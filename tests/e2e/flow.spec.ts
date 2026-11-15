@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { writeFileSync } from "node:fs";
 import { provenance } from "../../scripts/provenance";
 import { safeSourceUrl } from "../../src/domain";
+import { verifyDeployedPage } from "./deployed";
 test("hosted app reopens offline without cached user content", async ({
   page,
   context,
@@ -11,6 +12,7 @@ test("hosted app reopens offline without cached user content", async ({
     "Production service worker is enabled only in built releases.",
   );
   await page.goto("/");
+  const deployed = await verifyDeployedPage(page);
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page
     .getByLabel("Message to check", { exact: true })
@@ -18,6 +20,15 @@ test("hosted app reopens offline without cached user content", async ({
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
   await context.setOffline(true);
   await page.reload();
+  expect(
+    await page
+      .locator('script[type="module"][src]')
+      .evaluateAll((nodes) =>
+        nodes
+          .map((node) => new URL((node as HTMLScriptElement).src).pathname)
+          .sort(),
+      ),
+  ).toEqual(deployed.scriptPaths);
   await expect(
     page.getByLabel("Message to check", { exact: true }),
   ).toHaveValue("");
@@ -124,6 +135,9 @@ test("desktop layout and real cloud request exclude raw message content", async 
   );
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto("/");
+  const deployed = process.env.E2E_BASE_URL
+    ? await verifyDeployedPage(page)
+    : null;
   await page.screenshot({ path: "docs/evidence/desktop.png", fullPage: true });
   const bodies: string[] = [];
   const outgoing: string[] = [];
@@ -198,12 +212,14 @@ test("desktop layout and real cloud request exclude raw message content", async 
     validation.inferenceCompleted = true; // Adapter requires Firebase IN_CLOUD before completed.
     await page.getByRole("button", { name: "Close dialog" }).click();
   }
-  const deployedBuild = process.env.E2E_BASE_URL
-    ? await page.request
-        .get("/build-info.json")
-        .then((r) => r.json())
-        .catch(() => null)
-    : null;
+  const deployedBuild =
+    deployed?.build ??
+    (process.env.E2E_BASE_URL
+      ? await page.request
+          .get("/build-info.json")
+          .then((r) => r.json())
+          .catch(() => null)
+      : null);
   writeFileSync(
     "docs/evidence/cloud-transport.json",
     JSON.stringify(

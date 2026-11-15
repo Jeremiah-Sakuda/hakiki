@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-11-15T23:17:05.906Z",
+  "createdAt": "2026-11-15T23:21:19.792Z",
   "rawRunSha256": "f7573089978df17f91068c323da16e23f14df0eaa5d1a113dc7469127c7179cf",
   "sourceProvenance": {
     "at": "2026-11-15T23:11:34.805Z",
@@ -40,6 +40,15 @@
       "errors": 0,
       "genuine": 2,
       "imposter": 2,
+      "abstentionsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 0,
       "catchRate": 1,
       "falseAlarmRate": 0,
       "abstentionAndErrorRate": 0,
@@ -56,6 +65,15 @@
       "errors": 0,
       "genuine": 2,
       "imposter": 2,
+      "abstentionsByClass": {
+        "genuine": 2,
+        "imposter": 0
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 0,
       "catchRate": 1,
       "falseAlarmRate": 0,
       "abstentionAndErrorRate": 0.5,
@@ -72,6 +90,15 @@
       "errors": 0,
       "genuine": 2,
       "imposter": 2,
+      "abstentionsByClass": {
+        "genuine": 2,
+        "imposter": 0
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 0,
       "catchRate": 1,
       "falseAlarmRate": 0,
       "abstentionAndErrorRate": 0.5,
@@ -88,6 +115,15 @@
       "errors": 0,
       "genuine": 2,
       "imposter": 2,
+      "abstentionsByClass": {
+        "genuine": 2,
+        "imposter": 0
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 0,
       "catchRate": 1,
       "falseAlarmRate": 0,
       "abstentionAndErrorRate": 0.5,
@@ -106,6 +142,15 @@
       "errors": 0,
       "genuine": 4,
       "imposter": 4,
+      "abstentionsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 3,
       "catchRate": 0.25,
       "falseAlarmRate": 0.25,
       "abstentionAndErrorRate": 0,
@@ -122,6 +167,15 @@
       "errors": 0,
       "genuine": 4,
       "imposter": 4,
+      "abstentionsByClass": {
+        "genuine": 2,
+        "imposter": 3
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 3,
       "catchRate": 0.25,
       "falseAlarmRate": 0.5,
       "abstentionAndErrorRate": 0.625,
@@ -138,6 +192,15 @@
       "errors": 0,
       "genuine": 4,
       "imposter": 4,
+      "abstentionsByClass": {
+        "genuine": 3,
+        "imposter": 3
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 3,
       "catchRate": 0.25,
       "falseAlarmRate": 0.25,
       "abstentionAndErrorRate": 0.75,
@@ -154,6 +217,15 @@
       "errors": 0,
       "genuine": 4,
       "imposter": 4,
+      "abstentionsByClass": {
+        "genuine": 2,
+        "imposter": 2
+      },
+      "errorsByClass": {
+        "genuine": 0,
+        "imposter": 0
+      },
+      "unflaggedImpostersIncludingAbstentionsAndErrors": 2,
       "catchRate": 0.5,
       "falseAlarmRate": 0.5,
       "abstentionAndErrorRate": 0.5,

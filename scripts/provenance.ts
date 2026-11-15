@@ -26,10 +26,13 @@ export function provenance(command: string, target = "local source") {
     "scripts/evaluate-live.mjs",
     "scripts/summarize-live.mjs",
     "scripts/probe-local.mjs",
+    "scripts/service-worker.mjs",
+    "firebase.json",
     "scripts/provenance.ts",
     "vite.config.ts",
     "tests/e2e/flow.spec.ts",
     "tests/e2e/local.spec.ts",
+    "tests/e2e/deployed.ts",
   ];
   return {
     at: new Date().toISOString(),

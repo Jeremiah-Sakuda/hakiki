@@ -25,6 +25,8 @@ const summarize = (split, variant) => {
     errors: 0,
     genuine: 0,
     imposter: 0,
+    abstentionsByClass: { genuine: 0, imposter: 0 },
+    errorsByClass: { genuine: 0, imposter: 0 },
   };
   const latencies = [];
   for (const row of rows) {
@@ -41,12 +43,14 @@ const summarize = (split, variant) => {
         : row.local[variant];
     if (observation.status === "error") {
       counts.errors++;
+      counts.errorsByClass[row.label]++;
       continue;
     }
     if (Number.isFinite(observation.result?.elapsedMs))
       latencies.push(observation.result.elapsedMs);
     if (observation.flag === "abstain") {
       counts.abstentions++;
+      counts.abstentionsByClass[row.label]++;
       continue;
     }
     if (observation.flag === "positive")
@@ -56,6 +60,8 @@ const summarize = (split, variant) => {
   return {
     cases: rows.length,
     ...counts,
+    unflaggedImpostersIncludingAbstentionsAndErrors:
+      counts.imposter - counts.truePositive,
     catchRate: counts.truePositive / counts.imposter,
     falseAlarmRate: counts.falsePositive / counts.genuine,
     abstentionAndErrorRate: (counts.abstentions + counts.errors) / rows.length,

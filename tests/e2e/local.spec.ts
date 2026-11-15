@@ -1,6 +1,7 @@
 import { test, expect, chromium } from "@playwright/test";
 import { writeFileSync } from "node:fs";
 import { provenance } from "../../scripts/provenance";
+import { verifyDeployedPage } from "./deployed";
 test("real on-device comparison and profile import keep raw content local", async () => {
   test.skip(
     process.env.LIVE_LOCAL !== "1",
@@ -31,6 +32,9 @@ test("real on-device comparison and profile import keep raw content local", asyn
       outgoing.push(r.url() + " " + (r.postData() || "")),
     );
     await page.goto(process.env.E2E_BASE_URL || "http://127.0.0.1:5173");
+    const deployed = process.env.E2E_BASE_URL
+      ? await verifyDeployedPage(page)
+      : null;
     await expect
       .poll(
         () =>
@@ -210,8 +214,12 @@ test("real on-device comparison and profile import keep raw content local", asyn
       "docs/evidence/local-inference.json",
       JSON.stringify(
         {
-          provenance: provenance("LIVE_LOCAL=1 npm run test:e2e", page.url()),
+          provenance: provenance(
+            `LIVE_LOCAL=1 ${process.env.LIVE_HYBRID === "1" ? "LIVE_HYBRID=1 " : ""}npm run test:e2e -- tests/e2e/local.spec.ts`,
+            page.url(),
+          ),
           browser: await page.evaluate(() => navigator.userAgent),
+          deployed,
           execution:
             "Firebase ONLY_ON_DEVICE; adapter required ON_DEVICE response",
           comparisonSucceeded: true,

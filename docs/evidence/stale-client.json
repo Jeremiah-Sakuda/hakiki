@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-11-15T23:27:00Z",
+  "target": "https://hakiki-hybrid-2026.web.app",
+  "browserProfile": "isolated persistent chrome-probe profile; existing cache retained",
+  "serverCommit": "a2fbd237f211b354e64125292203134292ad8ab1",
+  "serverScript": "/assets/index-Z0Koyz9J.js",
+  "executingScriptFromCaughtException": "/assets/index-BkBu5gcV.js",
+  "htmlCacheControl": "max-age=3600",
+  "caughtException": "The on-device model took too long. Use the text-rule check or try again.",
+  "interpretation": "The two hosted acceptance failures executed stale code. Fresh server build-info alone did not identify the executing release. Do not count these as failures of the current 60-second local implementation.",
+  "fix": "Revalidate HTML and build metadata; bypass HTTP cache during service-worker precache and online navigation; assert actual page scripts against fresh server HTML and verify offline reload."
+}
