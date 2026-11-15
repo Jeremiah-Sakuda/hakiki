@@ -45,7 +45,7 @@ export type Receipt = {
   model: string;
   endpoint: string;
   request: unknown;
-  status: "sent" | "completed" | "failed";
+  status: "attempting" | "completed" | "failed";
   elapsedMs?: number;
 };
 export type WorldResult = {

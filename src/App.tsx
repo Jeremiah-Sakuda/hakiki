@@ -277,7 +277,11 @@ export default function App() {
     }
   }
   async function importChat(file?: File) {
-    if (!file) return;
+    if (!file || busy) return;
+    setBusy(true);
+    setChat(null);
+    setPermission(false);
+    setTrusted("");
     setError("");
     try {
       if (file.size > 2_000_000)
@@ -288,11 +292,13 @@ export default function App() {
       setContactName(parsed.participants[0]);
     } catch (e) {
       setError((e as Error).message);
+    } finally {
+      setBusy(false);
     }
   }
   async function addContact(e: FormEvent) {
     e.preventDefault();
-    if (!chat || !permission) return;
+    if (!chat || !permission || busy) return;
     setBusy(true);
     setError("");
     try {
@@ -315,6 +321,7 @@ export default function App() {
       setPermission(false);
       setTrusted("");
       setContactName("");
+      reset();
       setSelected(entry.id);
       setTab("check");
     } catch (e) {
@@ -328,7 +335,7 @@ export default function App() {
       const next = profiles.filter((p) => p.id !== id);
       saveProfiles(next);
       setProfiles(next);
-      if (selected === id) setSelected("");
+      if (selected === id) reset();
     } catch {
       setError(
         "Browser storage could not be updated. Try again or clear this site’s stored data.",
@@ -412,12 +419,14 @@ export default function App() {
         <nav aria-label="Main navigation">
           <button
             className={tab === "check" ? "active" : ""}
+            disabled={busy}
             onClick={() => setTab("check")}
           >
             Check a message
           </button>
           <button
             className={tab === "people" ? "active" : ""}
+            disabled={busy}
             onClick={() => setTab("people")}
           >
             Your people
@@ -489,6 +498,7 @@ export default function App() {
                       Message to check
                     </label>
                     <textarea
+                      disabled={busy}
                       id="message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -510,6 +520,7 @@ export default function App() {
                         <span className="muted">Optional</span>
                       </label>
                       <select
+                        disabled={busy}
                         id="contact"
                         value={selected}
                         onChange={(e) => setSelected(e.target.value)}
@@ -534,6 +545,7 @@ export default function App() {
                           </label>
                           <input
                             id="sender-number"
+                            disabled={busy}
                             type="tel"
                             maxLength={30}
                             value={number}
@@ -616,6 +628,7 @@ export default function App() {
                   <div className="example-grid">
                     {examples.map((e, i) => (
                       <button
+                        disabled={busy}
                         key={e.name}
                         onClick={() => {
                           setMessage(e.text);
@@ -887,6 +900,7 @@ export default function App() {
                       <button
                         className="text-button"
                         onClick={() => removeContact(p.id)}
+                        disabled={busy}
                       >
                         Delete<span className="sr-only"> {p.name}</span>
                       </button>
@@ -897,9 +911,15 @@ export default function App() {
                   <button
                     className="text-button danger"
                     onClick={() => {
-                      deleteProfiles();
-                      setProfiles([]);
-                      setSelected("");
+                      try {
+                        deleteProfiles();
+                        setProfiles([]);
+                        reset();
+                      } catch {
+                        setError(
+                          "Browser storage could not be updated. Try clearing this site’s stored data.",
+                        );
+                      }
                     }}
                   >
                     Delete all saved profiles
@@ -940,6 +960,7 @@ export default function App() {
                   <input
                     aria-label="Choose a WhatsApp text export"
                     type="file"
+                    disabled={busy}
                     accept=".txt,text/plain"
                     onChange={(e) => {
                       importChat(e.target.files?.[0]);
@@ -954,6 +975,7 @@ export default function App() {
                     </label>
                     <select
                       id="speaker"
+                      disabled={busy}
                       value={speaker}
                       onChange={(e) => {
                         setSpeaker(e.target.value);
@@ -975,6 +997,7 @@ export default function App() {
                     <label htmlFor="contact-name">Contact name</label>
                     <input
                       id="contact-name"
+                      disabled={busy}
                       maxLength={60}
                       required
                       value={contactName}
@@ -986,6 +1009,7 @@ export default function App() {
                     </label>
                     <input
                       id="trusted-number"
+                      disabled={busy}
                       type="tel"
                       maxLength={30}
                       value={trusted}
@@ -995,6 +1019,7 @@ export default function App() {
                     <label className="checkbox">
                       <input
                         type="checkbox"
+                        disabled={busy}
                         checked={permission}
                         onChange={(e) => setPermission(e.target.checked)}
                       />

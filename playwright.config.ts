@@ -5,15 +5,17 @@ export default defineConfig({
   workers: 1,
   timeout: 45000,
   use: {
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:5173",
     channel: "chrome",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
   reporter: [["list"], ["html", { open: "never" }]],
-  webServer: {
-    command: "npm.cmd run dev",
-    url: "http://127.0.0.1:5173",
-    reuseExistingServer: true,
-  },
+  webServer: process.env.E2E_BASE_URL
+    ? undefined
+    : {
+        command: "npm.cmd run dev",
+        url: "http://127.0.0.1:5173",
+        reuseExistingServer: true,
+      },
 });

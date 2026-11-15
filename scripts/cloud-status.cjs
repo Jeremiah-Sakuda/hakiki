@@ -15,6 +15,26 @@ const project = process.argv[2] || "soma-meta-jerem-2026";
     tokens: configstore.get("tokens"),
   });
   const { Client } = load("apiv2");
+  console.log(
+    "Existing billing enabled:",
+    await load("gcp/cloudbilling").checkBillingEnabled(project),
+  );
+  const crm = new Client({
+    urlPrefix: "https://cloudresourcemanager.googleapis.com",
+    apiVersion: "v1",
+    auth: true,
+  });
+  const policy = await crm.post(`projects/${project}:getIamPolicy`, {
+    options: { requestedPolicyVersion: 3 },
+  });
+  console.log(
+    "AI service agent bindings:",
+    JSON.stringify(
+      policy.body.bindings?.filter((b) =>
+        b.members.some((m) => m.includes("gcp-sa-firebasevertexai")),
+      ),
+    ),
+  );
   const client = new Client({
     urlPrefix: "https://serviceusage.googleapis.com",
     apiVersion: "v1",
@@ -23,6 +43,7 @@ const project = process.argv[2] || "soma-meta-jerem-2026";
   for (const service of [
     "firebasevertexai.googleapis.com",
     "generativelanguage.googleapis.com",
+    "aiplatform.googleapis.com",
   ]) {
     const response = await client.get(
       `projects/${project}/services/${service}`,

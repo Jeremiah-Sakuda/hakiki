@@ -1,10 +1,42 @@
 import { test, expect } from "@playwright/test";
+import { writeFileSync } from "node:fs";
+test("hosted app reopens offline without cached user content", async ({
+  page,
+  context,
+}) => {
+  test.skip(
+    !process.env.E2E_BASE_URL,
+    "Production service worker is enabled only in built releases.",
+  );
+  await page.goto("/");
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  await page
+    .getByLabel("Message to check", { exact: true })
+    .fill("EPHEMERAL-OFFLINE-CANARY");
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller);
+  await context.setOffline(true);
+  await page.reload();
+  await expect(
+    page.getByLabel("Message to check", { exact: true }),
+  ).toHaveValue("");
+  await expect(
+    page.getByText("You’re offline · local tools still work"),
+  ).toBeVisible();
+  await page
+    .getByLabel("Message to check", { exact: true })
+    .fill("send money now");
+  await page.getByRole("button", { name: "Review this message" }).click();
+  await expect(
+    page.getByRole("button", { name: "Approve & check patterns" }),
+  ).toBeDisabled();
+});
 test("local first check sends no raw data and can skip the cloud", async ({
   page,
+  baseURL,
 }) => {
   const outgoing: string[] = [];
   page.on("request", (r) => {
-    if (!r.url().startsWith("http://127.0.0.1"))
+    if (!r.url().startsWith(baseURL!))
       outgoing.push(r.url() + " " + (r.postData() || ""));
   });
   await page.goto("/");
@@ -58,13 +90,11 @@ test("contact import stays local and rejects malformed exports", async ({
 }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Your people", exact: true }).click();
-  await page
-    .getByLabel("Choose a WhatsApp text export")
-    .setInputFiles({
-      name: "bad.txt",
-      mimeType: "text/plain",
-      buffer: Buffer.from("a private message without export format"),
-    });
+  await page.getByLabel("Choose a WhatsApp text export").setInputFiles({
+    name: "bad.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("a private message without export format"),
+  });
   await expect(page.getByRole("alert")).toContainText("No chat messages found");
 });
 test("mobile layout has no horizontal overflow and supports keyboard dialog dismissal", async ({
@@ -87,23 +117,19 @@ test("desktop layout and real cloud request exclude raw message content", async 
   page,
 }) => {
   test.skip(
-    process.env.LIVE_AI !== "1",
+    process.env.LIVE_AI !== "1" && process.env.LIVE_TRANSPORT !== "1",
     "Opt-in integration test uses the real configured Firebase project.",
   );
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto("/");
   await page.screenshot({ path: "docs/evidence/desktop.png", fullPage: true });
   const bodies: string[] = [];
+  const outgoing: string[] = [];
   page.on("request", (r) => {
+    outgoing.push(
+      r.url() + " " + JSON.stringify(r.headers()) + " " + (r.postData() || ""),
+    );
     if (r.url().includes("generateContent")) bodies.push(r.postData() || "");
-  });
-  page.on("response", async (r) => {
-    if (r.url().includes("generateContent") && !r.ok())
-      console.log(
-        "AI response failure",
-        r.status(),
-        (await r.text()).slice(0, 1200),
-      );
   });
   await page
     .getByLabel("Message to check", { exact: true })
@@ -111,15 +137,54 @@ test("desktop layout and real cloud request exclude raw message content", async 
       "CANARY-REAL-X9 my account is 123456789. Send money urgently. New number. Don't call.",
     );
   await page.getByRole("button", { name: "Review this message" }).click();
+  const responsePromise = page.waitForResponse(
+    (r) => r.url().includes("generateContent"),
+    { timeout: 35000 },
+  );
   await page.getByRole("button", { name: "Approve & check patterns" }).click();
-  await expect(
-    page.getByRole("heading", { name: "What the cloud found" }),
-  ).toBeVisible({ timeout: 40000 });
+  const response = await responsePromise;
   expect(bodies).toHaveLength(1);
-  expect(bodies[0]).not.toContain("CANARY-REAL-X9");
-  expect(bodies[0]).not.toContain("123456789");
+  expect(outgoing.join(" ")).not.toContain("CANARY-REAL-X9");
+  expect(outgoing.join(" ")).not.toContain("123456789");
+  const payload = await response.json();
+  writeFileSync(
+    "docs/evidence/cloud-transport.json",
+    JSON.stringify(
+      {
+        at: new Date().toISOString(),
+        origin: new URL(response.url()).origin,
+        status: response.status(),
+        rawCanariesExcluded: true,
+        request: JSON.parse(bodies[0]),
+        response: payload,
+      },
+      null,
+      2,
+    ),
+  );
+  if (response.ok())
+    await expect(
+      page.getByRole("heading", { name: "What the cloud found" }),
+    ).toBeVisible();
+  else {
+    await expect(page.getByRole("alert")).toContainText(
+      "The cloud check could not finish",
+    );
+    await page
+      .getByRole("button", { name: "Inspect the request receipt" })
+      .click();
+    await expect(page.getByRole("dialog")).toContainText("failed");
+    await page.getByRole("button", { name: "Close dialog" }).click();
+  }
   await page.screenshot({
-    path: "docs/evidence/cloud-result.png",
+    path: response.ok()
+      ? "docs/evidence/cloud-result.png"
+      : "docs/evidence/cloud-unavailable.png",
     fullPage: true,
   });
+  if (process.env.LIVE_AI === "1")
+    expect(
+      response.ok(),
+      "Live model inference must succeed; transport privacy alone is not inference success.",
+    ).toBeTruthy();
 });

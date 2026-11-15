@@ -1,41 +1,73 @@
 # Hakiki
 
-A private second opinion on money requests that claim to come from someone you know.
+A private second opinion on family money requests. Pause, inspect the request, and contact the person through a route you already trust. Hakiki does not authenticate a sender or certify a request as safe.
 
-Hakiki is being designed to combine on-device relationship context with cloud scam intelligence through Firebase AI Logic. Its purpose is to help people choose an independent way to verify a request. It does not authenticate a sender or certify a message as safe.
+**Implementation candidate; hybrid release gates remain open.** The text workflow, optional local profile adapter, explicit cloud consent, privacy receipt, offline shell, and failure states are implemented. Real cloud requests reach Gemini, but Soma reports depleted prepaid credits. Chrome exposes the Prompt API on the tested machine but reports its model unavailable. Neither successful cloud inference nor a real local comparison has been demonstrated yet.
 
-**Status: planning and repository setup. No application, model integration, or evaluation results have been implemented yet.**
+[Try the hosted candidate](https://hakiki-hybrid-2026.web.app).
 
-## Build documents
+![Hakiki desktop interface](docs/evidence/desktop.png)
 
-- [Sprint build plan](docs/BUILD_PLAN.md): dates, tasks, dependencies, acceptance criteria, and release gates.
-- [Product requirements](docs/PRD.md): the revised scope and user experience.
-- [Privacy and architecture](docs/PRIVACY.md): permitted cloud inputs, local data, and failure behavior.
-- [Evaluation protocol](docs/EVALUATION.md): comparative testing, false alarms, and user walkthroughs.
-- [GitHub sprint milestones](https://github.com/Jeremiah-Sakuda/hakiki/milestones) and [checklist issues](https://github.com/Jeremiah-Sakuda/hakiki/issues): execution tracking for all five sprints.
+## Run locally
 
-## Delivery target
+Use Node.js 24 or newer and desktop Chrome for browser tests.
 
-The initial target is desktop Chrome for [#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/). The submission deadline is November 30, 2026 at 5:00 PM America/New_York. The internal submission target is noon that day.
+```sh
+npm ci
+npm run dev
+```
 
-| Sprint | Dates in 2026 | Outcome |
-| --- | --- | --- |
-| 0 | Nov 15–16 | Validate the SDK path and personal-context hypothesis |
-| 1 | Nov 17–19 | Complete a text-based check with and without a contact profile |
-| 2 | Nov 20–23 | Enforce the cloud boundary and finish failure states |
-| 3 | Nov 24–26 | Measure accuracy, false alarms, and user understanding |
-| 4 | Nov 27–30 | Stabilize, record, and submit |
+Open the URL printed by Vite. Without Firebase configuration, text rules and fictional examples work; AI buttons explain their prerequisites. No sign-in or private chat is required.
 
-iPhone is conditional scope. Android, community pattern collection, and an automatic playbook-refresh service are outside the hackathon baseline.
+For AI, copy `.env.example` to `.env.local` and supply your Firebase web app configuration, reCAPTCHA Enterprise site key, and cloud model. Enable Firebase AI Logic with the Gemini Developer API, usable quota, and App Check. Register the hosting domain in reCAPTCHA Enterprise. For localhost, register an App Check debug token and put it **only** in `.env.development.local`. Never commit that file or include debug tokens in a production build.
 
-## Development setup
+The owner setup helper `node scripts/provision.cjs PROJECT_ID PROJECT_NUMBER WEB_APP_ID` uses an authenticated global Windows Firebase CLI. It registers Hakiki-specific attestation and writes ignored environment files; it does not attach billing or change existing service enforcement. Current configuration uses `hakiki-hybrid-2026` for Hosting and a separate Hakiki web app in owner-selected `soma-meta-jerem-2026` for AI. Existing Soma app attestation was not changed.
 
-This initial commit contains documentation and repository conventions only. Sprint 0 will verify the supported Firebase AI Logic SDK version and provision the development environment. Sprint 1 will add the application and exact install, test, and run commands. There is currently no runnable demo.
+## Local AI
 
-The proposed web implementation is TypeScript with React and Vite, Firebase AI Logic, App Check, Remote Config, and Firebase Hosting. These are implementation choices to confirm in Sprint 0, not installed dependencies. No Firebase project or cloud resources have been provisioned by this repository setup.
+Open **Device setup**. A compatible desktop Chrome installation, supported hardware, and downloaded built-in model are required. Enable the multimodal Prompt API flag if required by your Chrome version, restart, and choose **Enable on-device AI**. Hakiki requests English text input/output and uses Firebase `ONLY_ON_DEVICE` mode for messages and profiles. An unavailable model never triggers a raw-text cloud fallback.
 
-Do not commit private chat exports, screenshots, contact profiles, credentials, App Check debug tokens, or raw evaluation records. Use synthetic fixtures in the public repository. See [privacy requirements](docs/PRIVACY.md).
+See [Firebase hybrid setup](https://firebase.google.com/docs/ai-logic/hybrid/web/get-started) and [Chrome requirements](https://developer.chrome.com/docs/ai/get-started). This repository records an actual unavailable result, not a simulated model run.
 
-## License
+## Validate
 
-[Apache License 2.0](LICENSE).
+```sh
+npm run typecheck
+npm test
+npm run build
+npm run test:e2e
+npm run evaluate
+```
+
+Unit tests explicitly mock Firebase transport when testing routing and invalid responses. Browser tests exercise the UI, local-only network behavior, offline/reconnection, malformed exports, and mobile layout. The normal suite skips live AI calls. Set `LIVE_AI=1` to require successful real cloud inference, or `LIVE_TRANSPORT=1` to audit the real outbound contract and service-error handling. These are different evidence gates. Set `E2E_BASE_URL` to test a hosted release, including its offline shell.
+
+`npm run evaluate` reproduces 80 authored synthetic English scenarios: 20 development and 60 evaluation. Rules flagged 18/30 imposter scenarios and 12/30 genuine scenarios in evaluation: **60% cue coverage and 40% false flags**, not validated fraud-detection accuracy. Local/cloud/hybrid comparison, profile ablation, and user studies are not measured. See [evaluation evidence](docs/evidence/evaluation.json).
+
+## Architecture and privacy
+
+```mermaid
+flowchart LR
+  A[Message and optional local profile] --> B[On-device AI or text-rule fallback]
+  B --> C[User reviews fixed categories]
+  C -->|Explicit approval| D[Firebase AI Logic and Google Search]
+  B --> E[Local result and trusted verification action]
+  D --> E
+  D --> F[Application request receipt]
+```
+
+`src/ai.ts` contains runtime Firebase SDK calls. `src/domain.ts` defines a strict allowlist of categorical cloud inputs. Arbitrary keys and free text are rejected. Raw messages, imports, phone numbers, names, and personal model findings are excluded from cloud generation. The receipt covers application AI request attempts, not infrastructure metadata. An attempt may fail before transmission; completion is confirmed by the SDK response.
+
+Profiles are saved locally only with consent, without application-level encryption. Raw imports stay in memory and can be discarded. Clear the current check and delete profiles separately. App Check, Hosting, and Remote Config use normal service metadata. Search suggestions are isolated in a sandboxed frame. The service worker caches app assets, never user content or cloud responses. Offline reopening requires one completed online visit.
+
+Stack: React 19, TypeScript, Vite, Firebase JS SDK 13.3, App Check, AI Logic, Remote Config, and Firebase Hosting. No Analytics, Firestore, named accounts, or backend conversation storage.
+
+## Build and release documents
+
+- [Product requirements](docs/PRD.md), [sprints](docs/BUILD_PLAN.md), and [privacy contract](docs/PRIVACY.md).
+- [Evaluation protocol](docs/EVALUATION.md) and [actual release status](docs/STATUS.md).
+- [GitHub milestones](https://github.com/Jeremiah-Sakuda/hakiki/milestones).
+
+Deploy `dist` with `firebase deploy --only hosting --project hakiki-hybrid-2026`. Keep AI and hosting project configuration distinct. Do not overwrite another project's Remote Config template; the app reads namespaced `hakiki_playbook_version` with a bundled default.
+
+English desktop text is the baseline. Swahili quality, screenshots, iPhone, human walkthroughs, a public demonstration video, and hackathon submission are not completed. [Apache License 2.0](LICENSE).
+

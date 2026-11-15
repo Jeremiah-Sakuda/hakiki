@@ -3,6 +3,7 @@ import {
   getAI,
   getGenerativeModel,
   GoogleAIBackend,
+  AgentPlatformBackend,
   InferenceMode,
   InferenceSource,
   type GenerativeModel,
@@ -33,6 +34,8 @@ import {
 
 const env = import.meta.env;
 export const cloudModel = env.VITE_CLOUD_MODEL || "gemini-3.8-flash";
+export const cloudProvider =
+  env.VITE_AI_PROVIDER === "agent-platform" ? "agent-platform" : "google-ai";
 export const configured = !!(
   env.VITE_FIREBASE_API_KEY &&
   env.VITE_FIREBASE_APP_ID &&
@@ -73,7 +76,12 @@ function ai(cloud = false) {
     });
     appCheckReady = true;
   }
-  return getAI(app, { backend: new GoogleAIBackend() });
+  return getAI(app, {
+    backend:
+      cloudProvider === "agent-platform"
+        ? new AgentPlatformBackend("global")
+        : new GoogleAIBackend(),
+  });
 }
 
 type Availability =
@@ -189,21 +197,21 @@ export async function checkWorld(
 ): Promise<WorldResult> {
   // This is the only cloud generation boundary. It accepts categories, never raw text.
   const request = cloudRequest(features);
-  const model = getGenerativeModel(ai(true), {
-    mode: InferenceMode.ONLY_IN_CLOUD,
-    inCloudParams: { model: cloudModel },
-  });
   const receipt: Receipt = {
     id: crypto.randomUUID(),
     at: new Date().toISOString(),
     model: cloudModel,
-    endpoint: `firebasevertexai.googleapis.com / projects/${env.VITE_FIREBASE_PROJECT_ID}`,
+    endpoint: `firebasevertexai.googleapis.com / projects/${env.VITE_FIREBASE_PROJECT_ID} / ${cloudProvider}`,
     request,
-    status: "sent",
+    status: "attempting",
   };
   onReceipt(receipt);
   const start = performance.now();
   try {
+    const model = getGenerativeModel(ai(true), {
+      mode: InferenceMode.ONLY_IN_CLOUD,
+      inCloudParams: { model: cloudModel },
+    });
     const result = await model.generateContent(request, { timeout: 30000 });
     if (result.response.inferenceSource !== InferenceSource.IN_CLOUD)
       throw new Error("Cloud execution could not be confirmed.");
@@ -242,11 +250,11 @@ export async function checkWorld(
 export async function refreshPlaybook(): Promise<string> {
   try {
     const rc = getRemoteConfig(firebaseApp());
-    rc.defaultConfig = { playbook_version: "2026-11-15" };
+    rc.defaultConfig = { hakiki_playbook_version: "2026-11-15" };
     rc.settings.fetchTimeoutMillis = 5000;
     rc.settings.minimumFetchIntervalMillis = 3600000;
     await fetchAndActivate(rc);
-    const value = getString(rc, "playbook_version");
+    const value = getString(rc, "hakiki_playbook_version");
     return /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : "2026-11-15";
   } catch {
     return "2026-11-15";

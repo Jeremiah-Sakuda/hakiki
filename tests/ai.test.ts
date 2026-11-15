@@ -13,6 +13,7 @@ vi.mock("firebase/ai", () => ({
   getAI: () => ({}),
   getGenerativeModel: fake.getGenerativeModel,
   GoogleAIBackend: class {},
+  AgentPlatformBackend: class {},
   InferenceMode: {
     ONLY_ON_DEVICE: "only_on_device",
     ONLY_IN_CLOUD: "only_in_cloud",

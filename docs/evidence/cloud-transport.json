@@ -1,0 +1,43 @@
+{
+  "at": "2026-11-15T22:05:04.628Z",
+  "origin": "https://firebasevertexai.googleapis.com",
+  "status": 429,
+  "rawCanariesExcluded": true,
+  "request": {
+    "generationConfig": {
+      "temperature": 0.2,
+      "maxOutputTokens": 650
+    },
+    "safetySettings": [],
+    "tools": [
+      {
+        "googleSearch": {}
+      }
+    ],
+    "systemInstruction": {
+      "role": "system",
+      "parts": [
+        {
+          "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+        }
+      ]
+    },
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "{\"schemaVersion\":1,\"requestType\":\"ordinary_money\",\"paymentChannel\":\"unknown\",\"urgency\":\"immediate\",\"secrecyRequested\":null,\"changedContactClaim\":true,\"verificationDiscouraged\":true}"
+          }
+        ]
+      }
+    ]
+  },
+  "response": {
+    "error": {
+      "code": 429,
+      "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+      "status": "RESOURCE_EXHAUSTED"
+    }
+  }
+}
