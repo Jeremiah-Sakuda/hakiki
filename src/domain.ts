@@ -1,95 +1,266 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const featureSchema = z.strictObject({
   schemaVersion: z.literal(1),
-  requestType: z.enum(['emergency_money','ordinary_money','unknown']),
-  paymentChannel: z.enum(['mobile_money','bank_transfer','gift_card','crypto','unknown']),
-  urgency: z.enum(['immediate','not_stated','unknown']),
+  requestType: z.enum(["emergency_money", "ordinary_money", "unknown"]),
+  paymentChannel: z.enum([
+    "mobile_money",
+    "bank_transfer",
+    "gift_card",
+    "crypto",
+    "unknown",
+  ]),
+  urgency: z.enum(["immediate", "not_stated", "unknown"]),
   secrecyRequested: z.boolean().nullable(),
   changedContactClaim: z.boolean().nullable(),
   verificationDiscouraged: z.boolean().nullable(),
 });
 export type Features = z.infer<typeof featureSchema>;
 export const profileSchema = z.strictObject({
-  id:z.string().max(80), name:z.string().min(1).max(60), style:z.string().min(10).max(1800),
-  trustedNumber:z.string().max(30), sample:z.boolean(), sampleCount:z.number().int().min(0).max(5000),
+  id: z.string().max(80),
+  name: z.string().min(1).max(60),
+  style: z.string().min(10).max(1800),
+  trustedNumber: z.string().max(30),
+  sample: z.boolean(),
+  sampleCount: z.number().int().min(0).max(5000),
 });
 export type Profile = z.infer<typeof profileSchema>;
 export const personalSchema = z.strictObject({
-  languageMatch:z.enum(['consistent','different','unknown']),
-  toneMatch:z.enum(['consistent','different','unknown']),
-  observations:z.array(z.string().max(240)).max(4),
+  languageMatch: z.enum(["consistent", "different", "unknown"]),
+  toneMatch: z.enum(["consistent", "different", "unknown"]),
+  observations: z.array(z.string().max(240)).max(4),
 });
 export type Personal = z.infer<typeof personalSchema>;
-export type LocalResult = {kind:'model'|'rules'; signals:string[]; personal?:Personal; number:'matches'|'differs'|'unknown'; note:string; elapsedMs:number};
-export type Receipt = {id:string; at:string; model:string; endpoint:string; request:unknown; status:'sent'|'completed'|'failed'; elapsedMs?:number};
-export type WorldResult = {text:string; sources:{title:string;url:string}[]; searchHtml?:string; grounded:boolean; elapsedMs:number};
+export type LocalResult = {
+  kind: "model" | "rules";
+  signals: string[];
+  personal?: Personal;
+  number: "matches" | "differs" | "unknown";
+  note: string;
+  elapsedMs: number;
+};
+export type Receipt = {
+  id: string;
+  at: string;
+  model: string;
+  endpoint: string;
+  request: unknown;
+  status: "sent" | "completed" | "failed";
+  elapsedMs?: number;
+};
+export type WorldResult = {
+  text: string;
+  sources: { title: string; url: string }[];
+  searchHtml?: string;
+  grounded: boolean;
+  elapsedMs: number;
+};
 
-export const CLOUD_INSTRUCTION = 'You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used.';
+export const CLOUD_INSTRUCTION =
+  "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used.";
 
-export function extractFeatures(text:string):Features {
-  const t=text.normalize('NFKC').toLowerCase();
-  return featureSchema.parse({schemaVersion:1,
-    requestType:/hospital|accident|emergency|stranded|arrest|hurt|injured/.test(t)?'emergency_money':/send|transfer|money|pay|loan|rent|lend|borrow/.test(t)?'ordinary_money':'unknown',
-    paymentChannel:/gift\s*card|voucher/.test(t)?'gift_card':/bitcoin|crypto|usdt/.test(t)?'crypto':/m[ -]?pesa|mobile money|airtel money/.test(t)?'mobile_money':/bank|wire|account transfer/.test(t)?'bank_transfer':'unknown',
-    urgency:/no rush|not urgent|whenever|when you can/.test(t)?'not_stated':/\bnow\b|immediately|urgent|right away|within.*minutes|asap/.test(t)?'immediate':'not_stated',
-    secrecyRequested:/don.?t tell|do not tell|keep.*(secret|between us)|just between us/.test(t)?true:null,
-    changedContactClaim:/new number|lost my phone|changed my number|temporary number|phone broke/.test(t)?true:null,
-    verificationDiscouraged:/don.?t call|do not call|can.?t (talk|call)|cannot (talk|call)|no calls/.test(t)?true:null,
+export function extractFeatures(text: string): Features {
+  const t = text.normalize("NFKC").toLowerCase();
+  return featureSchema.parse({
+    schemaVersion: 1,
+    requestType:
+      /hospital|accident|emergency|stranded|arrest|hurt|injured/.test(t)
+        ? "emergency_money"
+        : /send|transfer|money|pay|loan|rent|lend|borrow/.test(t)
+          ? "ordinary_money"
+          : "unknown",
+    paymentChannel: /gift\s*card|voucher/.test(t)
+      ? "gift_card"
+      : /bitcoin|crypto|usdt/.test(t)
+        ? "crypto"
+        : /m[ -]?pesa|mobile money|airtel money/.test(t)
+          ? "mobile_money"
+          : /bank|wire|account transfer/.test(t)
+            ? "bank_transfer"
+            : "unknown",
+    urgency: /no rush|not urgent|whenever|when you can/.test(t)
+      ? "not_stated"
+      : /\bnow\b|immediately|urgent|right away|within.*minutes|asap/.test(t)
+        ? "immediate"
+        : "not_stated",
+    secrecyRequested:
+      /don.?t tell|do not tell|keep.*(secret|between us)|just between us/.test(
+        t,
+      )
+        ? true
+        : null,
+    changedContactClaim:
+      /new number|lost my phone|changed my number|temporary number|phone broke/.test(
+        t,
+      )
+        ? true
+        : null,
+    verificationDiscouraged:
+      /don.?t call|do not call|can.?t (talk|call)|cannot (talk|call)|no calls/.test(
+        t,
+      )
+        ? true
+        : null,
   });
 }
-export function signalsFor(f:Features):string[] {
-  const signals:string[]=[];
-  if(f.urgency==='immediate') signals.push('The wording creates pressure to act quickly. Genuine emergencies can do this too.');
-  if(f.secrecyRequested) signals.push('You are being asked to keep the request secret. Check independently before sending anything.');
-  if(f.changedContactClaim) signals.push('The sender claims a changed contact number. The claim does not establish who is writing.');
-  if(f.verificationDiscouraged) signals.push('The request discourages a call or conversation. Try a route you already trust.');
-  if(f.paymentChannel==='gift_card'||f.paymentChannel==='crypto') signals.push('The requested payment method can make recovery difficult. Independently verify the request first.');
+export function signalsFor(f: Features): string[] {
+  const signals: string[] = [];
+  if (f.urgency === "immediate")
+    signals.push(
+      "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+    );
+  if (f.secrecyRequested)
+    signals.push(
+      "You are being asked to keep the request secret. Check independently before sending anything.",
+    );
+  if (f.changedContactClaim)
+    signals.push(
+      "The sender claims a changed contact number. The claim does not establish who is writing.",
+    );
+  if (f.verificationDiscouraged)
+    signals.push(
+      "The request discourages a call or conversation. Try a route you already trust.",
+    );
+  if (f.paymentChannel === "gift_card" || f.paymentChannel === "crypto")
+    signals.push(
+      "The requested payment method can make recovery difficult. Independently verify the request first.",
+    );
   return signals;
 }
-export function numberMatch(profile:Profile|undefined, number:string):LocalResult['number'] {
-  const normalize=(v:string)=>v.replace(/[^0-9+]/g,'');
-  if(!profile?.trustedNumber || !number.trim()) return 'unknown';
-  return normalize(profile.trustedNumber)===normalize(number)?'matches':'differs';
+export function numberMatch(
+  profile: Profile | undefined,
+  number: string,
+): LocalResult["number"] {
+  const normalize = (v: string) => v.replace(/[^0-9+]/g, "");
+  if (!profile?.trustedNumber || !number.trim()) return "unknown";
+  return normalize(profile.trustedNumber) === normalize(number)
+    ? "matches"
+    : "differs";
 }
-export function rulesResult(text:string,profile?:Profile,number=''):LocalResult {
-  return {kind:'rules',signals:signalsFor(extractFeatures(text)),number:numberMatch(profile,number),note:'Text rules only. No on-device AI or writing-style comparison has run.',elapsedMs:0};
+export function rulesResult(
+  text: string,
+  profile?: Profile,
+  number = "",
+): LocalResult {
+  return {
+    kind: "rules",
+    signals: signalsFor(extractFeatures(text)),
+    number: numberMatch(profile, number),
+    note: "Text rules only. No on-device AI or writing-style comparison has run.",
+    elapsedMs: 0,
+  };
 }
-export function cloudRequest(input:unknown) {
-  const features=featureSchema.parse(input);
-  return {contents:[{role:'user' as const,parts:[{type:'text' as const,text:JSON.stringify(features)}]}],systemInstruction:{role:'system' as const,parts:[{type:'text' as const,text:CLOUD_INSTRUCTION}]},tools:[{googleSearch:{}}],generationConfig:{temperature:0.2,maxOutputTokens:650}};
+export function cloudRequest(input: unknown) {
+  const features = featureSchema.parse(input);
+  return {
+    contents: [
+      {
+        role: "user" as const,
+        parts: [{ type: "text" as const, text: JSON.stringify(features) }],
+      },
+    ],
+    systemInstruction: {
+      role: "system" as const,
+      parts: [{ type: "text" as const, text: CLOUD_INSTRUCTION }],
+    },
+    tools: [{ googleSearch: {} }],
+    generationConfig: { temperature: 0.2, maxOutputTokens: 650 },
+  };
 }
-export function safeSourceUrl(value:string):string|null {
-  try {const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null;}catch{return null;}
+export function safeSourceUrl(value: string): string | null {
+  try {
+    const u = new URL(value);
+    return u.protocol === "https:" && !u.username && !u.password
+      ? u.href
+      : null;
+  } catch {
+    return null;
+  }
 }
-export function parseJson(text:string):unknown {
-  const clean=text.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'');
+export function parseJson(text: string): unknown {
+  const clean = text
+    .trim()
+    .replace(/^```(?:json)?\s*/, "")
+    .replace(/\s*```$/, "");
   return JSON.parse(clean);
 }
 
-export type Chat = {participants:string[]; messages:{speaker:string;text:string}[]};
-export function parseWhatsApp(text:string):Chat {
-  if(text.length>2_000_000) throw new Error('This export is too large. Choose a text export under 2 MB, without media.');
-  const messages:Chat['messages']=[];
-  for(const raw of text.replace(/\r/g,'').split('\n')) {
-    const line=raw.replace(/[\u200e\u200f]/g,'');
-    const m=line.match(/^(?:\[[\d/.,\s:APMapm-]+\]\s*|[\d/.,\s:APMapm]+\s+-\s+)([^:]{1,80}):\s*(.*)$/);
-    if(m){if(!/<Media omitted>|image omitted|video omitted|audio omitted/.test(m[2])) messages.push({speaker:m[1].trim(),text:m[2]});}
-    else if(messages.length && line.trim() && !/^\[?\d{1,4}[/.]/.test(line)) messages[messages.length-1].text+='\n'+line;
+export type Chat = {
+  participants: string[];
+  messages: { speaker: string; text: string }[];
+};
+export function parseWhatsApp(text: string): Chat {
+  if (text.length > 2_000_000)
+    throw new Error(
+      "This export is too large. Choose a text export under 2 MB, without media.",
+    );
+  const messages: Chat["messages"] = [];
+  for (const raw of text.replace(/\r/g, "").split("\n")) {
+    const line = raw.replace(/[\u200e\u200f]/g, "");
+    const m = line.match(
+      /^(?:\[[\d/.,\s:APMapm-]+\]\s*|[\d/.,\s:APMapm]+\s+-\s+)([^:]{1,80}):\s*(.*)$/,
+    );
+    if (m) {
+      if (
+        !/<Media omitted>|image omitted|video omitted|audio omitted/.test(m[2])
+      )
+        messages.push({ speaker: m[1].trim(), text: m[2] });
+    } else if (messages.length && line.trim() && !/^\[?\d{1,4}[/.]/.test(line))
+      messages[messages.length - 1].text += "\n" + line;
   }
-  if(!messages.length) throw new Error('No chat messages found. Use a WhatsApp text export with dates and sender names, without media.');
-  return {messages,participants:[...new Set(messages.map(m=>m.speaker))]};
+  if (!messages.length)
+    throw new Error(
+      "No chat messages found. Use a WhatsApp text export with dates and sender names, without media.",
+    );
+  return {
+    messages,
+    participants: [...new Set(messages.map((m) => m.speaker))],
+  };
 }
-const PROFILE_KEY='hakiki.contacts.v1';
-export function loadProfiles():Profile[]{
-  try{return z.array(profileSchema).max(30).parse(JSON.parse(localStorage.getItem(PROFILE_KEY)||'[]'));}catch{return [];}
+const PROFILE_KEY = "hakiki.contacts.v1";
+export function loadProfiles(): Profile[] {
+  try {
+    return z
+      .array(profileSchema)
+      .max(30)
+      .parse(JSON.parse(localStorage.getItem(PROFILE_KEY) || "[]"));
+  } catch {
+    return [];
+  }
 }
-export function saveProfiles(profiles:Profile[]){localStorage.setItem(PROFILE_KEY,JSON.stringify(z.array(profileSchema).max(30).parse(profiles)));}
-export function deleteProfiles(){localStorage.removeItem(PROFILE_KEY);}
+export function saveProfiles(profiles: Profile[]) {
+  localStorage.setItem(
+    PROFILE_KEY,
+    JSON.stringify(z.array(profileSchema).max(30).parse(profiles)),
+  );
+}
+export function deleteProfiles() {
+  localStorage.removeItem(PROFILE_KEY);
+}
 
-export const sampleProfile:Profile={id:'sample-amina',name:'Amina (example)',trustedNumber:'',sample:true,sampleCount:18,style:'Fictional example. Uses English, short friendly sentences and the greeting "hey cuz". Often says "no rush". Normally offers to talk by phone about money requests. No identity claim can be inferred from these habits.'};
-export const examples=[
-  {name:'A new number',tag:'Family emergency',text:"Hey, it's Amina. Lost my phone so this is my new number. I'm at the hospital and need you to send money by M-Pesa right now. Please don't call or tell anyone yet."},
-  {name:'An everyday request',tag:'A familiar conversation',text:"hey cuz, can you send your share of mum's birthday gift when you can? no rush. give me a call this evening and we can work out the details."},
-  {name:'A different kind of payment',tag:'An unusual ask',text:"I'm stuck and need help immediately. Buy gift cards and send the codes to me. Keep this between us, I can't talk on the phone."},
+export const sampleProfile: Profile = {
+  id: "sample-amina",
+  name: "Amina (example)",
+  trustedNumber: "",
+  sample: true,
+  sampleCount: 18,
+  style:
+    'Fictional example. Uses English, short friendly sentences and the greeting "hey cuz". Often says "no rush". Normally offers to talk by phone about money requests. No identity claim can be inferred from these habits.',
+};
+export const examples = [
+  {
+    name: "A new number",
+    tag: "Family emergency",
+    text: "Hey, it's Amina. Lost my phone so this is my new number. I'm at the hospital and need you to send money by M-Pesa right now. Please don't call or tell anyone yet.",
+  },
+  {
+    name: "An everyday request",
+    tag: "A familiar conversation",
+    text: "hey cuz, can you send your share of mum's birthday gift when you can? no rush. give me a call this evening and we can work out the details.",
+  },
+  {
+    name: "A different kind of payment",
+    tag: "An unusual ask",
+    text: "I'm stuck and need help immediately. Buy gift cards and send the codes to me. Keep this between us, I can't talk on the phone.",
+  },
 ];
