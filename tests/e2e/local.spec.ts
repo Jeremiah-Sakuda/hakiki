@@ -95,6 +95,24 @@ test("real on-device comparison and profile import keep raw content local", asyn
       fullPage: true,
     });
     await page
+      .getByRole("button", { name: "Continue without the cloud" })
+      .click();
+    await page
+      .getByRole("button", { name: "Clear this check & start again" })
+      .click();
+    await context.setOffline(true);
+    await page
+      .getByLabel("Message to check", { exact: true })
+      .fill("OFFLINE-LOCAL-CANARY-44 send money now, please call me first.");
+    await page.getByRole("button", { name: "Review this message" }).click();
+    await expect(
+      page.getByText("On-device AI + text rules", { exact: true }),
+    ).toBeVisible({ timeout: 75000 });
+    await expect(
+      page.getByRole("button", { name: "Approve & check patterns" }),
+    ).toBeDisabled();
+    await context.setOffline(false);
+    await page
       .getByRole("button", { name: "Your people", exact: false })
       .click();
     const history = [
@@ -146,6 +164,48 @@ test("real on-device comparison and profile import keep raw content local", asyn
     expect(outgoing.filter((x) => x.includes("generateContent"))).toHaveLength(
       0,
     );
+    let hybridCompleted = false;
+    if (process.env.LIVE_HYBRID === "1") {
+      await page
+        .getByLabel("Message to check", { exact: true })
+        .fill(
+          "HYBRID-LOCAL-CANARY-73 new number, send money now and do not call.",
+        );
+      await page.getByRole("button", { name: "Review this message" }).click();
+      await expect(
+        page.getByText("On-device AI + text rules", { exact: true }),
+      ).toBeVisible({ timeout: 75000 });
+      await page
+        .getByRole("button", { name: "Approve & check patterns" })
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "What the cloud found" }),
+      ).toBeVisible({ timeout: 45000 });
+      await page.getByRole("button", { name: "Open privacy receipt" }).click();
+      await expect(page.getByRole("dialog")).toContainText("completed");
+      await page.getByRole("button", { name: "Close dialog" }).click();
+      if (
+        await page.locator('iframe[title="Google Search suggestions"]').count()
+      )
+        await expect(
+          page
+            .frameLocator('iframe[title="Google Search suggestions"]')
+            .locator(".chip")
+            .first(),
+        ).toBeVisible();
+      await page.screenshot({
+        path: "docs/evidence/hybrid-result.png",
+        fullPage: true,
+      });
+      hybridCompleted = true;
+    }
+    for (const canary of [
+      "LOCAL-CANARY-91",
+      "LOCAL-IMPORT-CANARY-62",
+      "OFFLINE-LOCAL-CANARY-44",
+      "HYBRID-LOCAL-CANARY-73",
+    ])
+      expect(outgoing.join(" ")).not.toContain(canary);
     writeFileSync(
       "docs/evidence/local-inference.json",
       JSON.stringify(
@@ -155,6 +215,8 @@ test("real on-device comparison and profile import keep raw content local", asyn
           execution:
             "Firebase ONLY_ON_DEVICE; adapter required ON_DEVICE response",
           comparisonSucceeded: true,
+          offlineComparisonSucceeded: true,
+          hybridCompleted,
           profileImportSucceeded: true,
           generatedProfileDraft,
           reviewedBeforePersistence: true,
@@ -163,7 +225,9 @@ test("real on-device comparison and profile import keep raw content local", asyn
             (p: { name: string }) => p.name === "Synthetic cousin",
           ),
           rawCanariesExcluded: true,
-          cloudGenerationRequests: 0,
+          cloudGenerationRequests: outgoing.filter((x) =>
+            x.includes("generateContent"),
+          ).length,
         },
         null,
         2,

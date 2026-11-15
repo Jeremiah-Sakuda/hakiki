@@ -74,6 +74,8 @@ The hybrid hypothesis is that private context adds useful evidence under a fixed
 
 The early style test is a feasibility screen, not validation. If it fails, stop describing extraction-only behavior as personal impersonation detection. Narrow the language or revise the value proposition explicitly before continuing. If an enforceable outbound contract cannot be demonstrated, block cloud requests until repaired.
 
+November15 implementation decision: **narrow**. The real synthetic paired pilot did not demonstrate useful incremental personal-context benefit. Keep writing comparison optional and explicitly experimental; describe Hakiki as request inspection and independent-verification support, not an impersonation detector. Exact counts and preserved failures are in EVALUATION.md. Human studies and independent validation remain open.
+
 The previous independent review averaged 3.25/5: technology 3.00, design 3.17, impact 2.83, idea 4.00. These are planning assessments, not judge feedback or implemented quality. The build prioritizes missing evidence over additional features.
 
 ## Claims and sources

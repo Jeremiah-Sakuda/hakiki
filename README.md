@@ -41,7 +41,7 @@ npm run evaluate
 
 Unit tests explicitly mock Firebase transport when testing routing and invalid responses. Browser tests exercise the UI, local-only network behavior, offline/reconnection, malformed exports, and mobile layout. The normal suite skips live AI calls. Set `LIVE_AI=1` to require successful real cloud inference, or `LIVE_TRANSPORT=1` to audit the real outbound contract and service-error handling. These are different evidence gates. Set `E2E_BASE_URL` to test a hosted release, including its offline shell.
 
-`npm run evaluate` reproduces 80 authored synthetic English scenarios: 20 development and 60 evaluation. Rules flagged 18/30 imposter scenarios and 12/30 genuine scenarios in evaluation: **60% cue coverage and 40% false flags**, not validated fraud-detection accuracy. Local/cloud/hybrid comparison, profile ablation, and user studies are not measured. See [evaluation evidence](docs/evidence/evaluation.json).
+`npm run evaluate` reproduces 80 authored synthetic English scenarios: 20 development and 60 evaluation. Rules flagged 18/30 imposter scenarios and 12/30 genuine scenarios in evaluation: **60% cue coverage and 40% false flags**, not validated fraud-detection accuracy. A separate real 12-case synthetic pilot completed six profiles and 36 local comparisons. On its eight evaluation cases, matched profiles flagged 1/4 imposters and 2/4 genuine requests, with 5/8 abstentions: no demonstrated benefit over rules. Writing context remains experimental. Cloud/hybrid quality and real user outcomes are unmeasured. See the [protocol and full results](docs/EVALUATION.md).
 
 ## Architecture and privacy
 

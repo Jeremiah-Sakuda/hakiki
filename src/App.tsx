@@ -382,8 +382,8 @@ export default function App() {
             <p key={i}>{s}</p>
           ))}
           <small>
-            Writing style can change or be copied. This is not identity
-            verification.
+            Writing context is experimental. It may miss changes or flag normal
+            ones, and cannot confirm who sent a message.
           </small>
         </div>
       )}
@@ -889,8 +889,8 @@ export default function App() {
                     <Icon name="people" size={36} />
                     <h3>A little context goes a long way.</h3>
                     <p>
-                      No contacts saved yet. A compact writing profile can help
-                      an on-device model spot changes—but cannot prove identity.
+                      No contacts saved yet. Save optional writing context for
+                      an experimental comparison on this device.
                     </p>
                   </div>
                 ) : (
@@ -1004,6 +1004,10 @@ export default function App() {
                 <p>
                   Export a WhatsApp chat as text, without media. Only the
                   selected person’s messages are summarized, on this device.
+                </p>
+                <p className="small muted">
+                  Writing context is experimental. It may miss changes or flag
+                  normal ones, and cannot confirm who sent a message.
                 </p>
                 {!localReady && (
                   <div className="notice">

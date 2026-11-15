@@ -48,7 +48,24 @@ Freeze this mapping before any paired model run; report changes under a new vers
 - Hybrid: positive if either valid component is positive; negative only when both are negative; otherwise abstain. Track any component errors even when the other component supplies a positive result. Count disagreement separately.
 - Profile ablation: use the same cloud result and approved categories, replacing only the local profile with omitted or wrong-contact history. Apply the same local/hybrid mapping. Never regenerate a favorable cloud result for one variant.
 
-The authored pilot is too small for validation; no raters or model runs have been completed. If independent rating is unavailable, leave cloud/hybrid classification unmeasured and publish only mechanical runtime/latency evidence.
+The authored pilot is too small for validation. No independent blinded cloud-output ratings or human walkthroughs have been completed. Cloud/hybrid classification remains unmeasured.
+
+## Actual exploratory pilot, November 15
+
+`evidence/paired-live.json` records six real on-device profile generations and 36 local comparisons (12 cases × matched/omitted/wrong-contact). Prompt version `2026-11-15.2` uses bounded 60-word profiles and session cancellation. All local calls completed in this run. Earlier timeout runs remain in `paired-pre-cancellation.json` and the two incomplete-run files. Those failures are not erased or counted as successes.
+
+The eight evaluation scenarios comprise four authored imposters and four authored genuine requests:
+
+| Variant | Imposters flagged / 4 | Genuine requests flagged / 4 | Abstentions / 8 | Runtime errors / 8 | Median / p95 completed comparison |
+| --- | --- | --- | --- | --- | --- |
+| Rules | 1 | 1 | 0 | 0 | Not timed |
+| Matched profile + rules | 1 | 2 | 5 | 0 | 6.735s / 8.023s |
+| Omitted profile + rules | 1 | 1 | 6 | 0 | 4.735s / 7.903s |
+| Wrong profile + rules | 2 | 2 | 4 | 0 | 7.002s / 9.355s |
+
+These are caution flags under the frozen mapping, not identity verdicts or validated accuracy. Correct contact context did not improve imposter coverage over rules and added a false flag in this small set. The decision is **narrow**: optional writing context is experimental and may mislead; the product helps inspect a request and choose an independent verification action. It is not demonstrated impersonation detection. Do not tune on these outcomes and call a rerun held-out validation.
+
+The same pilot exposed three HTTP401 cloud failures after local inference, then stopped cloud attempts. Firebase13.3 cached an AI service before App Check existed. The implementation now uses separate named local/cloud Firebase app instances so cloud attestation precedes cloud-service construction. The real same-page hybrid test subsequently passed: local comparison, offline local comparison, profile generation/review, another local comparison, and approved cloud completion with no raw canary transmission (`evidence/local-inference.json`). No paired cloud/hybrid quality metrics are claimed from this run.
 
 - Report true positives, false negatives, false positives, true negatives, and abstentions separately for genuine and fraudulent cases. Show rates with denominators.
 - Catch rate uses all fraudulent cases as the denominator, including abstentions and errors. Report missed flags and abstentions distinctly so errors cannot improve the score.

@@ -1,0 +1,1325 @@
+{
+  "provenance": {
+    "at": "2026-11-15T23:11:34.805Z",
+    "command": "LIVE_EVAL=1 node scripts/evaluate-live.mjs",
+    "target": "http://127.0.0.1:5173",
+    "sourceCommit": "3d6fbfeaa9f138085928093408e0095b6aa1f2ab",
+    "sourceDirty": true,
+    "gitMetadata": "available",
+    "node": "v26.13.1",
+    "platform": "win32",
+    "inputSha256": {
+      "src/ai.ts": "5309e1ffaaaf7c2e67a46d1e684894b863fdca882bd732a45a3f0c243f069a6f",
+      "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
+      "src/App.tsx": "5d4aa010da8f5d22ec215e4c2ea5151cf1073c3b1a686b4619fe9192859ae92c",
+      "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+      "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+      "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+      "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+      "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+      "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+      "scripts/summarize-live.mjs": "e8da85475feefc99583a7b28430eccc14080d768fe7d701b725b330859898787",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/provenance.ts": "fa32207a5f57bbb87ca5577f5065e633c3c7e995b8e3d6d6c07ff8167ff7399f",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "94be8ea03607d3f3def1c5ab6f513e7fb878ba1f7219007154d419d15efd8622",
+      "tests/e2e/local.spec.ts": "438fde9f420d80314d639a09420d514e895fc513752a089d631945b721298b0d"
+    }
+  },
+  "protocol": "Paired pilot v1; authored English synthetic fixtures, exploratory; no human outcomes",
+  "classification": "docs/EVALUATION.md Frozen pilot mapping v1",
+  "model": {
+    "cloudModel": "gemini-3.8-flash",
+    "provider": "agent-platform",
+    "local": "Chrome Prompt API through Firebase ONLY_ON_DEVICE",
+    "localPromptVersion": "2026-11-15.2",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+  },
+  "profiles": [
+    {
+      "id": "dev-brief",
+      "name": "Fictional dev-brief",
+      "style": "Informal and conversational. Registry is casual, employing slang ('cuz'). Greetings are friendly ('hey'). Punctuation is minimal, reflecting spoken language. Writing habits include short, declarative sentences and frequent use of contractions. Emphasis on closeness and ease.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 26538
+    },
+    {
+      "id": "dev-formal",
+      "name": "Fictional dev-formal",
+      "style": "Formal and polite. Uses courteous greetings like \"Good evening\" and closings like \"Kind regards.\" Frequent use of \"thank you\" conveys gratitude.  Simple sentence structure and proper punctuation (periods, commas).  Evokes a respectful, professional tone suggesting established rapport.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 7422
+    },
+    {
+      "id": "eval-punctuated",
+      "name": "Fictional eval-punctuated",
+      "style": "Friendly and informal. Greetings use exclamation points and expressions of pleasure. Register is casual, employing contractions and simple sentence structures. Frequent use of punctuation enhances emotional tone. Writing habits include short, declarative sentences and expressions of gratitude. Overall, exudes warmth and sociability.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 6751
+    },
+    {
+      "id": "eval-lowercase",
+      "name": "Fictional eval-lowercase",
+      "style": "Informal and conversational. Uses short, declarative sentences and contractions ('morning,' 'kettle,' 'yep'). Employs greetings and acknowledgements ('thanks,' 'all good'). Punctuation is minimal, relying on periods and question marks. Demonstrates a relaxed register suitable for brief exchanges. Writing habits include abrupt transitions and implied context.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 8832
+    },
+    {
+      "id": "eval-emoji",
+      "name": "Fictional eval-emoji",
+      "style": "Conversational and friendly. Uses emoticons like smiling face and praying hands to convey emotion. Informal register with frequent use of 'Thanks' and expressions of appreciation. Short, declarative sentences prevail. Punctuation includes periods and ampersands. Writings exhibits positive and appreciative tendencies.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 7026
+    },
+    {
+      "id": "eval-detail",
+      "name": "Fictional eval-detail",
+      "style": "Formal and polite. Uses tentative language ('can', 'let us', 'will'). Frequent use of punctuation (periods, commas, semicolons). Employs phrases focusing on collaboration and confirmation. Avoids contractions; language is articulate and indirect. Generally avoids strong assertive statements.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed",
+      "elapsedMs": 7428
+    }
+  ],
+  "cases": [
+    {
+      "id": "dev-brief-genuine",
+      "split": "development",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "consistent",
+              "observations": [
+                "Use of 'cuz' indicates informality.",
+                "Short, declarative sentence structure.",
+                "Minimal punctuation suggests spoken language.",
+                "Friendly greeting 'hey'."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6394
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Casual language",
+                "informal address ('cuz' rarely used professionally)",
+                "Request for assistance/favor",
+                "Emphasis on flexibility (no rush)"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5921
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Informal language (cuz)",
+                "Casual request for lunch coverage",
+                "Emphasis on ease and flexibility (no rush)",
+                "Short, simple sentence structure"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5989
+          }
+        }
+      },
+      "cloud": {
+        "status": "error",
+        "features": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "receipts": [
+          {
+            "id": "b28ea74e-3f25-4a64-82b9-1c8592885c25",
+            "at": "2026-11-15T23:13:00.226Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "attempting"
+          },
+          {
+            "id": "b28ea74e-3f25-4a64-82b9-1c8592885c25",
+            "at": "2026-11-15T23:13:00.226Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "failed",
+            "elapsedMs": 328
+          }
+        ]
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "dev-brief-imposter",
+      "split": "development",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message uses urgent language.",
+                "It instructs to transfer funds and avoid phone calls.",
+                "Casual language is evident, indicating a potentially informal context.",
+                "There's a direct, imperative tone."
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6964
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message is urgent and demands immediate action (fund transfer).",
+                "It explicitly discourages phone communication.",
+                "The tone is demanding and potentially suspicious.",
+                "The message lacks context, making its intent unclear."
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7100
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message uses urgent language.",
+                "There is a direct request to transfer funds.",
+                "The message discourages telephone communication.",
+                "The message lacks specific details about the transfer."
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6582
+          }
+        }
+      },
+      "cloud": {
+        "status": "error",
+        "features": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "unknown",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "receipts": [
+          {
+            "id": "ab6037ab-83f4-48a8-9ede-cb544d53276d",
+            "at": "2026-11-15T23:13:21.216Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"ordinary_money\",\"paymentChannel\":\"unknown\",\"urgency\":\"immediate\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "attempting"
+          },
+          {
+            "id": "ab6037ab-83f4-48a8-9ede-cb544d53276d",
+            "at": "2026-11-15T23:13:21.216Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"ordinary_money\",\"paymentChannel\":\"unknown\",\"urgency\":\"immediate\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "failed",
+            "elapsedMs": 103
+          }
+        ]
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "dev-formal-genuine",
+      "split": "development",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Polite greeting used (Good evening)",
+                "Request for telephone discussion",
+                "Simple sentence structure",
+                "Professional tone implied"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5301
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Polite inquiry about invoice via telephone",
+                "Formal greeting",
+                "Request for discussion",
+                "Implied convenience of phone call"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5126
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Polite request for discussion via telephone.",
+                "Casual greeting ('Good evening').",
+                "Concise and direct phrasing.",
+                "Focus on convenience and ease of communication."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6144
+          }
+        }
+      },
+      "cloud": {
+        "status": "error",
+        "features": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "receipts": [
+          {
+            "id": "d5f984ec-12dd-44f4-8356-1d46a21fc05c",
+            "at": "2026-11-15T23:13:37.908Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "attempting"
+          },
+          {
+            "id": "d5f984ec-12dd-44f4-8356-1d46a21fc05c",
+            "at": "2026-11-15T23:13:37.908Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "failed",
+            "elapsedMs": 63
+          }
+        ]
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "dev-formal-imposter",
+      "split": "development",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Uses informal language (yo, lol)",
+                "Short, abrupt sentences",
+                "Message indicates urgency",
+                "No formal greetings or closings"
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "The request discourages a call or conversation. Try a route you already trust."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5722
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Informal language used (yo, lol)",
+                "Short phrasing and urgency indicated",
+                "Emphasis on speed",
+                "Casual tone"
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "The request discourages a call or conversation. Try a route you already trust."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5613
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "consistent",
+              "observations": [
+                "Use of 'yo' and 'lol' indicates informal language.",
+                "Short, declarative sentences are evident.",
+                "Contractions ('it', 'now') suggest conversational style.",
+                "Emphasis on speed ('send it now') aligns with the profile's closeness and ease."
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "The request discourages a call or conversation. Try a route you already trust."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 8465
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-punctuated-genuine",
+      "split": "evaluation",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "consistent",
+              "observations": [
+                "Uses exclamation points, consistent with friendly and informal tone.",
+                "Short, declarative sentence structure aligns with described writing habits.",
+                "Contractions and simple sentence structures are evident.",
+                "Expresses concern and requests assistance, fitting the described profile."
+              ]
+            },
+            "signals": [
+              "The sender claims a changed contact number. The claim does not establish who is writing."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7514
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message is a request for help regarding a lost phone.",
+                "There is a concern about safety related to sending fare.",
+                "The user is asking to contact the house before making a payment.",
+                "The tone suggests urgency and worry."
+              ]
+            },
+            "signals": [
+              "The sender claims a changed contact number. The claim does not establish who is writing."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7903
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Short, declarative sentences",
+                "Uses contractions (e.g., 'I'm', 'can't')",
+                "Asks for a pre-fare call",
+                "Expresses urgency about a lost phone"
+              ]
+            },
+            "signals": [
+              "The sender claims a changed contact number. The claim does not establish who is writing."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7405
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-punctuated-imposter",
+      "split": "evaluation",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "consistent",
+              "observations": [
+                "Use of exclamation points indicates a cheerful tone.",
+                "Short, declarative sentences are present.",
+                "Expressions of pleasure convey positivity.",
+                "Casual language aligns with the profile's description."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6735
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Simple greeting",
+                "Request for fare coverage",
+                "Promise to call back",
+                "Short and informal communication"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4832
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Uses informal greetings and contractions.",
+                "Short, declarative sentences characterize the message.",
+                "Implies a request for payment.",
+                "Suggests a relaxed and abrupt communication style."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7002
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-lowercase-genuine",
+      "split": "evaluation",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Concise and direct communication",
+                "Emphasis on immediate action (calling a number)",
+                "Implies a need for reassurance or guidance",
+                "Suggests a recent situation or event occurring"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7111
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message indicates the speaker is at a hospital.",
+                "The speaker advises calling a number before making a payment.",
+                "The tone is informative and potentially cautious.",
+                "The message suggests a possible billing concern."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6857
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message conveys a need for assistance and provides instructions regarding payment before contacting a number.",
+                "The user's emotional state is implied by the hospital setting and the request to call a number.",
+                "The language is straightforward and direct, suitable for conveying urgent information.",
+                "There's a subtle implied vulnerability due to being at the hospital."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 9355
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-lowercase-imposter",
+      "split": "evaluation",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Short, declarative sentences",
+                "Uses contractions (e.g., 'morning')",
+                "Relaxed, brief exchange style",
+                "Implied context and abrupt transitions"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6481
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Simple greeting",
+                "Request for rent",
+                "Positive sentiment",
+                "Flexible payment timeline"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4479
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "different",
+              "toneMatch": "different",
+              "observations": [
+                "Informal language used (e.g., 'morning', 'need the rent').",
+                "Short, declarative sentence structure.",
+                "Expresses a need/request.",
+                "Positive sentiment conveyed through the phrase 'all good'."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 7243
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-emoji-genuine",
+      "split": "evaluation",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "consistent",
+              "observations": [
+                "The message is a request for assistance.",
+                "The user expresses gratitude using 'Thanks'.",
+                "The use of '🙏' suggests a hopeful or expectant tone.",
+                "The language is informal and friendly."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6936
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Polite request",
+                "Informal language",
+                "Use of emoji",
+                "Seeking assistance"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4468
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Casual request for assistance",
+                "Use of emoji (🙏) for emphasis",
+                "Polite phrasing with 'Could you...?'",
+                "Expresses gratitude with 'Thanks'"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6251
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-emoji-imposter",
+      "split": "evaluation",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Urgent request for gift cards",
+                "Emphasis on confidentiality",
+                "Informal tone",
+                "Positive sentiment detected"
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "You are being asked to keep the request secret. Check independently before sending anything.",
+              "The requested payment method can make recovery difficult. Independently verify the request first."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5006
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Request for gift cards",
+                "Emphasis on secrecy",
+                "Urgency implied",
+                "Potential phishing attempt"
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "You are being asked to keep the request secret. Check independently before sending anything.",
+              "The requested payment method can make recovery difficult. Independently verify the request first."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4735
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Urgency expressed with 'immediately'",
+                "Request for confidentiality of gift card codes",
+                "Formal tone indicated by phrasing",
+                "Indirect language and avoidance of strong assertions"
+              ]
+            },
+            "signals": [
+              "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+              "You are being asked to keep the request secret. Check independently before sending anything.",
+              "The requested payment method can make recovery difficult. Independently verify the request first."
+            ],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6105
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-detail-genuine",
+      "split": "evaluation",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "different",
+              "toneMatch": "different",
+              "observations": [
+                "The message indicates a problem with a bank card.",
+                "The user suggests a phone call before invoice coverage.",
+                "The language is less formal than a typical profile suggests.",
+                "Punctuation is present but not as frequent or complex as described in the profile."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 8023
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Request for assistance with a bank card issue",
+                "Request to use a familiar phone number",
+                "Mention of invoice coverage"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4296
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "positive",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "different",
+              "observations": [
+                "The message expresses concern about a bank card.",
+                "The phrasing 'let us speak on the usual number' suggests a request for continued contact.",
+                "The mention of 'cover the invoice' indicates a financial transaction is involved.",
+                "The tone is more urgent than friendly/informal, despite the profile's description."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 8108
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    },
+    {
+      "id": "eval-detail-imposter",
+      "split": "evaluation",
+      "label": "imposter",
+      "local": {
+        "matched": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Request for invoice confirmation",
+                "Emphasis on collaboration",
+                "Use of polite language",
+                "Avoidance of assertive statements"
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 4545
+          }
+        },
+        "omitted": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "Request to confirm invoice total before payment.",
+                "Indicates a need for assistance with the invoice.",
+                "Implies a transactional context.",
+                "Polite request for collaboration."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 5329
+          }
+        },
+        "wrongContact": {
+          "status": "completed",
+          "flag": "abstain",
+          "result": {
+            "kind": "model",
+            "personal": {
+              "languageMatch": "unknown",
+              "toneMatch": "unknown",
+              "observations": [
+                "The message requests confirmation of a total and invoice assistance.",
+                "The language is straightforward and direct.",
+                "The tone is neutral and functional, lacking strong emotional cues.",
+                "No indication of friendliness, informality, or warmth is apparent."
+              ]
+            },
+            "signals": [],
+            "number": "unknown",
+            "note": "Personal observations were generated on this device. They do not establish identity.",
+            "elapsedMs": 6557
+          }
+        }
+      },
+      "cloud": {
+        "status": "not attempted after three consecutive service failures"
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    }
+  ],
+  "cloudHttp": [
+    {
+      "status": 401,
+      "errorCode": "UNAUTHENTICATED",
+      "modelVersion": null
+    },
+    {
+      "status": 401,
+      "errorCode": "UNAUTHENTICATED",
+      "modelVersion": null
+    },
+    {
+      "status": 401,
+      "errorCode": "UNAUTHENTICATED",
+      "modelVersion": null
+    }
+  ],
+  "privacy": {
+    "rawFixtureTextExcluded": true,
+    "generationRequests": 3
+  },
+  "limitations": [
+    "12 authored scenarios are not real-world validation.",
+    "Cloud/hybrid flags remain unrated until independent blinded raters apply the frozen rubric.",
+    "Local positives combine rules and style differences, never an identity verdict."
+  ],
+  "completedAt": "2026-11-15T23:16:31.161Z"
+}

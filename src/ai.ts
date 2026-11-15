@@ -43,25 +43,31 @@ export const configured = !!(
   env.VITE_FIREBASE_PROJECT_ID
 );
 export const cloudConfigured = configured && !!env.VITE_RECAPTCHA_SITE_KEY;
-function firebaseApp() {
+function firebaseApp(cloud = false) {
   if (!configured)
     throw new Error(
       "Cloud setup is not available in this build. Your message has stayed on this device.",
     );
+  const name = cloud ? "hakiki-cloud" : "hakiki-local";
   return (
-    getApps()[0] ||
-    initializeApp({
-      apiKey: env.VITE_FIREBASE_API_KEY,
-      appId: env.VITE_FIREBASE_APP_ID,
-      projectId: env.VITE_FIREBASE_PROJECT_ID,
-      authDomain: env.VITE_FIREBASE_AUTH_DOMAIN,
-      messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    })
+    getApps().find((app) => app.name === name) ||
+    initializeApp(
+      {
+        apiKey: env.VITE_FIREBASE_API_KEY,
+        appId: env.VITE_FIREBASE_APP_ID,
+        projectId: env.VITE_FIREBASE_PROJECT_ID,
+        authDomain: env.VITE_FIREBASE_AUTH_DOMAIN,
+        messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+      },
+      name,
+    )
   );
 }
 let appCheckReady = false;
 function ai(cloud = false) {
-  const app = firebaseApp();
+  // Firebase 13.3 snapshots App Check at getAI construction. The local instance
+  // must not create the cloud service before consent initializes its attestation.
+  const app = firebaseApp(cloud);
   if (cloud && !appCheckReady) {
     if (!cloudConfigured)
       throw new Error(
@@ -301,7 +307,7 @@ export async function checkWorld(
 }
 export async function refreshPlaybook(): Promise<string> {
   try {
-    const rc = getRemoteConfig(firebaseApp());
+    const rc = getRemoteConfig(firebaseApp(true));
     rc.defaultConfig = { hakiki_playbook_version: "2026-11-15" };
     rc.settings.fetchTimeoutMillis = 5000;
     rc.settings.minimumFetchIntervalMillis = 3600000;

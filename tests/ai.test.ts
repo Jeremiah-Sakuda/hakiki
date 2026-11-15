@@ -4,13 +4,21 @@ const fake = vi.hoisted(() => ({
   initializeDeviceModel: vi.fn(),
   getGenerativeModel: vi.fn(),
   initializeAppCheck: vi.fn(),
+  apps: [] as { name: string }[],
+  attested: new Set<object>(),
+  services: new Map<object, { attested: boolean }>(),
+  getAI: vi.fn(),
 }));
 vi.mock("firebase/app", () => ({
-  initializeApp: () => ({}),
-  getApps: () => [{}],
+  initializeApp: (_config: unknown, name: string) => {
+    const app = { name };
+    fake.apps.push(app);
+    return app;
+  },
+  getApps: () => fake.apps,
 }));
 vi.mock("firebase/ai", () => ({
-  getAI: () => ({}),
+  getAI: fake.getAI,
   getGenerativeModel: fake.getGenerativeModel,
   GoogleAIBackend: class {},
   AgentPlatformBackend: class {},
@@ -33,6 +41,17 @@ import { extractFeatures, sampleProfile } from "../src/domain";
 beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
+  fake.apps.length = 0;
+  fake.attested.clear();
+  fake.services.clear();
+  fake.initializeAppCheck.mockImplementation((app) => {
+    fake.attested.add(app);
+  });
+  fake.getAI.mockImplementation((app) => {
+    if (!fake.services.has(app))
+      fake.services.set(app, { attested: fake.attested.has(app) });
+    return fake.services.get(app);
+  });
   for (const key of [
     "VITE_FIREBASE_API_KEY",
     "VITE_FIREBASE_APP_ID",
@@ -45,6 +64,53 @@ beforeEach(() => {
   vi.stubGlobal("LanguageModel", { availability: async () => "available" });
 });
 describe("SDK privacy routing (mocked transport)", () => {
+  it.each(["local-first", "cloud-first"])(
+    "attests the cloud service before its cached creation: %s",
+    async (order) => {
+      const ai = await import("../src/ai");
+      fake.getGenerativeModel.mockImplementation((service, options) => ({
+        initializeDeviceModel: fake.initializeDeviceModel,
+        generateContent: async () => {
+          if (options.mode === "only_in_cloud" && !service.attested)
+            throw new Error("Unauthenticated cached AI service");
+          return {
+            response: {
+              inferenceSource:
+                options.mode === "only_in_cloud" ? "in_cloud" : "on_device",
+              text: () =>
+                options.mode === "only_in_cloud"
+                  ? "Verify independently."
+                  : JSON.stringify({
+                      languageMatch: "unknown",
+                      toneMatch: "unknown",
+                      observations: [],
+                    }),
+              candidates: [{ finishReason: "STOP" }],
+            },
+          };
+        },
+      }));
+      const local = async () => {
+        await ai.prepareLocal(() => {});
+        await ai.analyzeLocal("synthetic", undefined, "");
+      };
+      const cloud = () =>
+        ai.checkWorld(extractFeatures("send money"), () => {});
+      if (order === "local-first") {
+        await local();
+        expect(fake.initializeAppCheck).not.toHaveBeenCalled();
+        await cloud();
+      } else {
+        await cloud();
+        await local();
+      }
+      expect(fake.apps.map((app) => app.name).sort()).toEqual([
+        "hakiki-cloud",
+        "hakiki-local",
+      ]);
+      expect(fake.initializeAppCheck).toHaveBeenCalledTimes(1);
+    },
+  );
   it.each(["success", "invalid", "rejection", "timeout"])(
     "destroys the local session after %s",
     async (outcome) => {
@@ -75,7 +141,7 @@ describe("SDK privacy routing (mocked transport)", () => {
           outcome === "success"
             ? expect(pending).resolves.toMatchObject({ kind: "model" })
             : expect(pending).rejects.toThrow();
-      if (outcome === "timeout") await vi.advanceTimersByTimeAsync(60000);
+        if (outcome === "timeout") await vi.advanceTimersByTimeAsync(60000);
         await checked;
         const options = fake.getGenerativeModel.mock.calls.at(-1)?.[1];
         expect(options.mode).toBe("only_on_device");
