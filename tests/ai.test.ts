@@ -45,6 +45,77 @@ beforeEach(() => {
   vi.stubGlobal("LanguageModel", { availability: async () => "available" });
 });
 describe("SDK privacy routing (mocked transport)", () => {
+  it.each(["success", "invalid", "rejection", "timeout"])(
+    "destroys the local session after %s",
+    async (outcome) => {
+      vi.useFakeTimers();
+      try {
+        const ai = await import("../src/ai");
+        await ai.prepareLocal(() => {});
+        if (outcome === "timeout")
+          fake.generateContent.mockReturnValue(new Promise(() => {}));
+        else if (outcome === "rejection")
+          fake.generateContent.mockRejectedValue(new Error("Model failed"));
+        else
+          fake.generateContent.mockResolvedValue({
+            response: {
+              inferenceSource: "on_device",
+              text: () =>
+                outcome === "invalid"
+                  ? "invalid JSON"
+                  : JSON.stringify({
+                      languageMatch: "unknown",
+                      toneMatch: "unknown",
+                      observations: [],
+                    }),
+            },
+          });
+        const pending = ai.analyzeLocal("synthetic", undefined, "");
+        const checked =
+          outcome === "success"
+            ? expect(pending).resolves.toMatchObject({ kind: "model" })
+            : expect(pending).rejects.toThrow();
+      if (outcome === "timeout") await vi.advanceTimersByTimeAsync(60000);
+        await checked;
+        const options = fake.getGenerativeModel.mock.calls.at(-1)?.[1];
+        expect(options.mode).toBe("only_on_device");
+        expect(options.onDeviceParams.createOptions.signal.aborted).toBe(true);
+      } finally {
+        vi.useRealTimers();
+      }
+    },
+  );
+  it("bounds token preparation and ignores a late cloud completion", async () => {
+    vi.useFakeTimers();
+    try {
+      const ai = await import("../src/ai");
+      let finish!: (value: unknown) => void;
+      fake.generateContent.mockReturnValue(
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+      );
+      const receipts: unknown[] = [];
+      const pending = ai.checkWorld(extractFeatures("send money"), (r) =>
+        receipts.push(r),
+      );
+      const rejected = expect(pending).rejects.toThrow("could not finish");
+      await vi.advanceTimersByTimeAsync(35000);
+      await rejected;
+      finish({
+        response: {
+          inferenceSource: "in_cloud",
+          text: () => "Late response",
+          candidates: [{ finishReason: "STOP" }],
+        },
+      });
+      await Promise.resolve();
+      expect(receipts).toHaveLength(2);
+      expect(receipts.at(-1)).toMatchObject({ status: "failed" });
+    } finally {
+      vi.useRealTimers();
+    }
+  });
   it("rejects oversized complete cloud output instead of silently truncating it", async () => {
     const ai = await import("../src/ai");
     fake.generateContent.mockResolvedValue({
@@ -99,7 +170,11 @@ describe("SDK privacy routing (mocked transport)", () => {
     await expect(
       ai.analyzeLocal("private raw text", sampleProfile, ""),
     ).rejects.toThrow("execution location");
-    expect(fake.getGenerativeModel).toHaveBeenCalledTimes(1);
+    expect(
+      fake.getGenerativeModel.mock.calls.every(
+        (call) => call[1].mode === "only_on_device",
+      ),
+    ).toBe(true);
   });
   it("does not call any generation endpoint when a category includes raw text", async () => {
     const ai = await import("../src/ai");
@@ -170,6 +245,10 @@ describe("SDK privacy routing (mocked transport)", () => {
     await expect(
       ai.analyzeLocal("secret", sampleProfile, ""),
     ).rejects.toThrow();
-    expect(fake.getGenerativeModel).toHaveBeenCalledTimes(1);
+    expect(
+      fake.getGenerativeModel.mock.calls.every(
+        (call) => call[1].mode === "only_on_device",
+      ),
+    ).toBe(true);
   });
 });

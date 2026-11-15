@@ -84,7 +84,7 @@ test("real on-device comparison and profile import keep raw content local", asyn
     await page.getByRole("button", { name: "Review this message" }).click();
     await expect(
       page.getByText("On-device AI + text rules", { exact: true }),
-    ).toBeVisible({ timeout: 35000 });
+    ).toBeVisible({ timeout: 75000 });
     expect(outgoing.join(" ")).not.toContain("LOCAL-CANARY-91");
     expect(outgoing.filter((x) => x.includes("generateContent"))).toHaveLength(
       0,
@@ -117,7 +117,7 @@ test("real on-device comparison and profile import keep raw content local", asyn
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Create local profile" }).click();
     const draft = page.getByLabel("Writing profile for Synthetic cousin");
-    await expect(draft).toBeVisible({ timeout: 35000 });
+    await expect(draft).toBeVisible({ timeout: 75000 });
     const generatedProfileDraft = await draft.inputValue();
     expect(
       await page.evaluate(() =>
@@ -132,7 +132,7 @@ test("real on-device comparison and profile import keep raw content local", asyn
     await page.getByRole("button", { name: "Save reviewed profile" }).click();
     await expect(
       page.getByLabel("Who does it claim to be from?", { exact: false }),
-    ).toHaveValue(/.+/, { timeout: 35000 });
+    ).toHaveValue(/.+/, { timeout: 75000 });
     const profiles = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("hakiki.contacts.v1") || "[]"),
     );

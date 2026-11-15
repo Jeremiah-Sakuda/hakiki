@@ -32,6 +32,7 @@ const report = {
   model: {},
   profiles: [],
   cases: [],
+  cloudHttp: [],
   privacy: { rawFixtureTextExcluded: false },
   limitations: [
     "12 authored scenarios are not real-world validation.",
@@ -47,10 +48,27 @@ const save = () =>
 try {
   const page = await context.newPage();
   const outgoing = [];
+  const pendingResponses = [];
+  page.on("response", (r) => {
+    if (r.url().includes("generateContent"))
+      pendingResponses.push(
+        r
+          .json()
+          .catch(() => ({}))
+          .then((body) =>
+            report.cloudHttp.push({
+              status: r.status(),
+              errorCode: body.error?.status ?? null,
+              modelVersion: body.modelVersion ?? null,
+            }),
+          ),
+      );
+  });
   page.on("request", (r) =>
     outgoing.push(r.url() + " " + (r.postData() || "")),
   );
   await page.goto("http://127.0.0.1:5173");
+  await page.bringToFront();
   await page.evaluate(async () => {
     const ai = await import("/src/ai.ts");
     const domain = await import("/src/domain.ts");
@@ -61,6 +79,7 @@ try {
     cloudModel: window.__pilot.ai.cloudModel,
     provider: window.__pilot.ai.cloudProvider,
     local: "Chrome Prompt API through Firebase ONLY_ON_DEVICE",
+    localPromptVersion: window.__pilot.ai.localPromptVersion,
     browser: navigator.userAgent,
   }));
   const profiles = new Map();
@@ -68,11 +87,15 @@ try {
   for (const c of pairedCases) {
     if (attemptedProfiles.has(c.contactId)) continue;
     attemptedProfiles.add(c.contactId);
+    console.log("Starting local profile", c.contactId);
+    await page.bringToFront();
     const outcome = await page.evaluate(async (history) => {
+      const started = performance.now();
       try {
         return {
           status: "completed",
           style: await window.__pilot.ai.summarizeProfile(history),
+          elapsedMs: Math.round(performance.now() - started),
         };
       } catch (e) {
         return { status: "error", reason: e.message };
@@ -94,12 +117,18 @@ try {
       sampleCount: c.history.length,
     };
     profiles.set(c.contactId, profile);
-    report.profiles.push({ ...profile, status: "completed" });
+    report.profiles.push({
+      ...profile,
+      status: "completed",
+      elapsedMs: outcome.elapsedMs,
+    });
     console.log("Prepared real local profile", c.contactId);
     save();
   }
   let cloudFailures = 0;
   for (const c of pairedCases) {
+    console.log("Starting pilot case", c.id);
+    await page.bringToFront();
     const row = {
       id: c.id,
       split: c.split,
@@ -149,6 +178,7 @@ try {
         },
         { text: c.text, profile },
       );
+      console.log(c.id, variant, row.local[variant].status);
     }
     if (cloudFailures < 3) {
       row.cloud = await page.evaluate(async (text) => {
@@ -199,6 +229,7 @@ try {
       "A raw synthetic fixture appeared in outgoing traffic. Review required.",
     );
   report.completedAt = new Date().toISOString();
+  await Promise.allSettled(pendingResponses);
   save();
 } finally {
   save();

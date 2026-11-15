@@ -107,3 +107,47 @@ test("category correction updates observations and failure is not called skipped
     page.getByRole("dialog", { name: "Your privacy receipt" }),
   ).toBeVisible();
 });
+
+test("profile drafts require review and persist only the edited text", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Device setup" }).click();
+  await page.getByRole("button", { name: "Enable on-device AI" }).click();
+  await expect(
+    page.getByRole("button", { name: "Local model ready" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Close dialog" }).click();
+  await page.getByRole("button", { name: /Your people/ }).click();
+  await page
+    .getByLabel("Choose a WhatsApp text export")
+    .setInputFiles({
+      name: "synthetic.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from(
+        Array.from(
+          { length: 5 },
+          (_, i) => `11/12/2026, 10:20 AM - New person: synthetic line ${i}`,
+        ).join("\n"),
+      ),
+    });
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Create local profile" }).click();
+  await page.evaluate(() =>
+    (
+      window as unknown as { completeMockProfile: () => void }
+    ).completeMockProfile(),
+  );
+  const draft = page.getByLabel("Writing profile for New person");
+  await expect(draft).toBeVisible();
+  expect(
+    await page.evaluate(() => localStorage.getItem("hakiki.contacts.v1")),
+  ).toBeNull();
+  await draft.fill("Reviewed short informal sentences.");
+  await page.getByRole("button", { name: "Save reviewed profile" }).click();
+  const saved = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("hakiki.contacts.v1") || "[]"),
+  );
+  expect(saved).toHaveLength(1);
+  expect(saved[0].style).toBe("Reviewed short informal sentences.");
+});

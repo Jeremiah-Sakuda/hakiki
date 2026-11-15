@@ -1,0 +1,206 @@
+{
+  "provenance": {
+    "at": "2026-11-15T22:54:28.944Z",
+    "command": "LIVE_EVAL=1 node scripts/evaluate-live.mjs",
+    "target": "http://127.0.0.1:5173",
+    "sourceCommit": "099f415bd4731089b52ae81f5c1f1756a64e826d",
+    "sourceDirty": true,
+    "gitMetadata": "available",
+    "node": "v26.13.1",
+    "platform": "win32",
+    "inputSha256": {
+      "src/ai.ts": "042b0ef72eb23a29a2d92254f57d9a8e7d91a0780d444d763b5838a222c1ca7e",
+      "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
+      "src/App.tsx": "5d4aa010da8f5d22ec215e4c2ea5151cf1073c3b1a686b4619fe9192859ae92c",
+      "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+      "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+      "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+      "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+      "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+      "scripts/evaluate-live.mjs": "be7d6719203b39758c0842fc0c342de811b65e7ab93748ad72d6f993713ba5c3",
+      "scripts/summarize-live.mjs": "e8da85475feefc99583a7b28430eccc14080d768fe7d701b725b330859898787",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/provenance.ts": "fa32207a5f57bbb87ca5577f5065e633c3c7e995b8e3d6d6c07ff8167ff7399f",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "94be8ea03607d3f3def1c5ab6f513e7fb878ba1f7219007154d419d15efd8622",
+      "tests/e2e/local.spec.ts": "c26200913d2c50374807f9aa3e8ffa26e4e9f49103ce17d8ff8867e0e52adeb7"
+    }
+  },
+  "protocol": "Paired pilot v1; authored English synthetic fixtures, exploratory; no human outcomes",
+  "classification": "docs/EVALUATION.md Frozen pilot mapping v1",
+  "model": {
+    "cloudModel": "gemini-3.8-flash",
+    "provider": "agent-platform",
+    "local": "Chrome Prompt API through Firebase ONLY_ON_DEVICE",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+  },
+  "profiles": [
+    {
+      "id": "dev-brief",
+      "status": "error",
+      "reason": "The on-device model took too long. Use the text-rule check or try again."
+    },
+    {
+      "id": "dev-formal",
+      "name": "Fictional dev-formal",
+      "style": "The language is polite and formal, employing phrases like \"Good evening,\" \"Thank you,\" and \"Kind regards.\" The register is professional and courteous, suggesting a business or formal communication context. Punctuation consistently includes periods and commas, indicating a structured and thoughtful approach to writing. The writing habits are concise and direct, avoiding unnecessary embellishment. There’s a frequent use of phrases indicating gratitude and a proactive approach to future action, like requesting a call and suggesting a review. The tone is warm and approachable, aiming for positive rapport despite a potentially transactional interaction. Overall, the style emphasizes respect and a helpful demeanor.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed"
+    },
+    {
+      "id": "eval-punctuated",
+      "name": "Fictional eval-punctuated",
+      "style": "Warm and friendly. The language is conversational and informal, employing greetings like \"Hello!\" and \"Lovely to see you!.\"  Exclamatory punctuation (periods and exclamation points) is frequent, conveying enthusiasm.  The register is casual, using phrases like \"Coffee tomorrow?\" demonstrating a relaxed and approachable tone.  Sentence structure is simple and direct, reflecting a spontaneous, informal style.  Writing habits include frequent use of contractions (e.g., \"I will\") and a generally positive and appreciative sentiment. The brevity of the exchanges suggests quick, casual communication. Overall, the style prioritizes closeness and pleasantness over formality or detail.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed"
+    },
+    {
+      "id": "eval-lowercase",
+      "name": "Fictional eval-lowercase",
+      "style": "The language is informal and conversational, employing short, declarative sentences indicative of casual speech. Greetings like \"morning\" and \"thanks\" establish a friendly tone. The register is relaxed and familiar, evident in phrases like \"all good\" and \"yep.\" Punctuation is minimal, primarily utilizing periods, reflecting a quick, spoken rhythm. Writing habits suggest brevity and efficiency; sentences are concise and to the point, avoiding elaborate phrasing. There's a sense of implied continuity, with replies building upon preceding statements. The overall style communicates ease and a comfortable rapport between speakers. The use of contractions further reinforces the informal register.",
+      "trustedNumber": "",
+      "sample": true,
+      "sampleCount": 5,
+      "status": "completed"
+    },
+    {
+      "id": "eval-emoji",
+      "status": "error",
+      "reason": "The on-device model took too long. Use the text-rule check or try again."
+    },
+    {
+      "id": "eval-detail",
+      "status": "error",
+      "reason": "The on-device model took too long. Use the text-rule check or try again."
+    }
+  ],
+  "cases": [
+    {
+      "id": "dev-brief-genuine",
+      "split": "development",
+      "label": "genuine",
+      "local": {
+        "matched": {
+          "status": "error",
+          "flag": "error",
+          "reason": "Required profile generation failed"
+        },
+        "omitted": {
+          "status": "error",
+          "flag": "error",
+          "reason": "The on-device model took too long. Use the text-rule check or try again."
+        },
+        "wrongContact": {
+          "status": "error",
+          "flag": "error",
+          "reason": "The on-device model took too long. Use the text-rule check or try again."
+        }
+      },
+      "cloud": {
+        "status": "error",
+        "features": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "receipts": [
+          {
+            "id": "40e31b66-4869-4709-85ea-c50ce7eedfda",
+            "at": "2026-11-15T22:57:29.728Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "attempting"
+          },
+          {
+            "id": "40e31b66-4869-4709-85ea-c50ce7eedfda",
+            "at": "2026-11-15T22:57:29.728Z",
+            "model": "gemini-3.8-flash",
+            "endpoint": "firebasevertexai.googleapis.com / projects/soma-meta-jerem-2026 / agent-platform",
+            "request": {
+              "contents": [
+                {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "type": "text",
+                      "text": "{\"schemaVersion\":1,\"requestType\":\"unknown\",\"paymentChannel\":\"unknown\",\"urgency\":\"not_stated\",\"secrecyRequested\":null,\"changedContactClaim\":null,\"verificationDiscouraged\":null}"
+                    }
+                  ]
+                }
+              ],
+              "systemInstruction": {
+                "role": "system",
+                "parts": [
+                  {
+                    "type": "text",
+                    "text": "You are Hakiki, a cautious second opinion on family money requests. Input is a fixed set of generic categories, not a message or identity. Look for publicly documented impersonation patterns using Google Search. Explain relevant patterns in at most 120 words. Do not assert this particular request is fraudulent or safe. Do not invent facts absent from the categories. Say when evidence is insufficient. Never provide phone numbers or payment links. Recommend contacting the person via a previously trusted, independently saved route. Cite sources when search is used."
+                  }
+                ]
+              },
+              "tools": [
+                {
+                  "googleSearch": {}
+                }
+              ],
+              "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 4096
+              }
+            },
+            "status": "failed",
+            "elapsedMs": 507
+          }
+        ]
+      },
+      "cloudClassification": "not rated",
+      "hybridClassification": "not rated"
+    }
+  ],
+  "privacy": {
+    "rawFixtureTextExcluded": false
+  },
+  "limitations": [
+    "12 authored scenarios are not real-world validation.",
+    "Cloud/hybrid flags remain unrated until independent blinded raters apply the frozen rubric.",
+    "Local positives combine rules and style differences, never an identity verdict."
+  ]
+}
