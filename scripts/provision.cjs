@@ -7,10 +7,13 @@ const root = path.join(
   "npm/node_modules/firebase-tools/lib",
 );
 const load = (p) => require(path.join(root, p));
-const [project, projectNumber, appId] = process.argv.slice(2);
+const [project, projectNumber, appId, provider = "google-ai"] =
+  process.argv.slice(2);
+if (!["google-ai", "agent-platform"].includes(provider))
+  throw new Error("Provider must be google-ai or agent-platform");
 if (!project || !projectNumber || !appId)
   throw new Error(
-    "Usage: node scripts/provision.cjs AI_PROJECT PROJECT_NUMBER HAKIKI_WEB_APP_ID",
+    "Usage: node scripts/provision.cjs AI_PROJECT PROJECT_NUMBER HAKIKI_WEB_APP_ID [google-ai|agent-platform]",
   );
 const hostingProject = "hakiki-hybrid-2026";
 (async () => {
@@ -80,7 +83,7 @@ const hostingProject = "hakiki-hybrid-2026";
   const c = sdk.body;
   fs.writeFileSync(
     ".env.local",
-    `VITE_FIREBASE_API_KEY=${c.apiKey}\nVITE_FIREBASE_AUTH_DOMAIN=${c.authDomain}\nVITE_FIREBASE_PROJECT_ID=${project}\nVITE_FIREBASE_APP_ID=${appId}\nVITE_FIREBASE_MESSAGING_SENDER_ID=${projectNumber}\nVITE_RECAPTCHA_SITE_KEY=${siteKey}\nVITE_CLOUD_MODEL=gemini-3.8-flash\n`,
+    `VITE_FIREBASE_API_KEY=${c.apiKey}\nVITE_FIREBASE_AUTH_DOMAIN=${c.authDomain}\nVITE_FIREBASE_PROJECT_ID=${project}\nVITE_FIREBASE_APP_ID=${appId}\nVITE_FIREBASE_MESSAGING_SENDER_ID=${projectNumber}\nVITE_RECAPTCHA_SITE_KEY=${siteKey}\nVITE_CLOUD_MODEL=gemini-3.8-flash\nVITE_AI_PROVIDER=${provider}\n`,
   );
   const debugFile = `.local/appcheck-${project}.env`;
   fs.mkdirSync(".local", { recursive: true });

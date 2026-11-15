@@ -1,6 +1,6 @@
 # Hakiki privacy and architecture contract
 
-This is the proposed implementation contract. It is not a claim that a system has already passed a privacy audit.
+This is the implementation contract. See STATUS.md and the recorded evidence for which paths have been tested; finite tests are not a universal privacy audit.
 
 ## Data flow
 
@@ -13,7 +13,7 @@ This is the proposed implementation contract. It is not a claim that a system ha
 
 ## Candidate outbound schema
 
-The exact enums are frozen after the Sprint 0 utility test. This illustrates the permitted shape, not a working API contract:
+The implemented strict schema is defined in `src/domain.ts`. This is an allowed example:
 
 ```json
 {

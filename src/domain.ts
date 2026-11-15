@@ -190,7 +190,7 @@ export function cloudRequest(input: unknown) {
       parts: [{ type: "text" as const, text: CLOUD_INSTRUCTION }],
     },
     tools: [{ googleSearch: {} }],
-    generationConfig: { temperature: 0.2, maxOutputTokens: 650 },
+    generationConfig: { temperature: 0.2, maxOutputTokens: 4096 },
   };
 }
 export function safeSourceUrl(value: string): string | null {

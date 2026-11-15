@@ -2,7 +2,7 @@
 
 A private second opinion on family money requests. Pause, inspect the request, and contact the person through a route you already trust. Hakiki does not authenticate a sender or certify a request as safe.
 
-**Implementation candidate; hybrid release gates remain open.** The text workflow, optional local profile adapter, explicit cloud consent, privacy receipt, offline shell, and failure states are implemented. Real cloud requests reach Gemini, but Soma reports depleted prepaid credits. Chrome exposes the Prompt API on the tested machine but reports its model unavailable. Neither successful cloud inference nor a real local comparison has been demonstrated yet.
+**Implementation candidate; local-AI release gate remains open.** The text workflow, optional local profile adapter, explicit cloud consent, privacy receipt, offline shell, and failure states are implemented. Real cloud inference succeeds through Firebase AI Logic's Agent Platform (formerly Vertex AI) backend on Soma's existing billing, with complete output and rendered search sources. Raw-message canaries remain excluded. Chrome exposes the Prompt API in the tested isolated profiles but reports its model unavailable; real local comparison and profile creation remain unverified.
 
 [Try the hosted candidate](https://hakiki-hybrid-2026.web.app).
 
@@ -21,7 +21,7 @@ Open the URL printed by Vite. Without Firebase configuration, text rules and fic
 
 For AI, copy `.env.example` to `.env.local` and supply your Firebase web app configuration, reCAPTCHA Enterprise site key, and cloud model. Enable Firebase AI Logic with the Gemini Developer API, usable quota, and App Check. Register the hosting domain in reCAPTCHA Enterprise. For localhost, register an App Check debug token and put it **only** in `.env.development.local`. Never commit that file or include debug tokens in a production build.
 
-The owner setup helper `node scripts/provision.cjs PROJECT_ID PROJECT_NUMBER WEB_APP_ID` uses an authenticated global Windows Firebase CLI. It registers Hakiki-specific attestation and writes ignored environment files; it does not attach billing or change existing service enforcement. Current configuration uses `hakiki-hybrid-2026` for Hosting and a separate Hakiki web app in owner-selected `soma-meta-jerem-2026` for AI. Existing Soma app attestation was not changed.
+The owner setup helper `node scripts/provision.cjs PROJECT_ID PROJECT_NUMBER WEB_APP_ID [google-ai|agent-platform]` uses an authenticated global Windows Firebase CLI. It registers Hakiki-specific attestation and writes ignored environment files; it does not attach billing or change existing service enforcement. Current configuration uses `hakiki-hybrid-2026` for Hosting and a separate Hakiki web app in owner-selected `soma-meta-jerem-2026` for AI with `VITE_AI_PROVIDER=agent-platform`. The owner approved usage on Soma's existing Cloud billing. Existing Soma app attestation was not changed.
 
 ## Local AI
 

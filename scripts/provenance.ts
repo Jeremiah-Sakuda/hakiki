@@ -23,6 +23,7 @@ export function provenance(command: string, target = "local source") {
     "eval/pairs.ts",
     "package-lock.json",
     "scripts/evaluate.ts",
+    "scripts/evaluate-live.mjs",
     "scripts/provenance.ts",
     "vite.config.ts",
     "tests/e2e/flow.spec.ts",

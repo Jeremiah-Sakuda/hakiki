@@ -156,6 +156,10 @@ test("desktop layout and real cloud request exclude raw message content", async 
     attributionRendered: false,
   };
   if (response.ok()) {
+    expect(
+      payload.candidates?.[0]?.finishReason,
+      "Incomplete generation must not count as a successful inference.",
+    ).toBe("STOP");
     await expect(
       page.getByRole("heading", { name: "What the cloud found" }),
     ).toBeVisible();

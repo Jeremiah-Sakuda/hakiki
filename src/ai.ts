@@ -217,6 +217,9 @@ export async function checkWorld(
     const result = await model.generateContent(request, { timeout: 30000 });
     if (result.response.inferenceSource !== InferenceSource.IN_CLOUD)
       throw new Error("Cloud execution could not be confirmed.");
+    const finishReason = result.response.candidates?.[0]?.finishReason;
+    if (finishReason && finishReason !== "STOP")
+      throw new Error("The cloud response was incomplete.");
     const text = result.response.text().trim().slice(0, 6000);
     if (!text) throw new Error("The cloud returned no usable response.");
     const metadata = result.response.candidates?.[0]?.groundingMetadata;
@@ -247,7 +250,7 @@ export async function checkWorld(
       elapsedMs: Math.round(performance.now() - start),
     });
     throw new Error(
-      "The cloud check could not finish. It may be unavailable, rate-limited, or blocked by App Check. Your raw message was not included. Review the receipt before choosing to retry.",
+      "The cloud check could not finish. The response may be incomplete, unavailable, rate-limited, or blocked by App Check. Your raw message was not included. Review the receipt before choosing to retry.",
     );
   }
 }

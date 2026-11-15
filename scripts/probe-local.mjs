@@ -8,8 +8,14 @@ const context = await chromium.launchPersistentContext(".local/chrome-probe", {
   ignoreDefaultArgs: [
     "--disable-component-update",
     "--disable-background-networking",
+    "--disable-field-trial-config",
+    "--disable-component-extensions-with-background-pages",
   ],
-  args: ["--enable-features=PromptAPIForGeminiNanoMultimodalInput"],
+  // Restore OptimizationHints normally disabled by Playwright, so Chrome can fetch model eligibility.
+  args: [
+    "--disable-features=Translate",
+    "--enable-features=PromptAPIForGeminiNanoMultimodalInput",
+  ],
 });
 try {
   const page = await context.newPage();
@@ -37,6 +43,22 @@ try {
     ...capability,
   };
   console.log(JSON.stringify(report, null, 2));
+  if (process.env.LOCAL_DIAGNOSTIC === "1") {
+    const diagnostic = await context.newPage();
+    await diagnostic.goto("chrome://on-device-internals");
+    await diagnostic.waitForLoadState("networkidle");
+    await diagnostic
+      .getByText("Loading...", { exact: true })
+      .waitFor({ state: "hidden", timeout: 60000 })
+      .catch(() => {});
+    let snapshot = await diagnostic.locator("body").ariaSnapshot();
+    await diagnostic.getByRole("tab", { name: "Broker State" }).click();
+    await diagnostic.waitForLoadState("networkidle");
+    snapshot +=
+      "\nBroker state:\n" + (await diagnostic.locator("body").ariaSnapshot());
+    await writeFile(".local/model-diagnostic.txt", snapshot);
+    console.log(snapshot.slice(0, 6000));
+  }
   await writeFile(
     headed
       ? "docs/evidence/local-capability-headed.json"
