@@ -2,8 +2,18 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 export function provenance(command: string, target = "local source") {
-  const git = (args: string[]) =>
-    execFileSync("git", args, { encoding: "utf8" }).trim();
+  const git = (args: string[]) => {
+    try {
+      return execFileSync("git", args, {
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      }).trim();
+    } catch {
+      return null;
+    }
+  };
+  const sourceCommit = git(["rev-parse", "HEAD"]);
+  const status = git(["status", "--porcelain"]);
   const files = [
     "src/ai.ts",
     "src/domain.ts",
@@ -12,13 +22,21 @@ export function provenance(command: string, target = "local source") {
     "eval/cases.ts",
     "eval/pairs.ts",
     "package-lock.json",
+    "scripts/evaluate.ts",
+    "scripts/provenance.ts",
+    "vite.config.ts",
+    "tests/e2e/flow.spec.ts",
   ];
   return {
     at: new Date().toISOString(),
     command,
     target,
-    sourceCommit: git(["rev-parse", "HEAD"]),
-    sourceDirty: !!git(["status", "--porcelain"]),
+    sourceCommit,
+    sourceDirty: status === null ? null : !!status,
+    gitMetadata:
+      sourceCommit && status !== null
+        ? "available"
+        : "unavailable; source archive or Git missing",
     node: process.version,
     platform: process.platform,
     inputSha256: Object.fromEntries(

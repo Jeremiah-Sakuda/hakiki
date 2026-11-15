@@ -38,6 +38,18 @@ Version the model, prompts, configs, and decision mapping. Freeze them before th
 
 ## Metrics and release interpretation
 
+### Frozen pilot mapping, version 1
+
+Freeze this mapping before any paired model run; report changes under a new version. It evaluates _caution evidence_, not a product identity verdict.
+
+- Rules: positive if `signalsFor(features)` contains a cue; negative otherwise. There is no rules abstention.
+- Local: positive if rules contain a cue or either validated personal match field is `different`; negative only if rules have no cues and both personal fields are `consistent`; otherwise abstain. A missing/failed/invalid local result is an error, recorded separately and included in the abstention/error denominator.
+- Cloud prose: two independent raters, blinded to scenario label and personal history, classify positive only when the response explicitly applies an urgency, secrecy, changed-contact, blocked-verification, or payment-method caution to the supplied categories. A generic instruction to verify, a source link alone, or hypothetical discussion does not count. An explicit absence of applicable cues is negative; insufficient/ambiguous prose is abstention. Disagreement without consensus remains abstention. API failures or empty responses are errors. Archive each rater's reason and classification; no automatic substring mapping or post-hoc selection of favorable outputs.
+- Hybrid: positive if either valid component is positive; negative only when both are negative; otherwise abstain. Track any component errors even when the other component supplies a positive result. Count disagreement separately.
+- Profile ablation: use the same cloud result and approved categories, replacing only the local profile with omitted or wrong-contact history. Apply the same local/hybrid mapping. Never regenerate a favorable cloud result for one variant.
+
+The authored pilot is too small for validation; no raters or model runs have been completed. If independent rating is unavailable, leave cloud/hybrid classification unmeasured and publish only mechanical runtime/latency evidence.
+
 - Report true positives, false negatives, false positives, true negatives, and abstentions separately for genuine and fraudulent cases. Show rates with denominators.
 - Catch rate uses all fraudulent cases as the denominator, including abstentions and errors. Report missed flags and abstentions distinctly so errors cannot improve the score.
 - False-alarm rate uses all genuine cases as the denominator. Report coverage and abstention rates so a system cannot look accurate merely by declining every case.

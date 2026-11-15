@@ -25,3 +25,14 @@ Findings and changes prepared for round 2:
 - Evidence: add a separate 12-case synthetic paired pilot, split-integrity checks, per-case rule outputs, source hashes, hosted build metadata, separate headed/headless capability records, and stricter eventual live-success assertions.
 
 All reviewers withheld credit for successful hybrid inference, demonstrated personal-context advantage, and real user outcomes. Those remain evidence gates until measured.
+
+## Round 2 — `076af06`
+
+| Reviewer    | Technology | Design | Impact | Idea |       Mean |
+| ----------- | ---------: | -----: | -----: | ---: | ---------: |
+| Technical   |       2.75 |   3.75 |   2.00 | 4.00 |     3.1250 |
+| Product     |       3.00 |   4.00 |   2.50 | 4.00 |     3.3750 |
+| Competition |       3.25 |   4.00 |   2.00 | 4.00 |     3.3125 |
+| Panel       |       3.00 |   3.92 |   2.17 | 4.00 | **3.2708** |
+
+The panel change is +0.1042, above the stability threshold. All prior implementation findings, including the P1 deletion race, were confirmed resolved. One new P2 issue: provenance made Git mandatory for source-archive builds. The next revision tolerates unavailable Git metadata, retains source hashes, and tests that behavior. Evidence improvements additionally freeze the pilot flag/abstention mapping and hash the evidence runner and build configuration. No model efficacy or user-impact score is increased based on these preparations.
