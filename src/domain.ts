@@ -61,6 +61,18 @@ export const CLOUD_INSTRUCTION =
 
 export function extractFeatures(text: string): Features {
   const t = text.normalize("NFKC").toLowerCase();
+  const clauses = t.split(/[.!?;\n]+|\b(?:but|however)\b/);
+  // Editable cues, not semantic understanding. Reject directly negated cues.
+  const positive = (pattern: RegExp) =>
+    clauses.some((c) => {
+      const m = pattern.exec(c);
+      return (
+        !!m &&
+        !/(?:don.?t|do not|never|not to|avoid)\s+(?:\w+\s+){0,4}$/.test(
+          c.slice(0, m.index),
+        )
+      );
+    });
   return featureSchema.parse({
     schemaVersion: 1,
     requestType:
@@ -69,26 +81,27 @@ export function extractFeatures(text: string): Features {
         : /send|transfer|money|pay|loan|rent|lend|borrow/.test(t)
           ? "ordinary_money"
           : "unknown",
-    paymentChannel: /gift\s*card|voucher/.test(t)
+    paymentChannel: positive(/gift\s*card|voucher/)
       ? "gift_card"
-      : /bitcoin|crypto|usdt/.test(t)
+      : positive(/bitcoin|crypto|usdt/)
         ? "crypto"
-        : /m[ -]?pesa|mobile money|airtel money/.test(t)
+        : positive(/m[ -]?pesa|mobile money|airtel money/)
           ? "mobile_money"
-          : /bank|wire|account transfer/.test(t)
+          : positive(/bank|wire|account transfer/)
             ? "bank_transfer"
             : "unknown",
-    urgency: /no rush|not urgent|whenever|when you can/.test(t)
-      ? "not_stated"
-      : /\bnow\b|immediately|urgent|right away|within.*minutes|asap/.test(t)
-        ? "immediate"
-        : "not_stated",
-    secrecyRequested:
-      /don.?t tell|do not tell|keep.*(secret|between us)|just between us/.test(
-        t,
-      )
-        ? true
-        : null,
+    urgency: clauses.some(
+      (c) =>
+        !/no rush|not urgent|whenever|when you can/.test(c) &&
+        /\bnow\b|immediately|urgent|right away|within.*minutes|asap/.test(c),
+    )
+      ? "immediate"
+      : "not_stated",
+    secrecyRequested: positive(
+      /don.?t tell|do not tell|keep.*(secret|between us)|just between us/,
+    )
+      ? true
+      : null,
     changedContactClaim:
       /new number|lost my phone|changed my number|temporary number|phone broke/.test(
         t,
@@ -127,12 +140,25 @@ export function signalsFor(f: Features): string[] {
     );
   return signals;
 }
+export function profileInput(messages: string[]): string[] {
+  return messages
+    .filter((m) => m.trim())
+    .slice(-40)
+    .map((m) => m.slice(0, 250));
+}
 export function numberMatch(
   profile: Profile | undefined,
   number: string,
 ): LocalResult["number"] {
   const normalize = (v: string) => v.replace(/[^0-9+]/g, "");
   if (!profile?.trustedNumber || !number.trim()) return "unknown";
+  if (
+    ![profile.trustedNumber, number].every((v) => {
+      const digits = v.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    })
+  )
+    return "unknown";
   return normalize(profile.trustedNumber) === normalize(number)
     ? "matches"
     : "differs";

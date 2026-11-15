@@ -70,4 +70,3 @@ Stack: React 19, TypeScript, Vite, Firebase JS SDK 13.3, App Check, AI Logic, Re
 Deploy `dist` with `firebase deploy --only hosting --project hakiki-hybrid-2026`. Keep AI and hosting project configuration distinct. Do not overwrite another project's Remote Config template; the app reads namespaced `hakiki_playbook_version` with a bundled default.
 
 English desktop text is the baseline. Swahili quality, screenshots, iPhone, human walkthroughs, a public demonstration video, and hackathon submission are not completed. [Apache License 2.0](LICENSE).
-

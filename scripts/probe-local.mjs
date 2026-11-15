@@ -1,5 +1,6 @@
 import { chromium } from "@playwright/test";
 import { mkdir, writeFile } from "node:fs/promises";
+import { provenance } from "./provenance.ts";
 await mkdir(".local", { recursive: true });
 const context = await chromium.launchPersistentContext(".local/chrome-probe", {
   channel: "chrome",
@@ -13,7 +14,7 @@ const context = await chromium.launchPersistentContext(".local/chrome-probe", {
 try {
   const page = await context.newPage();
   await page.goto("http://127.0.0.1:5173");
-  const report = await page.evaluate(async () => ({
+  const capability = await page.evaluate(async () => ({
     browser: navigator.userAgent,
     promptApi: "LanguageModel" in globalThis,
     availability:
@@ -24,9 +25,22 @@ try {
           })
         : "unavailable",
   }));
+  const headed = process.env.HEADED === "1";
+  const report = {
+    ...provenance(
+      `${headed ? "HEADED=1 " : ""}node scripts/probe-local.mjs`,
+      page.url(),
+    ),
+    profile:
+      "isolated Playwright chrome-probe profile, not the user’s regular browser profile",
+    mode: headed ? "headed" : "headless",
+    ...capability,
+  };
   console.log(JSON.stringify(report, null, 2));
   await writeFile(
-    "docs/evidence/local-capability.json",
+    headed
+      ? "docs/evidence/local-capability-headed.json"
+      : "docs/evidence/local-capability.json",
     JSON.stringify(report, null, 2),
   );
 } finally {

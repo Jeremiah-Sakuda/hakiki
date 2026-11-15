@@ -1,6 +1,23 @@
 {
-  "createdAt": "2026-11-15T21:50:23.383Z",
-  "protocol": "v1 synthetic authored scenarios; not a blind or real-world validation",
+  "provenance": {
+    "at": "2026-11-15T22:17:10.195Z",
+    "command": "npm run evaluate",
+    "target": "local source",
+    "sourceCommit": "543a82a7b2d4c5c01398dc4d8b23092268cc29c5",
+    "sourceDirty": true,
+    "node": "v26.13.1",
+    "platform": "win32",
+    "inputSha256": {
+      "src/ai.ts": "39c26e1c40fc3a74f43452b505548cb6948ddf92d5d2a3e7df92425ed071551a",
+      "src/domain.ts": "aee81be3ae1565d924cb51d53f9c920e611bdf9ad8f3c4a44379b40bd7ac0d52",
+      "src/App.tsx": "078b50066641b3bc9f86ffe8480641cfac1fc6a9e1c223ee64c18e1fe1d8ae7c",
+      "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+      "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+      "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+      "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6"
+    }
+  },
+  "protocol": "v1 authored scenarios, exploratory rerun after code review; not blind or real-world validation",
   "source": "80 synthetic English scenarios: 20 development and 60 evaluation",
   "rules": {
     "development": {
@@ -11,7 +28,289 @@
       "trueNegative": 9,
       "abstained": 0,
       "catchRate": 1,
-      "falseAlarmRate": 0.1
+      "falseAlarmRate": 0.1,
+      "outcomes": [
+        {
+          "id": "g1",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g2",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g3",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g4",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g5",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g6",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g7",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g8",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g9",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g10",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i1",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i2",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "gift_card",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i3",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "bank_transfer",
+            "urgency": "immediate",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i4",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "mobile_money",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i5",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "crypto",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i6",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i7",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "gift_card",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i8",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i9",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "crypto",
+            "urgency": "not_stated",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i10",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        }
+      ]
     },
     "evaluation": {
       "cases": 60,
@@ -21,22 +320,876 @@
       "trueNegative": 18,
       "abstained": 0,
       "catchRate": 0.6,
-      "falseAlarmRate": 0.4
+      "falseAlarmRate": 0.4,
+      "outcomes": [
+        {
+          "id": "g11",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g12",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "mobile_money",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g13",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g14",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "g15",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g16",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "gift_card",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g17",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g18",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "bank_transfer",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g19",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g20",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g21",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g22",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g23",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g24",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g25",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g26",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g27",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g28",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g29",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "crypto",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g30",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g31",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g32",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g33",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g34",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g35",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "bank_transfer",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g36",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g37",
+          "label": "genuine",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "g38",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g39",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "g40",
+          "label": "genuine",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i11",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i12",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i13",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "bank_transfer",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i14",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i15",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i16",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i17",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "gift_card",
+            "urgency": "not_stated",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i18",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i19",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "crypto",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i20",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "mobile_money",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i21",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i22",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "bank_transfer",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i23",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "gift_card",
+            "urgency": "not_stated",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i24",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "emergency_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i25",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i26",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "crypto",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i27",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i28",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i29",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "gift_card",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i30",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i31",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i32",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i33",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": true,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i34",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "crypto",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i35",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "bank_transfer",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": true
+          }
+        },
+        {
+          "id": "i36",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "unknown",
+            "paymentChannel": "gift_card",
+            "urgency": "immediate",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i37",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i38",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "immediate",
+            "secrecyRequested": true,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i39",
+          "label": "imposter",
+          "flag": true,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": true,
+            "verificationDiscouraged": null
+          }
+        },
+        {
+          "id": "i40",
+          "label": "imposter",
+          "flag": false,
+          "features": {
+            "schemaVersion": 1,
+            "requestType": "ordinary_money",
+            "paymentChannel": "unknown",
+            "urgency": "not_stated",
+            "secrecyRequested": null,
+            "changedContactClaim": null,
+            "verificationDiscouraged": null
+          }
+        }
+      ]
     }
   },
   "localOnly": {
-    "status": "not measured",
-    "reason": "Chrome reports the on-device model unavailable on the tested machine."
+    "status": "not attempted in this rules-only run",
+    "historicalEvidence": "docs/evidence/local-capability.json"
   },
   "cloudOnly": {
-    "status": "not measured",
-    "reason": "Live endpoint returned quota exceeded; do not replace with invented outputs."
+    "status": "not attempted in this rules-only run",
+    "historicalEvidence": "docs/evidence/cloud-transport.json"
   },
   "hybrid": {
     "status": "not measured"
   },
   "profileAblation": {
     "status": "not measured"
+  },
+  "pairedPilot": {
+    "version": "pairs-v1",
+    "cases": 12,
+    "status": "prepared; no model evaluation performed",
+    "fixtures": "eval/pairs.ts",
+    "variants": [
+      "matched",
+      "omitted",
+      "wrongContact"
+    ],
+    "limitations": "Small authored pilot; no linguistic split independence or real-world validity established."
   },
   "userWalkthroughs": {
     "participants": 0,

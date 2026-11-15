@@ -45,6 +45,17 @@ beforeEach(() => {
   vi.stubGlobal("LanguageModel", { availability: async () => "available" });
 });
 describe("SDK privacy routing (mocked transport)", () => {
+  it("rejects empty cloud content instead of claiming completion", async () => {
+    const ai = await import("../src/ai");
+    fake.generateContent.mockResolvedValue({
+      response: { inferenceSource: "in_cloud", text: () => "  " },
+    });
+    const receipts: unknown[] = [];
+    await expect(
+      ai.checkWorld(extractFeatures("send money"), (r) => receipts.push(r)),
+    ).rejects.toThrow("could not finish");
+    expect(receipts.at(-1)).toMatchObject({ status: "failed" });
+  });
   it("forces local-only mode and rejects a cloud-located personal result", async () => {
     const ai = await import("../src/ai");
     await ai.prepareLocal(() => {});

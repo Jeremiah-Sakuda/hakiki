@@ -8,6 +8,7 @@ import {
   safeSourceUrl,
   sampleProfile,
   signalsFor,
+  profileInput,
 } from "../src/domain";
 describe("outbound privacy boundary", () => {
   const raw =
@@ -53,6 +54,40 @@ describe("outbound privacy boundary", () => {
   });
 });
 describe("cautious text rules", () => {
+  it("does not turn invalid phone strings into a match", () => {
+    expect(numberMatch({ ...sampleProfile, trustedNumber: "abc" }, "xyz")).toBe(
+      "unknown",
+    );
+    expect(numberMatch({ ...sampleProfile, trustedNumber: "123" }, "123")).toBe(
+      "unknown",
+    );
+  });
+  it("handles directly negated payment and secrecy cues conservatively", () => {
+    expect(
+      extractFeatures("Do not keep this secret. Call our family before paying.")
+        .secrecyRequested,
+    ).toBeNull();
+    expect(
+      extractFeatures("Please do not buy gift cards. Call me first.")
+        .paymentChannel,
+    ).toBe("unknown");
+  });
+  it("does not let a separate nonurgent clause suppress current urgency", () => {
+    expect(
+      extractFeatures(
+        "No rush for yesterday. This is urgent now; send the hospital money immediately.",
+      ).urgency,
+    ).toBe("immediate");
+  });
+  it("uses only the bounded nonempty profile sample", () => {
+    const sample = profileInput([
+      ...Array.from({ length: 5100 }, (_, i) => String(i).padEnd(300, "x")),
+      " ",
+    ]);
+    expect(sample).toHaveLength(40);
+    expect(sample[0]).toHaveLength(250);
+    expect(sample.at(-1)).toContain("5099");
+  });
   it("does not mark explicit no-rush wording urgent", () =>
     expect(extractFeatures("Send money when you can, no rush.")).toMatchObject({
       urgency: "not_stated",

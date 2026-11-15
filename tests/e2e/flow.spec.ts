@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { writeFileSync } from "node:fs";
+import { provenance } from "../../scripts/provenance";
+import { safeSourceUrl } from "../../src/domain";
 test("hosted app reopens offline without cached user content", async ({
   page,
   context,
@@ -147,14 +149,62 @@ test("desktop layout and real cloud request exclude raw message content", async 
   expect(outgoing.join(" ")).not.toContain("CANARY-REAL-X9");
   expect(outgoing.join(" ")).not.toContain("123456789");
   const payload = await response.json();
+  const validation = {
+    inferenceCompleted: false,
+    nonemptyText: false,
+    sourceCount: 0,
+    attributionRendered: false,
+  };
+  if (response.ok()) {
+    await expect(
+      page.getByRole("heading", { name: "What the cloud found" }),
+    ).toBeVisible();
+    expect(
+      (await page.locator(".world-text").innerText()).trim().length,
+    ).toBeGreaterThan(0);
+    validation.nonemptyText = true;
+    const chunks =
+      payload.candidates?.[0]?.groundingMetadata?.groundingChunks ?? [];
+    validation.sourceCount = chunks
+      .filter(
+        (c: { web?: { uri?: string } }) =>
+          c.web?.uri && safeSourceUrl(c.web.uri),
+      )
+      .slice(0, 8).length;
+    await expect(page.locator(".sources a")).toHaveCount(
+      validation.sourceCount,
+    );
+    if (validation.sourceCount === 0)
+      await expect(
+        page.getByText("General model response · no search sources returned"),
+      ).toBeVisible();
+    validation.attributionRendered = true;
+    await page.getByRole("button", { name: "Open privacy receipt" }).click();
+    await expect(page.getByRole("dialog")).toContainText("completed");
+    validation.inferenceCompleted = true; // Adapter requires Firebase IN_CLOUD before completed.
+    await page.getByRole("button", { name: "Close dialog" }).click();
+  }
+  const deployedBuild = process.env.E2E_BASE_URL
+    ? await page.request
+        .get("/build-info.json")
+        .then((r) => r.json())
+        .catch(() => null)
+    : null;
   writeFileSync(
     "docs/evidence/cloud-transport.json",
     JSON.stringify(
       {
-        at: new Date().toISOString(),
+        provenance: provenance(
+          process.env.LIVE_AI === "1"
+            ? "LIVE_AI=1 npm run test:e2e"
+            : "LIVE_TRANSPORT=1 npm run test:e2e",
+          page.url(),
+        ),
         origin: new URL(response.url()).origin,
         status: response.status(),
         rawCanariesExcluded: true,
+        validation,
+        deployedBuild,
         request: JSON.parse(bodies[0]),
         response: payload,
       },

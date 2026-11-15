@@ -1222,16 +1222,14 @@ pre {
   }
   .companion {
     padding: 25px;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 0 15px;
+    display: block;
   }
   .illustration {
-    grid-row: 1/4;
-    height: 150px;
+    height: 160px;
     transform: scale(0.65);
-    transform-origin: left top;
+    transform-origin: center top;
     width: 190px;
+    margin: 0 auto;
   }
   .companion > .eyebrow {
     margin-top: 6px;
@@ -1241,7 +1239,7 @@ pre {
     margin: 10px 0;
   }
   .companion > p {
-    font-size: 11px;
+    font-size: 14px;
     margin: 4px 0;
   }
   .companion .aside-rule,

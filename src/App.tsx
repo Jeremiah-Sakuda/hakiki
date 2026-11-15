@@ -25,6 +25,8 @@ import {
   rulesResult,
   sampleProfile,
   saveProfiles,
+  signalsFor,
+  profileInput,
   type Chat,
   type Features,
   type LocalResult,
@@ -112,6 +114,7 @@ function Modal({
   return (
     <dialog
       ref={ref}
+      aria-label={title}
       onCancel={onClose}
       onClick={(e) => {
         if (e.target === ref.current) onClose();
@@ -301,18 +304,20 @@ export default function App() {
     if (!chat || !permission || busy) return;
     setBusy(true);
     setError("");
+    const current = ++epoch.current;
     try {
       const messages = chat.messages
         .filter((m) => m.speaker === speaker)
         .map((m) => m.text);
       const style = await summarizeProfile(messages);
+      if (current !== epoch.current) return;
       const entry: Profile = {
         id: crypto.randomUUID(),
         name: contactName.trim(),
         trustedNumber: trusted.trim(),
         style,
         sample: false,
-        sampleCount: messages.length,
+        sampleCount: profileInput(messages).length,
       };
       const next = [...profiles, entry];
       saveProfiles(next);
@@ -325,9 +330,9 @@ export default function App() {
       setSelected(entry.id);
       setTab("check");
     } catch (e) {
-      setError((e as Error).message);
+      if (current === epoch.current) setError((e as Error).message);
     } finally {
-      setBusy(false);
+      if (current === epoch.current) setBusy(false);
     }
   }
   function removeContact(id: string) {
@@ -736,8 +741,9 @@ export default function App() {
                     <div className="notice">
                       <Icon name="cloud" />
                       <p>
-                        Cloud check skipped. This result includes local
-                        observations only.
+                        {receipts.length
+                          ? "Cloud check unavailable after an approved attempt. See the privacy receipt for its status. This result includes local observations only."
+                          : "Cloud check skipped. This result includes local observations only."}
                       </p>
                     </div>
                   )}
@@ -784,7 +790,12 @@ export default function App() {
                       </p>
                       <FeatureEditor
                         features={features}
-                        setFeatures={setFeatures}
+                        setFeatures={(next) => {
+                          setFeatures(next);
+                          setLocal((old) =>
+                            old ? { ...old, signals: signalsFor(next) } : old,
+                          );
+                        }}
                         disabled={busy}
                       />
                       <p className="small">
@@ -991,8 +1002,10 @@ export default function App() {
                         chat.messages.filter((m) => m.speaker === speaker)
                           .length
                       }{" "}
-                      messages from this person. The original export will be
-                      discarded after the profile is created.
+                      messages available. Only the most recent 40 nonempty
+                      messages (up to 250 characters each) are used. The
+                      original export will be discarded after the profile is
+                      created.
                     </p>
                     <label htmlFor="contact-name">Contact name</label>
                     <input
