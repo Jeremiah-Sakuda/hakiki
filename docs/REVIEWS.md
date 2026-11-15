@@ -55,3 +55,33 @@ The real pilot failed to establish useful personal-context benefit. Product clai
 Round4 corrections: record LIVE_HYBRID in reproducible provenance; report abstentions/errors by actual class and unflagged imposters explicitly; refresh screenshots after asserting a visible provider search chip. These changes improve evidence clarity without manufacturing additional model efficacy.
 
 Hosted verification additionally exposed a P1 update-cache defect: the persistent browser executed an older script despite fresh server build-info. Default one-hour HTML caching contaminated service-worker precaching. Round4 now fixes HTML revalidation and worker fetch policies, checks the executing script paths, and retests upgrade plus offline reload using the existing profile. See evidence/stale-client.json; those failures must not be attributed to the current local model code.
+
+## Round 4 — deployed `515fb62`
+
+| Reviewer | Technology | Design | Impact | Idea | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Technical | 3.75 | 4.00 | 2.00 | 3.75 | 3.3750 |
+| Product | 4.00 | 4.00 | 2.50 | 3.50 | 3.5000 |
+| Competition | 4.25 | 4.00 | 2.25 | 3.75 | 3.5625 |
+| Panel | 4.00 | 4.00 | 2.25 | 3.67 | **3.4792** |
+
+Change: +0.0208, the first consecutive change below0.1. No new actionable P1/P2 was found after the cache fix. Existing-client migration, current offline assets, and actual hosted hybrid execution substantiated the implementation; efficacy scores were not inflated. Visual capture of the provider iframe was still being refreshed, separately from its passing visibility assertion.
+
+A later current-build local-model repeat fell back to text rules; the follow-up diagnostic succeeded without reproducing the failure. Round5 must consider this reliability limit. It is documented separately in evidence/current-local-fallback.json and must not be explained away as stale caching.
+
+## Round 5 — final stability audit of `515fb62`
+
+| Reviewer | Technology | Design | Impact | Idea | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Technical | 3.50 | 4.00 | 2.00 | 3.75 | 3.3125 |
+| Product | 3.75 | 4.00 | 2.50 | 3.50 | 3.4375 |
+| Competition | 4.00 | 4.00 | 2.25 | 3.75 | 3.5000 |
+| Panel | 3.75 | 4.00 | 2.25 | 3.67 | **3.4167** |
+
+Change: −0.0625. Together with Round3→4 (+0.0208), this satisfies two consecutive absolute panel changes below0.1, with no newly identified actionable critical implementation defect. **Review scores stabilized at3.42/5.** This is not official judging, a reliability certification, or acceptance of every release gate.
+
+All reviewers reduced technology for the unexplained current-build local fallback; a successful diagnostic did not erase it. Impact and idea remained constrained by the negative personal-context pilot, unmeasured cloud/hybrid usefulness, and absent user outcomes. Exact Nano4 eligibility remains unconfirmed.
+
+Visual attribution is now verified in cloud-attribution.png and cloud-result.png: Google logo and search chips are visible. An offscreen iframe was omitted from an earlier full-page browser capture, despite a passing DOM assertion. The failure screenshot cleanup selected the actual app-page image instead of Playwright's blank initial-tab image; the JSON failure record remains intact.
+
+Remaining work is tracked as reliability investigation, independent usefulness evaluation, voluntary target-user walkthroughs, model-eligibility clarification, and owner video/submission actions. Additional score increases require new evidence, not repeated prompting of the panel.

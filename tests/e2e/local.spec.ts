@@ -197,6 +197,22 @@ test("real on-device comparison and profile import keep raw content local", asyn
             .locator(".chip")
             .first(),
         ).toBeVisible();
+      const attribution = page.locator(
+        'iframe[title="Google Search suggestions"]',
+      );
+      if (await attribution.count()) {
+        await attribution.scrollIntoViewIfNeeded();
+        await attribution.screenshot({
+          path: "docs/evidence/hybrid-attribution.png",
+        });
+      }
+      await page.setViewportSize({
+        width: 1280,
+        height: Math.min(
+          await page.evaluate(() => document.documentElement.scrollHeight),
+          8000,
+        ),
+      });
       await page.screenshot({
         path: "docs/evidence/hybrid-result.png",
         fullPage: true,

@@ -23,3 +23,9 @@ Cloud capacity was resolved through the approved Vertex backend on existing Soma
 Remaining evidence gates are comparative usefulness, consent-based target-user walkthroughs, exact required local model eligibility, and release materials. Stable AI-reviewer scores do not close those gates or guarantee eligibility.
 
 
+
+A later repeat on the verified current hosted build fell back during local comparison; a subsequent diagnostic succeeded. This is an unresolved local-model reliability limitation, preserved in evidence/current-local-fallback.json. The app explicitly labels text-rule fallback and does not send raw data to recover. Successful smoke/pilot runs are not a guarantee that every local call succeeds.
+
+Final review panel stabilized at3.4167/5 (rounded3.42) after five rounds. Last absolute panel changes:0.0208 and0.0625. No actionable critical implementation defect was identified in the final review; the unexplained current-build local fallback remains a reliability limitation, not a resolved issue. See REVIEWS.md.
+
+Verified deployment:515fb62537baaf293bb8f77950b590819cd67363. Existing cached client migration and offline reopening used the current script; the complete hosted hybrid flow passed. The repository's later evidence/documentation commits do not change this runtime build.

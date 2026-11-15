@@ -1,26 +1,33 @@
 {
   "provenance": {
-    "at": "2026-11-15T22:35:17.866Z",
+    "at": "2026-11-15T23:39:51.651Z",
     "command": "LIVE_AI=1 npm run test:e2e",
     "target": "https://hakiki-hybrid-2026.web.app/",
-    "sourceCommit": "099f415bd4731089b52ae81f5c1f1756a64e826d",
-    "sourceDirty": false,
+    "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
+    "sourceDirty": true,
     "gitMetadata": "available",
     "node": "v26.13.1",
     "platform": "win32",
     "inputSha256": {
-      "src/ai.ts": "5ad9b1684b6ad6552057112564ad6fbec0565f009f92aaa432c8270e2f8fa12c",
+      "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
       "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
-      "src/App.tsx": "078b50066641b3bc9f86ffe8480641cfac1fc6a9e1c223ee64c18e1fe1d8ae7c",
+      "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
       "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
       "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
       "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
       "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
       "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
-      "scripts/evaluate-live.mjs": "77efddef0080defa165fd9afde5bb59c09250551636a1ca64d2aa36677bd1743",
-      "scripts/provenance.ts": "efc76557575ec0f547982e030c68bb1192b96650e014f18dbf02829f1f14e2bb",
-      "vite.config.ts": "8f6ce1f4cd618c4c97c567aad711d8f4eab45c871a0392ee8cacf2d4a1a15977",
-      "tests/e2e/flow.spec.ts": "eb6349be649b8944a4305e5c12f37e6431df56c28d3878ae37ba440bf04c9b8d"
+      "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+      "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+      "scripts/verify-upgrade.mjs": "99b070cb428706964b32e2f787b7cb832014ca1a74502c4a199bf4225f8954fe",
+      "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+      "scripts/provenance.ts": "1c19a8f50b6877ea519bbf57f701155bae8e88bf843abb8115b5b60c58f26d6f",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "67dd2cba0730880ac4ebecba556cc317c7d030dbadf8ffd3d7d777dc8383de6a",
+      "tests/e2e/local.spec.ts": "ec9ef9d159757d6cc8f84fb011424c6f1943dee95b11464ee4fcfdb587ef7ec3",
+      "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
     }
   },
   "origin": "https://firebasevertexai.googleapis.com",
@@ -33,31 +40,40 @@
     "attributionRendered": true
   },
   "deployedBuild": {
-    "at": "2026-11-15T22:34:03.464Z",
+    "at": "2026-11-15T23:31:59.665Z",
     "command": "npm run build",
     "target": "local source",
-    "sourceCommit": "099f415bd4731089b52ae81f5c1f1756a64e826d",
+    "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
     "sourceDirty": false,
     "gitMetadata": "available",
     "node": "v26.13.1",
     "platform": "win32",
     "inputSha256": {
-      "src/ai.ts": "5ad9b1684b6ad6552057112564ad6fbec0565f009f92aaa432c8270e2f8fa12c",
+      "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
       "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
-      "src/App.tsx": "078b50066641b3bc9f86ffe8480641cfac1fc6a9e1c223ee64c18e1fe1d8ae7c",
+      "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
       "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
       "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
       "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
       "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
       "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
-      "scripts/evaluate-live.mjs": "77efddef0080defa165fd9afde5bb59c09250551636a1ca64d2aa36677bd1743",
-      "scripts/provenance.ts": "efc76557575ec0f547982e030c68bb1192b96650e014f18dbf02829f1f14e2bb",
-      "vite.config.ts": "8f6ce1f4cd618c4c97c567aad711d8f4eab45c871a0392ee8cacf2d4a1a15977",
-      "tests/e2e/flow.spec.ts": "eb6349be649b8944a4305e5c12f37e6431df56c28d3878ae37ba440bf04c9b8d"
+      "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+      "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+      "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+      "scripts/provenance.ts": "35242455913d0d851fdc245dccd98b906cc148024c0c43c201dc121afd2e3278",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "e9f20d4e65dd569a019343fdfbd071244594f1ce30ece2d00f52ba1f09c8a156",
+      "tests/e2e/local.spec.ts": "dfd2fea1618cd8643f04fa4e2594edd827a2116b90e81840394d3df297a9174d",
+      "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
     },
     "provider": "agent-platform",
     "model": "gemini-3.8-flash"
   },
+  "executingScripts": [
+    "/assets/index-Z0Koyz9J.js"
+  ],
   "request": {
     "generationConfig": {
       "temperature": 0.2,
@@ -95,47 +111,48 @@
           "role": "model",
           "parts": [
             {
-              "text": "These indicators align with documented \"family impersonation\" patterns (often called \"Hi Mum\" or \"Hi Dad\" schemes) monitored by consumer protection authorities like the FTC and Action Fraud. In these setups, impostors claim a changed contact number, fabricate immediate urgency for funds, and actively discourage verification to prevent the recipient from discovering the deception.\n\nBecause these generic details provide insufficient evidence to confirm whether this specific request is genuine or fraudulent, treat the situation cautiously. Do not send funds or rely on the new contact method. Instead, reach out to the person directly through a previously trusted, independently saved route—such as their established phone number or an in-person check—to confirm their situation.",
-              "thoughtSignature": "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"
+              "text": "The provided indicators—an immediate money request involving a claimed contact change while discouraging verification—align with documented family impersonation schemes, such as the \"Hi Mum\" scam highlighted by organizations like the ACMA and the FTC. In these patterns, fraudsters claim to use an unfamiliar number because a device was lost or broken, create artificial urgency, and discourage direct calls to prevent their voice from giving them away.\n\nBecause these generic categories provide limited context, the evidence is insufficient to determine whether this specific request is fraudulent or safe. To protect yourself, do not use the incoming channel; instead, contact your family member directly through a previously trusted, independently saved route.",
+              "thoughtSignature": "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"
             }
           ]
         },
         "finishReason": "STOP",
         "groundingMetadata": {
           "webSearchQueries": [
-            "Hi Mum scam changed number urgent money FTC Action Fraud"
+            "FTC Hi Mum scam impersonation text new number",
+            "impersonation scam changed phone number urgent money request FTC"
           ],
           "searchEntryPoint": {
-            "renderedContent": "<style>\n.container {\n  align-items: center;\n  border-radius: 8px;\n  display: flex;\n  font-family: Google Sans, Roboto, sans-serif;\n  font-size: 14px;\n  line-height: 20px;\n  padding: 8px 12px;\n}\n.chip {\n  display: inline-block;\n  border: solid 1px;\n  border-radius: 16px;\n  min-width: 14px;\n  padding: 5px 16px;\n  text-align: center;\n  user-select: none;\n  margin: 0 8px;\n  -webkit-tap-highlight-color: transparent;\n}\n.carousel {\n  overflow: auto;\n  scrollbar-width: none;\n  white-space: nowrap;\n  margin-right: -12px;\n}\n.headline {\n  display: flex;\n  margin-right: 4px;\n}\n.gradient-container {\n  position: relative;\n}\n.gradient {\n  position: absolute;\n  transform: translate(3px, -9px);\n  height: 36px;\n  width: 9px;\n}\n@media (prefers-color-scheme: light) {\n  .container {\n    background-color: #fafafa;\n    box-shadow: 0 0 0 1px #0000000f;\n  }\n  .headline-label {\n    color: #1f1f1f;\n  }\n  .chip {\n    background-color: #ffffff;\n    border-color: #d2d2d2;\n    color: #5e5e5e;\n    text-decoration: none;\n  }\n  .chip:hover {\n    background-color: #f2f2f2;\n  }\n  .chip:focus {\n    background-color: #f2f2f2;\n  }\n  .chip:active {\n    background-color: #d8d8d8;\n    border-color: #b6b6b6;\n  }\n  .logo-dark {\n    display: none;\n  }\n  .gradient {\n    background: linear-gradient(90deg, #fafafa 15%, #fafafa00 100%);\n  }\n}\n@media (prefers-color-scheme: dark) {\n  .container {\n    background-color: #1f1f1f;\n    box-shadow: 0 0 0 1px #ffffff26;\n  }\n  .headline-label {\n    color: #fff;\n  }\n  .chip {\n    background-color: #2c2c2c;\n    border-color: #3c4043;\n    color: #fff;\n    text-decoration: none;\n  }\n  .chip:hover {\n    background-color: #353536;\n  }\n  .chip:focus {\n    background-color: #353536;\n  }\n  .chip:active {\n    background-color: #464849;\n    border-color: #53575b;\n  }\n  .logo-light {\n    display: none;\n  }\n  .gradient {\n    background: linear-gradient(90deg, #1f1f1f 15%, #1f1f1f00 100%);\n  }\n}\n</style>\n<div class=\"container\">\n  <div class=\"headline\">\n    <svg class=\"logo-light\" width=\"18\" height=\"18\" viewBox=\"9 9 35 35\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M42.8622 27.0064C42.8622 25.7839 42.7525 24.6084 42.5487 23.4799H26.3109V30.1568H35.5897C35.1821 32.3041 33.9596 34.1222 32.1258 35.3448V39.6864H37.7213C40.9814 36.677 42.8622 32.2571 42.8622 27.0064V27.0064Z\" fill=\"#4285F4\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M26.3109 43.8555C30.9659 43.8555 34.8687 42.3195 37.7213 39.6863L32.1258 35.3447C30.5898 36.3792 28.6306 37.0061 26.3109 37.0061C21.8282 37.0061 18.0195 33.9811 16.6559 29.906H10.9194V34.3573C13.7563 39.9841 19.5712 43.8555 26.3109 43.8555V43.8555Z\" fill=\"#34A853\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.6559 29.8904C16.3111 28.8559 16.1074 27.7588 16.1074 26.6146C16.1074 25.4704 16.3111 24.3733 16.6559 23.3388V18.8875H10.9194C9.74388 21.2072 9.06992 23.8247 9.06992 26.6146C9.06992 29.4045 9.74388 32.022 10.9194 34.3417L15.3864 30.8621L16.6559 29.8904V29.8904Z\" fill=\"#FBBC05\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M26.3109 16.2386C28.85 16.2386 31.107 17.1164 32.9095 18.8091L37.8466 13.8719C34.853 11.082 30.9659 9.3736 26.3109 9.3736C19.5712 9.3736 13.7563 13.245 10.9194 18.8875L16.6559 23.3388C18.0195 19.2636 21.8282 16.2386 26.3109 16.2386V16.2386Z\" fill=\"#EA4335\"/>\n    </svg>\n    <svg class=\"logo-dark\" width=\"18\" height=\"18\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n      <circle cx=\"24\" cy=\"23\" fill=\"#FFF\" r=\"22\"/>\n      <path d=\"M33.76 34.26c2.75-2.56 4.49-6.37 4.49-11.26 0-.89-.08-1.84-.29-3H24.01v5.99h8.03c-.4 2.02-1.5 3.56-3.07 4.56v.75l3.91 2.97h.88z\" fill=\"#4285F4\"/>\n      <path d=\"M15.58 25.77A8.845 8.845 0 0 0 24 31.86c1.92 0 3.62-.46 4.97-1.31l4.79 3.71C31.14 36.7 27.65 38 24 38c-5.93 0-11.01-3.4-13.45-8.36l.17-1.01 4.06-2.85h.8z\" fill=\"#34A853\"/>\n      <path d=\"M15.59 20.21a8.864 8.864 0 0 0 0 5.58l-5.03 3.86c-.98-2-1.53-4.25-1.53-6.64 0-2.39.55-4.64 1.53-6.64l1-.22 3.81 2.98.22 1.08z\" fill=\"#FBBC05\"/>\n      <path d=\"M24 14.14c2.11 0 4.02.75 5.52 1.98l4.36-4.36C31.22 9.43 27.81 8 24 8c-5.93 0-11.01 3.4-13.45 8.36l5.03 3.85A8.86 8.86 0 0 1 24 14.14z\" fill=\"#EA4335\"/>\n    </svg>\n    <div class=\"gradient-container\"><div class=\"gradient\"></div></div>\n  </div>\n  <div class=\"carousel\">\n    <a class=\"chip\" href=\"https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDcx2aJa6Tx24C_9Hq-5DM28ItCO6YEdpMy7tniYq2d3Ar89IyCWGE175atDBG9lHgNVYSZbgosqdzgq83r1FGHRUUqzSGMcBL7lzSagWoVECVV6FJQA_u735OwwbITwRhgPhbnD-uoqdiIHdslkPGNqqan5KIaU6heEvFvMXvReCcO8IqvXBlkLoAXLxz_k8yXi_aXQEiCs1b2onCN3hGadGnMC5xFnR822wqIEO8CcpCndqjwb9OijEH\">Hi Mum scam changed number urgent money FTC Action Fraud</a>\n  </div>\n</div>\n"
+            "renderedContent": "<style>\n.container {\n  align-items: center;\n  border-radius: 8px;\n  display: flex;\n  font-family: Google Sans, Roboto, sans-serif;\n  font-size: 14px;\n  line-height: 20px;\n  padding: 8px 12px;\n}\n.chip {\n  display: inline-block;\n  border: solid 1px;\n  border-radius: 16px;\n  min-width: 14px;\n  padding: 5px 16px;\n  text-align: center;\n  user-select: none;\n  margin: 0 8px;\n  -webkit-tap-highlight-color: transparent;\n}\n.carousel {\n  overflow: auto;\n  scrollbar-width: none;\n  white-space: nowrap;\n  margin-right: -12px;\n}\n.headline {\n  display: flex;\n  margin-right: 4px;\n}\n.gradient-container {\n  position: relative;\n}\n.gradient {\n  position: absolute;\n  transform: translate(3px, -9px);\n  height: 36px;\n  width: 9px;\n}\n@media (prefers-color-scheme: light) {\n  .container {\n    background-color: #fafafa;\n    box-shadow: 0 0 0 1px #0000000f;\n  }\n  .headline-label {\n    color: #1f1f1f;\n  }\n  .chip {\n    background-color: #ffffff;\n    border-color: #d2d2d2;\n    color: #5e5e5e;\n    text-decoration: none;\n  }\n  .chip:hover {\n    background-color: #f2f2f2;\n  }\n  .chip:focus {\n    background-color: #f2f2f2;\n  }\n  .chip:active {\n    background-color: #d8d8d8;\n    border-color: #b6b6b6;\n  }\n  .logo-dark {\n    display: none;\n  }\n  .gradient {\n    background: linear-gradient(90deg, #fafafa 15%, #fafafa00 100%);\n  }\n}\n@media (prefers-color-scheme: dark) {\n  .container {\n    background-color: #1f1f1f;\n    box-shadow: 0 0 0 1px #ffffff26;\n  }\n  .headline-label {\n    color: #fff;\n  }\n  .chip {\n    background-color: #2c2c2c;\n    border-color: #3c4043;\n    color: #fff;\n    text-decoration: none;\n  }\n  .chip:hover {\n    background-color: #353536;\n  }\n  .chip:focus {\n    background-color: #353536;\n  }\n  .chip:active {\n    background-color: #464849;\n    border-color: #53575b;\n  }\n  .logo-light {\n    display: none;\n  }\n  .gradient {\n    background: linear-gradient(90deg, #1f1f1f 15%, #1f1f1f00 100%);\n  }\n}\n</style>\n<div class=\"container\">\n  <div class=\"headline\">\n    <svg class=\"logo-light\" width=\"18\" height=\"18\" viewBox=\"9 9 35 35\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M42.8622 27.0064C42.8622 25.7839 42.7525 24.6084 42.5487 23.4799H26.3109V30.1568H35.5897C35.1821 32.3041 33.9596 34.1222 32.1258 35.3448V39.6864H37.7213C40.9814 36.677 42.8622 32.2571 42.8622 27.0064V27.0064Z\" fill=\"#4285F4\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M26.3109 43.8555C30.9659 43.8555 34.8687 42.3195 37.7213 39.6863L32.1258 35.3447C30.5898 36.3792 28.6306 37.0061 26.3109 37.0061C21.8282 37.0061 18.0195 33.9811 16.6559 29.906H10.9194V34.3573C13.7563 39.9841 19.5712 43.8555 26.3109 43.8555V43.8555Z\" fill=\"#34A853\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.6559 29.8904C16.3111 28.8559 16.1074 27.7588 16.1074 26.6146C16.1074 25.4704 16.3111 24.3733 16.6559 23.3388V18.8875H10.9194C9.74388 21.2072 9.06992 23.8247 9.06992 26.6146C9.06992 29.4045 9.74388 32.022 10.9194 34.3417L15.3864 30.8621L16.6559 29.8904V29.8904Z\" fill=\"#FBBC05\"/>\n      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M26.3109 16.2386C28.85 16.2386 31.107 17.1164 32.9095 18.8091L37.8466 13.8719C34.853 11.082 30.9659 9.3736 26.3109 9.3736C19.5712 9.3736 13.7563 13.245 10.9194 18.8875L16.6559 23.3388C18.0195 19.2636 21.8282 16.2386 26.3109 16.2386V16.2386Z\" fill=\"#EA4335\"/>\n    </svg>\n    <svg class=\"logo-dark\" width=\"18\" height=\"18\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n      <circle cx=\"24\" cy=\"23\" fill=\"#FFF\" r=\"22\"/>\n      <path d=\"M33.76 34.26c2.75-2.56 4.49-6.37 4.49-11.26 0-.89-.08-1.84-.29-3H24.01v5.99h8.03c-.4 2.02-1.5 3.56-3.07 4.56v.75l3.91 2.97h.88z\" fill=\"#4285F4\"/>\n      <path d=\"M15.58 25.77A8.845 8.845 0 0 0 24 31.86c1.92 0 3.62-.46 4.97-1.31l4.79 3.71C31.14 36.7 27.65 38 24 38c-5.93 0-11.01-3.4-13.45-8.36l.17-1.01 4.06-2.85h.8z\" fill=\"#34A853\"/>\n      <path d=\"M15.59 20.21a8.864 8.864 0 0 0 0 5.58l-5.03 3.86c-.98-2-1.53-4.25-1.53-6.64 0-2.39.55-4.64 1.53-6.64l1-.22 3.81 2.98.22 1.08z\" fill=\"#FBBC05\"/>\n      <path d=\"M24 14.14c2.11 0 4.02.75 5.52 1.98l4.36-4.36C31.22 9.43 27.81 8 24 8c-5.93 0-11.01 3.4-13.45 8.36l5.03 3.85A8.86 8.86 0 0 1 24 14.14z\" fill=\"#EA4335\"/>\n    </svg>\n    <div class=\"gradient-container\"><div class=\"gradient\"></div></div>\n  </div>\n  <div class=\"carousel\">\n    <a class=\"chip\" href=\"https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEwcXC2uBKeLCH99hutSjifJ-0yW-BpV1KABFA2QQB8KCT8s_WfaEbFFmjwVzQmsHnP2LV9brWmT9GET8vQkAKq8RuXVglJuOp4nFUn1RX1is9QpQxQ8-d27zDNyPLCOZns9ujQvairStmJ2u6Notamq3AFp0bh6KBiKSK-mlg3y_gs50J4iijTsYVcIQW4W_jMSydUSpJl_uP8ifZxZE6j4vCyO9iTeALV94OkI93YnZKgKGjcaOFVrXBhLc-HPGmuxFAn\">impersonation scam changed phone number urgent money request FTC</a>\n    <a class=\"chip\" href=\"https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGhHkeJiinDEP-8zbsdoi2jVX0Czq7EA7rehey8WKcoLBge5adQqnELvk7b3AUQwoN6K8rvEnS3cpjaZn2H9y0ZbBVyL-7EJAQyvafWfHJIUzf9K4H5RlBcd2x_6TZc6sTXbM9g40f1RZCETXjdOTFrdV-vncujVx9oraQjBnQeQ-dC7yQVeC9rzcWgGc0epWCeL3o2pvntV9cA0l2AI5aiX1nWAWTBLKm64qeGByiEMA==\">FTC Hi Mum scam impersonation text new number</a>\n  </div>\n</div>\n"
           },
           "groundingChunks": [
             {
               "web": {
-                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF_bc05tgGltZLOWplvvwHee_c-GjthmMhxnQxlqixvJw729TcwmSjWYTj2Tpb7i4VOwqfoDwQU0yGD8cY__SGG0WUsAczVIhc0IRTNyfA9ruCNJfbYSa5XXw5pRi7sXurY-9ERFcAlUmGi6e95rKHvjwyyTQeFf2xWexjIyxvGaqZjm8j0eMwPhe56",
-                "title": "bitdefender.com",
-                "domain": "bitdefender.com"
+                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFZVGJ93ypdwDSt0hPXV4QhwK2opFmNocQJSrOtYZg5CapLyWJvy3z3iAbSiiBX-Hm_VO37t_8FYwwamLUS7_jAVdW_oeX_USest8_AkdEVgUbBSKVRS6OeVhhrHnlQ24kquuz1-Ud9VSR_oMdobp4IK1UpNB_tSnUfJFxUm95KlNXK3D6IdJI=",
+                "title": "acma.gov.au",
+                "domain": "acma.gov.au"
               }
             },
             {
               "web": {
-                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHT5n_MZAJ0R2w50DeUMY0eU_rwiecGMbQ-CUiADKEviOHqH9zDKDhEqVY3WgBMpwLl5XgNkjLYbHlFxJ0VxHjyoWwEa0lPdO3JRkJ3Uk6G5K4PEKU-FTsbDBJAimRAWgOnizlWGq0FIBV-x-kCOF4S4N_oHM5Szx9iXZTXKIxAqb2QJ8d3lSKwjRTeRRP-SolJh2dZ3g8=",
-                "title": "theguardian.com",
-                "domain": "theguardian.com"
+                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH5-bbd4juc4Upzai6tEmy4McXmUCf4t28TcFMn0HD8e4bBv3S_iCnZzwo2bgAsTtmWqBk-_tdu7fFshicA7xxSSvk3HL-A3vJM1h2j7ptQUT3isGfkkM9Pon0H0ehAUfKoPY51MehjEEn1w1aWv74HAtIHApTWWpIf4153cM4OI2TY3aBwIG5gBtCPhI91yh-y024Gl4oSowqjBBOVJS-_AJr6aZ-iig==",
+                "title": "occ.gov",
+                "domain": "occ.gov"
               }
             },
             {
               "web": {
-                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE4oeL3PouwwcL1PhlgVXPfYa2-PR7zVa4sWVB0MMiklo9V2vDx71qi8Kd0M2J00XXix8NkJZLDa08cMaRYLSF0HsFM0nzpqF5y_ZOyPMGvitBnDIhyPH5OXTIqc7Ph2vyY01Pqc-0SM0M_iH92hbRAHsQif6hR8q4F9_F4xC1OQK4cr_o74w==",
-                "title": "ybs.co.uk",
-                "domain": "ybs.co.uk"
+                "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFUdg4_oNYm8FQHCCEBEih8XQXRB-BUVAaSOd1bApFPB9NRbdAuiuKKg3BjpBIry9aaZGFe9jfmNr0DL1U6R6NEpdzKEw_7Phh2w1gO05tu_g9UhmywWHHYNlycHZx-Eqh3jvrApwM=",
+                "title": "youtube.com",
+                "domain": "youtube.com"
               }
             }
           ],
           "groundingSupports": [
             {
               "segment": {
-                "endIndex": 189,
-                "text": "These indicators align with documented \"family impersonation\" patterns (often called \"Hi Mum\" or \"Hi Dad\" schemes) monitored by consumer protection authorities like the FTC and Action Fraud"
+                "endIndex": 254,
+                "text": "The provided indicators—an immediate money request involving a claimed contact change while discouraging verification—align with documented family impersonation schemes, such as the \"Hi Mum\" scam highlighted by organizations like the ACMA and the FTC"
               },
               "groundingChunkIndices": [
                 0,
@@ -144,24 +161,13 @@
             },
             {
               "segment": {
-                "startIndex": 191,
-                "endIndex": 381,
-                "text": "In these setups, impostors claim a changed contact number, fabricate immediate urgency for funds, and actively discourage verification to prevent the recipient from discovering the deception"
+                "startIndex": 256,
+                "endIndex": 456,
+                "text": "In these patterns, fraudsters claim to use an unfamiliar number because a device was lost or broken, create artificial urgency, and discourage direct calls to prevent their voice from giving them away"
               },
               "groundingChunkIndices": [
-                0,
-                2
-              ]
-            },
-            {
-              "segment": {
-                "startIndex": 596,
-                "endIndex": 785,
-                "text": "Instead, reach out to the person directly through a previously trusted, independently saved route—such as their established phone number or an in-person check—to confirm their situation"
-              },
-              "groundingChunkIndices": [
-                0,
-                2
+                2,
+                0
               ]
             }
           ]
@@ -170,8 +176,8 @@
     ],
     "usageMetadata": {
       "promptTokenCount": 174,
-      "candidatesTokenCount": 178,
-      "totalTokenCount": 1301,
+      "candidatesTokenCount": 157,
+      "totalTokenCount": 1381,
       "trafficType": "ON_DEMAND",
       "promptTokensDetails": [
         {
@@ -182,13 +188,13 @@
       "candidatesTokensDetails": [
         {
           "modality": "TEXT",
-          "tokenCount": 178
+          "tokenCount": 157
         }
       ],
-      "thoughtsTokenCount": 949
+      "thoughtsTokenCount": 1050
     },
     "modelVersion": "gemini-3.8-flash",
-    "createTime": "2026-11-15T22:35:06.271566Z",
-    "responseId": "mjP6as7JEI-gm9IPspDq2Ak"
+    "createTime": "2026-11-15T23:39:38.842295Z",
+    "responseId": "ukL6are0M4-gm9IPspDq2Ak"
   }
 }

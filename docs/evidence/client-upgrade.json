@@ -1,0 +1,78 @@
+{
+  "provenance": {
+    "at": "2026-11-15T23:34:09.542Z",
+    "command": "node scripts/verify-upgrade.mjs",
+    "target": "https://hakiki-hybrid-2026.web.app/",
+    "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
+    "sourceDirty": true,
+    "gitMetadata": "available",
+    "node": "v26.13.1",
+    "platform": "win32",
+    "inputSha256": {
+      "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
+      "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
+      "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
+      "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+      "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+      "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+      "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+      "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+      "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+      "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+      "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+      "scripts/provenance.ts": "35242455913d0d851fdc245dccd98b906cc148024c0c43c201dc121afd2e3278",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "e9f20d4e65dd569a019343fdfbd071244594f1ce30ece2d00f52ba1f09c8a156",
+      "tests/e2e/local.spec.ts": "dfd2fea1618cd8643f04fa4e2594edd827a2116b90e81840394d3df297a9174d",
+      "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
+    }
+  },
+  "deployed": {
+    "build": {
+      "at": "2026-11-15T23:31:59.665Z",
+      "command": "npm run build",
+      "target": "local source",
+      "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
+      "sourceDirty": false,
+      "gitMetadata": "available",
+      "node": "v26.13.1",
+      "platform": "win32",
+      "inputSha256": {
+        "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
+        "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
+        "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
+        "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+        "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+        "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+        "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+        "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+        "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+        "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+        "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+        "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+        "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+        "scripts/provenance.ts": "35242455913d0d851fdc245dccd98b906cc148024c0c43c201dc121afd2e3278",
+        "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+        "tests/e2e/flow.spec.ts": "e9f20d4e65dd569a019343fdfbd071244594f1ce30ece2d00f52ba1f09c8a156",
+        "tests/e2e/local.spec.ts": "dfd2fea1618cd8643f04fa4e2594edd827a2116b90e81840394d3df297a9174d",
+        "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
+      },
+      "provider": "agent-platform",
+      "model": "gemini-3.8-flash"
+    },
+    "scriptPaths": [
+      "/assets/index-Z0Koyz9J.js"
+    ],
+    "initialScriptPaths": [
+      "/assets/index-Z0Koyz9J.js"
+    ],
+    "upgradedExistingClient": false
+  },
+  "offlineScripts": [
+    "/assets/index-Z0Koyz9J.js"
+  ],
+  "offlineReloadPassed": true,
+  "ephemeralMessageEmpty": true
+}

@@ -6,6 +6,8 @@ A private second opinion on family money requests. Pause, inspect the request, a
 
 [Try the hosted candidate](https://hakiki-hybrid-2026.web.app).
 
+The three-reviewer AI panel stabilized at **3.42/5 after five rounds**, not an official judging score. Local inference has an unexplained intermittent failure; the app labels the text-rule fallback and keeps raw content local. See [review history](docs/REVIEWS.md) and [remaining gates](docs/STATUS.md).
+
 ![Hakiki desktop interface](docs/evidence/desktop.png)
 
 ## Run locally
@@ -40,6 +42,8 @@ npm run evaluate
 ```
 
 Unit tests explicitly mock Firebase transport when testing routing and invalid responses. Browser tests exercise the UI, local-only network behavior, offline/reconnection, malformed exports, and mobile layout. The normal suite skips live AI calls. Set `LIVE_AI=1` to require successful real cloud inference, or `LIVE_TRANSPORT=1` to audit the real outbound contract and service-error handling. These are different evidence gates. Set `E2E_BASE_URL` to test a hosted release, including its offline shell.
+
+Set both `LIVE_LOCAL=1` and `LIVE_HYBRID=1` to run `npm run test:e2e -- tests/e2e/local.spec.ts` for actual local comparison, offline inference, reviewed import, then cloud completion in one session. Run `node scripts/verify-upgrade.mjs` separately afterward to verify the same persistent browser's current offline shell. Do not run these two commands concurrently; they share the isolated test profile.
 
 `npm run evaluate` reproduces 80 authored synthetic English scenarios: 20 development and 60 evaluation. Rules flagged 18/30 imposter scenarios and 12/30 genuine scenarios in evaluation: **60% cue coverage and 40% false flags**, not validated fraud-detection accuracy. A separate real 12-case synthetic pilot completed six profiles and 36 local comparisons. On its eight evaluation cases, matched profiles flagged 1/4 imposters and 2/4 genuine requests, with 5/8 abstentions: no demonstrated benefit over rules. Writing context remains experimental. Cloud/hybrid quality and real user outcomes are unmeasured. See the [protocol and full results](docs/EVALUATION.md).
 

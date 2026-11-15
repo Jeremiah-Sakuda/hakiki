@@ -27,6 +27,7 @@ export function provenance(command: string, target = "local source") {
     "scripts/summarize-live.mjs",
     "scripts/probe-local.mjs",
     "scripts/service-worker.mjs",
+    "scripts/verify-upgrade.mjs",
     "firebase.json",
     "scripts/provenance.ts",
     "vite.config.ts",

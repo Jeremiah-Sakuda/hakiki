@@ -86,3 +86,5 @@ Observe first-use completion, optional import friction, interpretation of disagr
 ## Public evidence
 
 Publish the protocol, synthetic runnable fixtures, aggregate results, failure examples stripped of private content, and exact environment versions. Keep raw private material and participant identities outside Git. An evaluation report with empty fields is a template, not a completed benchmark.
+
+Runtime limitation: a later current-build hosted local check fell back, while the next diagnostic succeeded. This is preserved separately in `evidence/current-local-fallback.json`; neither the earlier successful pilot nor the stale-cache fix eliminates this reliability uncertainty. No success-rate estimate is inferred from these exploratory reruns.

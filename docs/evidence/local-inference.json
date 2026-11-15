@@ -1,9 +1,9 @@
 {
   "provenance": {
-    "at": "2026-11-15T23:18:11.531Z",
-    "command": "LIVE_LOCAL=1 npm run test:e2e",
-    "target": "http://127.0.0.1:5173/",
-    "sourceCommit": "cef4afc143d1073a5b64586fdd20112e7d7ad3ee",
+    "at": "2026-11-15T23:33:45.155Z",
+    "command": "LIVE_LOCAL=1 LIVE_HYBRID=1 npm run test:e2e -- tests/e2e/local.spec.ts",
+    "target": "https://hakiki-hybrid-2026.web.app/",
+    "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
     "sourceDirty": true,
     "gitMetadata": "available",
     "node": "v26.13.1",
@@ -11,32 +11,76 @@
     "inputSha256": {
       "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
       "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
-      "src/App.tsx": "5d4aa010da8f5d22ec215e4c2ea5151cf1073c3b1a686b4619fe9192859ae92c",
+      "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
       "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
       "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
       "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
       "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
       "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
       "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
-      "scripts/summarize-live.mjs": "e8da85475feefc99583a7b28430eccc14080d768fe7d701b725b330859898787",
+      "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
       "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
-      "scripts/provenance.ts": "fa32207a5f57bbb87ca5577f5065e633c3c7e995b8e3d6d6c07ff8167ff7399f",
+      "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+      "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+      "scripts/provenance.ts": "35242455913d0d851fdc245dccd98b906cc148024c0c43c201dc121afd2e3278",
       "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
-      "tests/e2e/flow.spec.ts": "94be8ea03607d3f3def1c5ab6f513e7fb878ba1f7219007154d419d15efd8622",
-      "tests/e2e/local.spec.ts": "31ffb5e0609e4f6f4c3831eb0331ae9a147d77b3da76bcdf86483f905a55720a"
+      "tests/e2e/flow.spec.ts": "e9f20d4e65dd569a019343fdfbd071244594f1ce30ece2d00f52ba1f09c8a156",
+      "tests/e2e/local.spec.ts": "dfd2fea1618cd8643f04fa4e2594edd827a2116b90e81840394d3df297a9174d",
+      "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
     }
   },
   "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+  "deployed": {
+    "build": {
+      "at": "2026-11-15T23:31:59.665Z",
+      "command": "npm run build",
+      "target": "local source",
+      "sourceCommit": "515fb62537baaf293bb8f77950b590819cd67363",
+      "sourceDirty": false,
+      "gitMetadata": "available",
+      "node": "v26.13.1",
+      "platform": "win32",
+      "inputSha256": {
+        "src/ai.ts": "a518c408454122ad6f76d230a4184d62e246531cf72542bee679fc6e7036d183",
+        "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
+        "src/App.tsx": "efc4f0d0892c713c53eae57a7354c792896211e61e4e1dbc33acd0e1bbaf49c2",
+        "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
+        "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+        "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+        "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+        "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+        "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+        "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+        "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+        "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+        "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+        "scripts/provenance.ts": "35242455913d0d851fdc245dccd98b906cc148024c0c43c201dc121afd2e3278",
+        "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+        "tests/e2e/flow.spec.ts": "e9f20d4e65dd569a019343fdfbd071244594f1ce30ece2d00f52ba1f09c8a156",
+        "tests/e2e/local.spec.ts": "dfd2fea1618cd8643f04fa4e2594edd827a2116b90e81840394d3df297a9174d",
+        "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
+      },
+      "provider": "agent-platform",
+      "model": "gemini-3.8-flash"
+    },
+    "scriptPaths": [
+      "/assets/index-Z0Koyz9J.js"
+    ],
+    "initialScriptPaths": [
+      "/assets/index-BkBu5gcV.js"
+    ],
+    "upgradedExistingClient": true
+  },
   "execution": "Firebase ONLY_ON_DEVICE; adapter required ON_DEVICE response",
   "comparisonSucceeded": true,
   "offlineComparisonSucceeded": true,
   "hybridCompleted": true,
   "profileImportSucceeded": true,
-  "generatedProfileDraft": "Conversational and informal. Greetings are prevalent, utilizing familial terms. The register is casual, employing contractions and short sentences. Punctuation includes exclamation marks for warmth. Writing habits suggest a relaxed communication style, prioritizing ease and familiarity over formality. There's consistent emphasis on politeness and amicable interactions.",
+  "generatedProfileDraft": "Conversational, informal register using greetings like 'hello cousin' and 'lovely day.' Frequently employs contractions ('your', 'we'). Uses punctuation liberally with commas and periods. Shows politeness with 'thanks' and 'hope.' Short, direct exchanges typical of casual communication. Emphasis on personal connection and future plans.",
   "reviewedBeforePersistence": true,
-  "observations": "Compared with Amina (example)\n\nLanguage: consistent. Tone: consistent.\n\nUses informal language (cuz)\n\nAsks for a gift\n\nSuggests a call to discuss\n\nIndicates no urgency (no rush)\n\nWriting style can change or be copied. This is not identity verification.",
+  "observations": "Compared with Amina (example)\n\nLanguage: consistent. Tone: consistent.\n\nInformal language used (cuz)\n\nRequest for a gift\n\nIndication of no urgency\n\nSuggestion to communicate via phone\n\nWriting context is experimental. It may miss changes or flag normal ones, and cannot confirm who sent a message.",
   "syntheticProfile": {
-    "id": "4ff2d8f3-9ca9-4582-9a12-2c8474618d47",
+    "id": "8ee13e3e-5f85-4af4-aa1b-2924dbe437bd",
     "name": "Synthetic cousin",
     "style": "Uses informal English, short sentences, friendly greetings, and relaxed punctuation.",
     "trustedNumber": "",

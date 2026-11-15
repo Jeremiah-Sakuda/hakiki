@@ -1,0 +1,10 @@
+{
+  "observedDate": "2026-11-15",
+  "target": "https://hakiki-hybrid-2026.web.app",
+  "deployedCommit": "515fb62537baaf293bb8f77950b590819cd67363",
+  "executingScriptVerifiedByTest": "/assets/index-Z0Koyz9J.js",
+  "test": "LIVE_LOCAL=1 LIVE_HYBRID=1 E2E_BASE_URL=https://hakiki-hybrid-2026.web.app npm run test:e2e -- tests/e2e/local.spec.ts",
+  "outcome": "A later repeat fell back to explicitly labeled text rules during its initial local comparison. The real-model success assertion failed. No cloud request was sent at this stage.",
+  "diagnosticFollowup": "A subsequent diagnostic on the same current script completed native local comparison. The specific prior model failure was not reproduced or isolated.",
+  "limitation": "Successful smoke and pilot runs do not establish reliable local model availability or output on every request. Preserve this failure separately from the earlier stale-client failures."
+}

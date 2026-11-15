@@ -235,6 +235,7 @@ test("desktop layout and real cloud request exclude raw message content", async 
         rawCanariesExcluded: true,
         validation,
         deployedBuild,
+        executingScripts: deployed?.scriptPaths ?? null,
         request: JSON.parse(bodies[0]),
         response: payload,
       },
@@ -256,6 +257,20 @@ test("desktop layout and real cloud request exclude raw message content", async 
     await expect(page.getByRole("dialog")).toContainText("failed");
     await page.getByRole("button", { name: "Close dialog" }).click();
   }
+  const attribution = page.locator('iframe[title="Google Search suggestions"]');
+  if (response.ok() && (await attribution.count())) {
+    await attribution.scrollIntoViewIfNeeded();
+    await attribution.screenshot({
+      path: "docs/evidence/cloud-attribution.png",
+    });
+  }
+  await page.setViewportSize({
+    width: 1440,
+    height: Math.min(
+      await page.evaluate(() => document.documentElement.scrollHeight),
+      8000,
+    ),
+  });
   await page.screenshot({
     path: response.ok()
       ? "docs/evidence/cloud-result.png"
