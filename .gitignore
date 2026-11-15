@@ -1,0 +1,41 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+.vite/
+.firebase/
+*.log
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*service-account*.json
+*serviceAccount*.json
+firebase-debug.log*
+ui-debug.log*
+
+# Private source material and local evaluation data
+private-data/
+data/private/
+eval/private/
+chat-exports/
+screenshots/private/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+
+# Conditional iOS build artifacts
+DerivedData/
+*.xcuserstate
+xcuserdata/

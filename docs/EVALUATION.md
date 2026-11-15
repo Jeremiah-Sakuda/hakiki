@@ -1,0 +1,55 @@
+# Hakiki evaluation protocol
+
+Freeze the protocol before the final evaluation. Report counts and limitations, including failures. All thresholds below are project targets, not achieved results or population-level performance guarantees.
+
+## Development gate
+
+Use 20 development cases, ten genuine and ten impersonation attempts, with paired contact histories. Start with English and a separately labeled Swahili subset only when competent review is available. Include unusual genuine emergencies, new-number claims, familiar-style imposters, wrong-contact profiles, and insufficient history.
+
+The original early target remains at least 8/10 imposters flagged and at most 2/10 genuine requests flagged. Define a flag consistently as at least one explicit suspicious-evidence finding; the generic recommendation to verify is not a flag because every result includes it. Count invalid model responses and abstentions separately. Repeat with profiles swapped or omitted and compare against cloud-only and rules. The screen passes only when SDK execution is real, privacy holds, and contact context shows useful incremental signal. The small sample is a go/no-go diagnostic, not an accuracy claim.
+
+## Held-out benchmark
+
+Target 80 cases: 40 genuine and 40 impersonation attempts. Maintain a separate development set. If time limits the benchmark, publish the actual counts and reduce claims; never fill a missing denominator with generated results.
+
+Use disjoint contacts and conversation threads across development and evaluation. A test request must not appear in its own contact profile. Keep paraphrases and cases derived from the same scam template within one split. Mark each record as synthetic, consented real, or adapted with documented permission; report their results separately. Do not describe synthetic cases as real-world validation.
+
+For each case record a local case ID, source class, language, label and rationale, scenario category, contact-history pairing, metadata availability, and split. Where possible, have a second competent reviewer check labels and language. Resolve disagreements before running the frozen benchmark; uncertain ground truth belongs in a separate exploratory set.
+
+Cover normal genuine requests, urgent genuine requests, changed-number requests, sparse histories, code-switching, copied style, coercive secrecy, and unknown scam patterns. If both English and Swahili ship, target 20 genuine and 20 fraudulent cases per language. Otherwise use all 80 for English and label any Swahili cases exploratory.
+
+## Comparisons
+
+| Variant | Available evidence |
+| --- | --- |
+| Deterministic rules | Fixed pressure/verification rules and supplied number metadata; no model |
+| Local only | Request and contact profile; same bundled playbook as shipped |
+| Cloud only | The exact permitted feature object used by the hybrid run; no personal data |
+| Hybrid | Local findings plus the same cloud result, combined on device |
+| Profile ablation | Hybrid with profile omitted or wrong-contact profile substituted |
+
+Add a separate end-to-end no-local-model evaluation because deterministic/manual feature extraction differs from the controlled comparison. Sharing one feature object between cloud-only and hybrid isolates the incremental contribution of personal context; it does not by itself measure the usability of the fallback.
+
+Version the model, prompts, configs, and decision mapping. Freeze them before the held-out run. Do not tune on held-out outcomes; any later revision needs a newly held-out set or must be labeled exploratory.
+
+## Metrics and release interpretation
+
+- Report true positives, false negatives, false positives, true negatives, and abstentions separately for genuine and fraudulent cases. Show rates with denominators.
+- Catch rate uses all fraudulent cases as the denominator, including abstentions and errors. Report missed flags and abstentions distinctly so errors cannot improve the score.
+- False-alarm rate uses all genuine cases as the denominator. Report coverage and abstention rates so a system cannot look accurate merely by declining every case.
+- Report results by language and scenario, plus median and p95 latency, errors, and actual cloud usage/cost where observable.
+- Compare paired cases between variants, not unmatched aggregate datasets. Report uncertainty intervals where practical and avoid significance claims unsupported by the sample.
+
+Proposed quality targets: hybrid catch rate at least 80%, genuine false-alarm rate at most 10%, and total abstention/error rate at most 20%. To claim a useful personal-context benefit, target at least 10 percentage points higher catch rate than cloud-only with no more than 5 points additional false alarms. Treat this as an exploratory product threshold; the sample is small. Publish differences even if these targets are missed.
+
+No result authorizes an all-clear verdict. If the personal-context benefit does not materialize, revise the product claim and report the limitation. Do not compensate by relaxing privacy or by concealing the cloud-only baseline.
+
+## User walkthroughs
+
+The project owner recruits five target users voluntarily; this plan does not authorize unsolicited outreach. Use synthetic or consented scenarios and avoid asking participants to expose family chat history.
+
+Observe first-use completion, optional import friction, interpretation of disagreement, and selection of a previously trusted verification route. Target at least 4/5 completing a first check without facilitator intervention within three minutes and 5/5 understanding that a familiar style is not proof of identity. Record counts, confusing wording, and resulting fixes. Do not infer prevented losses from a short walkthrough.
+
+## Public evidence
+
+Publish the protocol, synthetic runnable fixtures, aggregate results, failure examples stripped of private content, and exact environment versions. Keep raw private material and participant identities outside Git. An evaluation report with empty fields is a template, not a completed benchmark.
