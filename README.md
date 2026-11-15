@@ -12,6 +12,7 @@ Hakiki is being designed to combine on-device relationship context with cloud sc
 - [Product requirements](docs/PRD.md): the revised scope and user experience.
 - [Privacy and architecture](docs/PRIVACY.md): permitted cloud inputs, local data, and failure behavior.
 - [Evaluation protocol](docs/EVALUATION.md): comparative testing, false alarms, and user walkthroughs.
+- [GitHub sprint milestones](https://github.com/Jeremiah-Sakuda/hakiki/milestones) and [checklist issues](https://github.com/Jeremiah-Sakuda/hakiki/issues): execution tracking for all five sprints.
 
 ## Delivery target
 

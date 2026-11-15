@@ -25,7 +25,7 @@ Every sprint ends with a brief working demonstration and a written gate result. 
 | Task | Hours | Dependencies | Acceptance evidence |
 | --- | --- | --- | --- |
 | S0-1 Verify environment and SDK | 3 | None | Exact package/version, Chrome/OS/hardware requirements, local capability probe, runtime local call, cloud call, App Check setup, and execution-location evidence recorded |
-| S0-2 Test personal-context signal | 4 | S0-1 | Twenty development cases run through local, cloud, and rules paths; wrong/omitted profile comparison; counts and failure examples recorded |
+| S0-2 Test personal-context signal | 4 | S0-1, S0-3 | Twenty development cases run through local, cloud, and rules paths; wrong/omitted profile comparison; counts and failure examples recorded |
 | S0-3 Validate feature contract and grounding | 3 | S0-1 | Closed feature schema tested on diverse requests; cloud can provide useful generic evidence; grounding and required attribution verified; no raw content sent |
 | S0-4 Lock scope and recruit testing participants | 2 | S0-2, S0-3 | Language scope, target-user assumptions, device access, owner availability, and five potential walkthrough slots recorded privately |
 
