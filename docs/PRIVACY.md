@@ -33,6 +33,8 @@ The no-local-model flow uses simple deterministic rules and user-selected catego
 
 ## Storage and network boundaries
 
+Profile generation is not a sanitizer. In a synthetic live test the local model repeated a canary and short quotations despite the prompt. Generated profiles therefore remain unsaved drafts until the user reviews, edits, and explicitly saves them. The draft screen warns users to remove private details. This controls persistence; it cannot guarantee that a user-reviewed profile contains no personal information.
+
 | Data | Location and lifetime |
 | --- | --- |
 | Raw request and screenshot | Memory for the current check; clear on reset; no default persistence |

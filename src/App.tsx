@@ -192,6 +192,7 @@ export default function App() {
   const [contactName, setContactName] = useState("");
   const [trusted, setTrusted] = useState("");
   const [permission, setPermission] = useState(false);
+  const [profileDraft, setProfileDraft] = useState<Profile | null>(null);
   const resultHeading = useRef<HTMLHeadingElement>(null);
   const epoch = useRef(0);
   const profile = [...profiles, sampleProfile].find((p) => p.id === selected);
@@ -210,6 +211,7 @@ export default function App() {
   }, [stage]);
   function reset() {
     epoch.current++;
+    setProfileDraft(null);
     setBusy(false);
     setMessage("");
     setSelected("");
@@ -283,6 +285,7 @@ export default function App() {
     if (!file || busy) return;
     setBusy(true);
     setChat(null);
+    setProfileDraft(null);
     setPermission(false);
     setTrusted("");
     setError("");
@@ -319,16 +322,10 @@ export default function App() {
         sample: false,
         sampleCount: profileInput(messages).length,
       };
-      const next = [...profiles, entry];
-      saveProfiles(next);
-      setProfiles(next);
+      setProfileDraft(entry);
       setChat(null);
-      setPermission(false);
       setTrusted("");
       setContactName("");
-      reset();
-      setSelected(entry.id);
-      setTab("check");
     } catch (e) {
       if (current === epoch.current) setError((e as Error).message);
     } finally {
@@ -944,6 +941,66 @@ export default function App() {
               </section>
               <form className="finding import-form" onSubmit={addContact}>
                 <h2>Add a contact</h2>
+                {profileDraft && (
+                  <div className="notice">
+                    <div>
+                      <h3>Review before saving</h3>
+                      <p>
+                        The local model may repeat private details or make
+                        mistakes. Remove names, numbers, quotations, and
+                        anything you do not want stored. This draft has not been
+                        saved.
+                      </p>
+                      <label htmlFor="profile-draft">
+                        Writing profile for {profileDraft.name}
+                      </label>
+                      <textarea
+                        id="profile-draft"
+                        maxLength={1800}
+                        value={profileDraft.style}
+                        onChange={(e) =>
+                          setProfileDraft({
+                            ...profileDraft,
+                            style: e.target.value,
+                          })
+                        }
+                      />
+                      <button
+                        type="button"
+                        className="primary"
+                        disabled={profileDraft.style.trim().length < 10}
+                        onClick={() => {
+                          try {
+                            const entry = {
+                              ...profileDraft,
+                              style: profileDraft.style.trim(),
+                            };
+                            const next = [...profiles, entry];
+                            saveProfiles(next);
+                            setProfiles(next);
+                            setPermission(false);
+                            reset();
+                            setSelected(entry.id);
+                            setTab("check");
+                          } catch {
+                            setError(
+                              "Browser storage could not be updated. Your profile was not saved.",
+                            );
+                          }
+                        }}
+                      >
+                        Save reviewed profile
+                      </button>
+                      <button
+                        type="button"
+                        className="text-button"
+                        onClick={() => setProfileDraft(null)}
+                      >
+                        Discard profile draft
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <p>
                   Export a WhatsApp chat as text, without media. Only the
                   selected person’s messages are summarized, on this device.

@@ -1,28 +1,23 @@
 # Implementation evidence and release gates
 
-Updated November 15, 2026. Code completion and demonstrated model capability are separate. This file does not replace PRD acceptance criteria.
+Updated November 15, 2026. Working software, demonstrated usefulness, and competition eligibility are separate.
 
-| Area                         | Evidence                                                          | State                                                                                                                      |
-| ---------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Text workflow and consent    | Browser tests and synthetic screenshots                           | Implemented                                                                                                                |
-| Strict local/cloud adapters  | SDK 13.3 runtime code, mocked routing tests                       | Implemented; real local result unverified                                                                                  |
-| Local model                  | `evidence/local-capability.json`, Chrome 157 Windows              | Unavailable in isolated headed and headless automation profiles; regular browser profile not tested                        |
-| Gemini endpoint              | Live Firebase AI Logic request, Soma                              | Vertex cloud inference passed with complete output and two search sources; Developer API credit error preserved separately |
-| App Check                    | Dedicated Hakiki app and reCAPTCHA registration; service enforced | Hosted production attestation reached Gemini; Vertex-backed hosted verification follows deployment                         |
-| Privacy boundary             | Closed schema, canary tests, no raw-text fallback                 | Tested paths only; not a universal audit                                                                                   |
-| Offline shell                | Versioned same-origin service worker                              | Passed hosted offline reload and empty-message check                                                                       |
-| Profiles                     | Parser, local-only summarization, consent/storage/deletion        | Real model import unverified                                                                                               |
-| Rules benchmark              | 80 synthetic cases, 20 development/60 evaluation                  | 60% coverage, 40% false flags                                                                                              |
-| Comparative model evaluation | No fabricated outputs                                             | Not measured                                                                                                               |
-| Target-user walkthroughs     | No real participants recruited                                    | Not conducted                                                                                                              |
-| iPhone, screenshots, Swahili | Conditional PRD scope                                             | Deferred                                                                                                                   |
-| Video and Devpost submission | Owner release actions                                             | Not performed                                                                                                              |
+| Area | Evidence | State |
+| --- | --- | --- |
+| Text workflow, consent, correction, deletion | Normal browser regression suite | Passed |
+| Strict local/cloud adapters | SDK13.3 runtime, unit routing tests, real response locations | Implemented and exercised |
+| Local comparison and profile generation | evidence/local-inference.json; isolated Chrome157 Windows | Real inference passed; subsequent draft-review flow pending repeat verification |
+| Cloud inference | evidence/cloud-transport.json; hosted Soma Vertex route | Complete output, three sources, production App Check passed |
+| Privacy boundary | Closed categorical schema, canary tests, no raw fallback | Tested paths passed; not a universal audit |
+| Profile storage | Explicit review/edit before persistence; deletion | Local plaintext; model summaries may contain private details |
+| Offline shell | Versioned same-origin service worker | Hosted offline reload passed; message not retained |
+| Rules benchmark | 80 authored synthetic cases, 20 development/60 evaluation | 60% cue coverage, 40% false flags; not validated accuracy |
+| Paired model pilot | Real adapter runner with matched/omitted/wrong profiles | In progress; preserves failures separately |
+| Exact Nano4 eligibility | docs/MODEL_ELIGIBILITY.md | Unconfirmed; browser reports nano_v3 asset |
+| Target-user walkthroughs | No real participants recruited | Not conducted |
+| iPhone, screenshots, Swahili | Conditional P1 scope | Deferred |
+| Video and Devpost submission | Owner release actions | Not performed |
 
-## Remaining hybrid gates
+Cloud capacity was resolved through the approved Vertex backend on existing Soma billing. No billing account was attached and no credits were purchased. Successful inference is runtime evidence, not model-quality validation. Remote Config reads a namespaced version label with a bundled default; the shared Soma template has not been overwritten.
 
-1. Cloud capacity resolved using the approved Vertex backend on existing Soma billing. No billing account was attached and no credits were purchased. Successful inference evidence is a runtime smoke test, not model-quality evaluation.
-2. A Chrome device/profile with a downloadable or available model. Demonstrate local comparison and profile creation without raw-data transmission.
-3. Real model evaluation and profile ablation. Mock tests cannot establish model usefulness.
-4. Consent-based target-user walkthroughs before claiming observed user benefits.
-
-The candidate can be reviewed while these gates remain open. A stable review score is not release acceptance or a guarantee of hackathon eligibility.
+Remaining evidence gates are comparative usefulness, consent-based target-user walkthroughs, exact required local model eligibility, and release materials. Stable AI-reviewer scores do not close those gates or guarantee eligibility.

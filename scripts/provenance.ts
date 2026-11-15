@@ -24,9 +24,12 @@ export function provenance(command: string, target = "local source") {
     "package-lock.json",
     "scripts/evaluate.ts",
     "scripts/evaluate-live.mjs",
+    "scripts/summarize-live.mjs",
+    "scripts/probe-local.mjs",
     "scripts/provenance.ts",
     "vite.config.ts",
     "tests/e2e/flow.spec.ts",
+    "tests/e2e/local.spec.ts",
   ];
   return {
     at: new Date().toISOString(),

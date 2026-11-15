@@ -1,1 +1,1 @@
-{"parameters":{"playbook_version":{"defaultValue":{"value":"2026-11-15"},"description":"Published generic scam-pattern guidance version. Never changes the outbound data contract."}},"conditions":[]}
+{"parameters":{"hakiki_playbook_version":{"defaultValue":{"value":"2026-11-15"},"description":"Hakiki guidance version label. Never changes the outbound data contract. Merge this namespaced parameter; do not overwrite a shared project template."}},"conditions":[]}

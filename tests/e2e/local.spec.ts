@@ -105,21 +105,31 @@ test("real on-device comparison and profile import keep raw content local", asyn
       "thanks cousin, see you this weekend.",
       "LOCAL-IMPORT-CANARY-62 hello again, have a lovely day.",
     ];
-    await page
-      .getByLabel("Choose a WhatsApp text export")
-      .setInputFiles({
-        name: "fictional-local.txt",
-        mimeType: "text/plain",
-        buffer: Buffer.from(
-          history
-            .map(
-              (m, i) => `11/12/2026, 10:${20 + i} AM - Synthetic cousin: ${m}`,
-            )
-            .join("\n"),
-        ),
-      });
+    await page.getByLabel("Choose a WhatsApp text export").setInputFiles({
+      name: "fictional-local.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from(
+        history
+          .map((m, i) => `11/12/2026, 10:${20 + i} AM - Synthetic cousin: ${m}`)
+          .join("\n"),
+      ),
+    });
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Create local profile" }).click();
+    const draft = page.getByLabel("Writing profile for Synthetic cousin");
+    await expect(draft).toBeVisible({ timeout: 35000 });
+    const generatedProfileDraft = await draft.inputValue();
+    expect(
+      await page.evaluate(() =>
+        JSON.parse(localStorage.getItem("hakiki.contacts.v1") || "[]").some(
+          (p: { name: string }) => p.name === "Synthetic cousin",
+        ),
+      ),
+    ).toBe(false);
+    await draft.fill(
+      "Uses informal English, short sentences, friendly greetings, and relaxed punctuation.",
+    );
+    await page.getByRole("button", { name: "Save reviewed profile" }).click();
     await expect(
       page.getByLabel("Who does it claim to be from?", { exact: false }),
     ).toHaveValue(/.+/, { timeout: 35000 });
@@ -146,6 +156,8 @@ test("real on-device comparison and profile import keep raw content local", asyn
             "Firebase ONLY_ON_DEVICE; adapter required ON_DEVICE response",
           comparisonSucceeded: true,
           profileImportSucceeded: true,
+          generatedProfileDraft,
+          reviewedBeforePersistence: true,
           observations,
           syntheticProfile: profiles.find(
             (p: { name: string }) => p.name === "Synthetic cousin",

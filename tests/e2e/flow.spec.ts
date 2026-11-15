@@ -182,6 +182,16 @@ test("desktop layout and real cloud request exclude raw message content", async 
       await expect(
         page.getByText("General model response · no search sources returned"),
       ).toBeVisible();
+    if (
+      payload.candidates?.[0]?.groundingMetadata?.searchEntryPoint
+        ?.renderedContent
+    )
+      await expect(
+        page
+          .frameLocator('iframe[title="Google Search suggestions"]')
+          .locator(".chip")
+          .first(),
+      ).toBeVisible();
     validation.attributionRendered = true;
     await page.getByRole("button", { name: "Open privacy receipt" }).click();
     await expect(page.getByRole("dialog")).toContainText("completed");

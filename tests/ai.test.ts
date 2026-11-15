@@ -45,6 +45,21 @@ beforeEach(() => {
   vi.stubGlobal("LanguageModel", { availability: async () => "available" });
 });
 describe("SDK privacy routing (mocked transport)", () => {
+  it("rejects oversized complete cloud output instead of silently truncating it", async () => {
+    const ai = await import("../src/ai");
+    fake.generateContent.mockResolvedValue({
+      response: {
+        inferenceSource: "in_cloud",
+        text: () => "x".repeat(6001),
+        candidates: [{ finishReason: "STOP" }],
+      },
+    });
+    const receipts: unknown[] = [];
+    await expect(
+      ai.checkWorld(extractFeatures("send money"), (r) => receipts.push(r)),
+    ).rejects.toThrow("could not finish");
+    expect(receipts.at(-1)).toMatchObject({ status: "failed" });
+  });
   it("rejects truncated cloud output", async () => {
     const ai = await import("../src/ai");
     fake.generateContent.mockResolvedValue({

@@ -2,7 +2,7 @@
 
 A private second opinion on family money requests. Pause, inspect the request, and contact the person through a route you already trust. Hakiki does not authenticate a sender or certify a request as safe.
 
-**Implementation candidate; local-AI release gate remains open.** The text workflow, optional local profile adapter, explicit cloud consent, privacy receipt, offline shell, and failure states are implemented. Real cloud inference succeeds through Firebase AI Logic's Agent Platform (formerly Vertex AI) backend on Soma's existing billing, with complete output and rendered search sources. Raw-message canaries remain excluded. Chrome exposes the Prompt API in the tested isolated profiles but reports its model unavailable; real local comparison and profile creation remain unverified.
+**Working hybrid implementation candidate.** Real on-device comparison and profile generation pass through Firebase AI Logic, and cloud inference succeeds through its Agent Platform (formerly Vertex AI) backend on Soma's approved existing billing. The hosted app displays complete cloud output and search sources. Tested raw-message canaries remain excluded from outbound requests. Model usefulness, human outcomes, and exact Nano 4 competition eligibility are separate evidence gates; see [release status](docs/STATUS.md).
 
 [Try the hosted candidate](https://hakiki-hybrid-2026.web.app).
 
@@ -19,7 +19,7 @@ npm run dev
 
 Open the URL printed by Vite. Without Firebase configuration, text rules and fictional examples work; AI buttons explain their prerequisites. No sign-in or private chat is required.
 
-For AI, copy `.env.example` to `.env.local` and supply your Firebase web app configuration, reCAPTCHA Enterprise site key, and cloud model. Enable Firebase AI Logic with the Gemini Developer API, usable quota, and App Check. Register the hosting domain in reCAPTCHA Enterprise. For localhost, register an App Check debug token and put it **only** in `.env.development.local`. Never commit that file or include debug tokens in a production build.
+For AI, copy `.env.example` to `.env.local` and supply your Firebase web app configuration, reCAPTCHA Enterprise site key, and cloud model. Enable Firebase AI Logic with your selected provider (`google-ai` or `agent-platform`), usable quota/billing, and App Check. Register the hosting domain in reCAPTCHA Enterprise. For localhost, register an App Check debug token and put it **only** in `.env.development.local`. Never commit that file or include debug tokens in a production build.
 
 The owner setup helper `node scripts/provision.cjs PROJECT_ID PROJECT_NUMBER WEB_APP_ID [google-ai|agent-platform]` uses an authenticated global Windows Firebase CLI. It registers Hakiki-specific attestation and writes ignored environment files; it does not attach billing or change existing service enforcement. Current configuration uses `hakiki-hybrid-2026` for Hosting and a separate Hakiki web app in owner-selected `soma-meta-jerem-2026` for AI with `VITE_AI_PROVIDER=agent-platform`. The owner approved usage on Soma's existing Cloud billing. Existing Soma app attestation was not changed.
 
@@ -27,7 +27,7 @@ The owner setup helper `node scripts/provision.cjs PROJECT_ID PROJECT_NUMBER WEB
 
 Open **Device setup**. A compatible desktop Chrome installation, supported hardware, and downloaded built-in model are required. Enable the multimodal Prompt API flag if required by your Chrome version, restart, and choose **Enable on-device AI**. Hakiki requests English text input/output and uses Firebase `ONLY_ON_DEVICE` mode for messages and profiles. An unavailable model never triggers a raw-text cloud fallback.
 
-See [Firebase hybrid setup](https://firebase.google.com/docs/ai-logic/hybrid/web/get-started) and [Chrome requirements](https://developer.chrome.com/docs/ai/get-started). This repository records an actual unavailable result, not a simulated model run.
+See [Firebase hybrid setup](https://firebase.google.com/docs/ai-logic/hybrid/web/get-started) and [Chrome requirements](https://developer.chrome.com/docs/ai/get-started). Initial automation disabled Chrome model services. Restoring component updates/OptimizationHints and allowing the download made the isolated Chrome 157 profile usable. `LIVE_LOCAL=1` runs the real comparison/import test with an isolated persistent profile; its first download can take several minutes. Chrome's broker identified `nano_v3_gpu_component`, version `2025.8.8.1141`; this establishes neither Nano 4 identity nor eligibility. See [model eligibility](docs/MODEL_ELIGIBILITY.md).
 
 ## Validate
 
@@ -57,7 +57,7 @@ flowchart LR
 
 `src/ai.ts` contains runtime Firebase SDK calls. `src/domain.ts` defines a strict allowlist of categorical cloud inputs. Arbitrary keys and free text are rejected. Raw messages, imports, phone numbers, names, and personal model findings are excluded from cloud generation. The receipt covers application AI request attempts, not infrastructure metadata. An attempt may fail before transmission; completion is confirmed by the SDK response.
 
-Profiles are saved locally only with consent, without application-level encryption. Raw imports stay in memory and can be discarded. Clear the current check and delete profiles separately. App Check, Hosting, and Remote Config use normal service metadata. Search suggestions are isolated in a sandboxed frame. The service worker caches app assets, never user content or cloud responses. Offline reopening requires one completed online visit.
+Profiles are generated locally, then shown for review and editing before saving. Model summaries can repeat private details; they are not guaranteed sanitized. Saved profiles have no application-level encryption. Raw imports and unconfirmed drafts stay in memory and can be discarded. Clear the current check and delete profiles separately. App Check, Hosting, and Remote Config use normal service metadata. Search suggestions are isolated in a sandboxed frame. The service worker caches app assets, never user content or cloud responses. Offline reopening requires one completed online visit.
 
 Stack: React 19, TypeScript, Vite, Firebase JS SDK 13.3, App Check, AI Logic, Remote Config, and Firebase Hosting. No Analytics, Firestore, named accounts, or backend conversation storage.
 

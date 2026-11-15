@@ -1,22 +1,29 @@
 {
-  "at": "2026-11-15T22:15:15.493Z",
+  "at": "2026-11-15T22:42:38.826Z",
   "command": "node scripts/probe-local.mjs",
   "target": "http://127.0.0.1:5173/",
-  "sourceCommit": "543a82a7b2d4c5c01398dc4d8b23092268cc29c5",
+  "sourceCommit": "099f415bd4731089b52ae81f5c1f1756a64e826d",
   "sourceDirty": true,
+  "gitMetadata": "available",
   "node": "v26.13.1",
   "platform": "win32",
   "inputSha256": {
-    "src/ai.ts": "39c26e1c40fc3a74f43452b505548cb6948ddf92d5d2a3e7df92425ed071551a",
-    "src/domain.ts": "aee81be3ae1565d924cb51d53f9c920e611bdf9ad8f3c4a44379b40bd7ac0d52",
+    "src/ai.ts": "5ad9b1684b6ad6552057112564ad6fbec0565f009f92aaa432c8270e2f8fa12c",
+    "src/domain.ts": "5d3671042c775f1cfc50f25b723d426d5b04871b2c98d59d52ac5a26065cdcbf",
     "src/App.tsx": "078b50066641b3bc9f86ffe8480641cfac1fc6a9e1c223ee64c18e1fe1d8ae7c",
     "src/styles.css": "e5ea0b3197a549a067d049f10750dfed87e1c8e037676968befb4efd59bfd3ea",
     "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
-    "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6"
+    "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+    "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+    "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+    "scripts/evaluate-live.mjs": "77efddef0080defa165fd9afde5bb59c09250551636a1ca64d2aa36677bd1743",
+    "scripts/provenance.ts": "efc76557575ec0f547982e030c68bb1192b96650e014f18dbf02829f1f14e2bb",
+    "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+    "tests/e2e/flow.spec.ts": "eb6349be649b8944a4305e5c12f37e6431df56c28d3878ae37ba440bf04c9b8d"
   },
   "profile": "isolated Playwright chrome-probe profile, not the user’s regular browser profile",
   "mode": "headless",
   "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
   "promptApi": true,
-  "availability": "unavailable"
+  "availability": "available"
 }

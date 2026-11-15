@@ -25,10 +25,15 @@ try {
     promptApi: "LanguageModel" in globalThis,
     availability:
       "LanguageModel" in globalThis
-        ? await globalThis.LanguageModel.availability({
-            expectedInputs: [{ type: "text", languages: ["en"] }],
-            expectedOutputs: [{ type: "text", languages: ["en"] }],
-          })
+        ? await Promise.race([
+            globalThis.LanguageModel.availability({
+              expectedInputs: [{ type: "text", languages: ["en"] }],
+              expectedOutputs: [{ type: "text", languages: ["en"] }],
+            }),
+            new Promise((resolve) =>
+              setTimeout(() => resolve("availability check timed out"), 5000),
+            ),
+          ])
         : "unavailable",
   }));
   const headed = process.env.HEADED === "1";

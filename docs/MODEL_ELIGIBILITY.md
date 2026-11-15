@@ -1,0 +1,7 @@
+# Exact on-device model eligibility
+
+On November 15, 2026, real Firebase `ONLY_ON_DEVICE` comparison and profile generation succeeded in isolated Chrome 157 on Windows. The SDK returned `ON_DEVICE`. Chrome's `chrome://on-device-internals` broker identified installed asset `nano_v3_gpu_component`, version `2025.8.8.1141`, with a 4,072.13 MiB `nano_v3_gpu_high_tier_model`. This proves local execution, not Nano 4 identity.
+
+The [official competition rules](https://firebasehybridaihackathon.devpost.com/rules) explicitly name Gemini Nano 4 for Web entries. The [Firebase Web configuration](https://firebase.google.com/docs/ai-logic/hybrid/web/configuration-options) exposes on-device creation/prompt options, but no documented Nano-generation selector. The [Chrome Prompt API documentation](https://developer.chrome.com/docs/ai/prompt-api) describes browser-managed Gemini Nano. No official mapping from this observed asset to Nano 4 was found. Gemma 4 must not be presented as Nano 4 without supporting evidence.
+
+Exact eligibility remains unconfirmed. This is separate from the verified Firebase integration. A concrete organizer question is: “Does the documented Firebase ONLY_ON_DEVICE Web integration qualify when Chrome selects nano_v3_gpu_component version 2025.8.8.1141? If Nano 4 specifically is required, which supported Chrome configuration selects it and what evidence is required?” No organizer message has been sent.

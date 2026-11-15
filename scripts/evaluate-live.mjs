@@ -64,12 +64,27 @@ try {
     browser: navigator.userAgent,
   }));
   const profiles = new Map();
+  const attemptedProfiles = new Set();
   for (const c of pairedCases) {
-    if (profiles.has(c.contactId)) continue;
-    const style = await page.evaluate(
-      (history) => window.__pilot.ai.summarizeProfile(history),
-      c.history,
-    );
+    if (attemptedProfiles.has(c.contactId)) continue;
+    attemptedProfiles.add(c.contactId);
+    const outcome = await page.evaluate(async (history) => {
+      try {
+        return {
+          status: "completed",
+          style: await window.__pilot.ai.summarizeProfile(history),
+        };
+      } catch (e) {
+        return { status: "error", reason: e.message };
+      }
+    }, c.history);
+    if (outcome.status === "error") {
+      report.profiles.push({ id: c.contactId, ...outcome });
+      console.log("Local profile failed", c.contactId, outcome.reason);
+      save();
+      continue;
+    }
+    const style = outcome.style;
     const profile = {
       id: c.contactId,
       name: `Fictional ${c.contactId}`,
@@ -79,7 +94,7 @@ try {
       sampleCount: c.history.length,
     };
     profiles.set(c.contactId, profile);
-    report.profiles.push(profile);
+    report.profiles.push({ ...profile, status: "completed" });
     console.log("Prepared real local profile", c.contactId);
     save();
   }
@@ -101,6 +116,14 @@ try {
           : variant === "wrongContact"
             ? profiles.get(c.wrongContactId)
             : null;
+      if (variant !== "omitted" && !profile) {
+        row.local[variant] = {
+          status: "error",
+          flag: "error",
+          reason: "Required profile generation failed",
+        };
+        continue;
+      }
       row.local[variant] = await page.evaluate(
         async ({ text, profile }) => {
           try {
@@ -120,8 +143,8 @@ try {
                   ? "negative"
                   : "abstain";
             return { status: "completed", flag, result };
-          } catch {
-            return { status: "error", flag: "error" };
+          } catch (e) {
+            return { status: "error", flag: "error", reason: e.message };
           }
         },
         { text: c.text, profile },

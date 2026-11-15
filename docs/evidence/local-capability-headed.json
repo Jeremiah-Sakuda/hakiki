@@ -1,8 +1,8 @@
 {
-  "at": "2026-11-15T22:28:30.125Z",
+  "at": "2026-11-15T22:43:30.618Z",
   "command": "HEADED=1 node scripts/probe-local.mjs",
   "target": "http://127.0.0.1:5173/",
-  "sourceCommit": "3e6f805a1a8d7cce9e0001da60720645d504046c",
+  "sourceCommit": "099f415bd4731089b52ae81f5c1f1756a64e826d",
   "sourceDirty": true,
   "gitMetadata": "available",
   "node": "v26.13.1",
@@ -16,13 +16,14 @@
     "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
     "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
     "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
-    "scripts/provenance.ts": "388ea0078dcd28531b851133816c07465146f165e5c09abfbd8f14937161b3f8",
-    "vite.config.ts": "8f6ce1f4cd618c4c97c567aad711d8f4eab45c871a0392ee8cacf2d4a1a15977",
+    "scripts/evaluate-live.mjs": "77efddef0080defa165fd9afde5bb59c09250551636a1ca64d2aa36677bd1743",
+    "scripts/provenance.ts": "efc76557575ec0f547982e030c68bb1192b96650e014f18dbf02829f1f14e2bb",
+    "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
     "tests/e2e/flow.spec.ts": "eb6349be649b8944a4305e5c12f37e6431df56c28d3878ae37ba440bf04c9b8d"
   },
   "profile": "isolated Playwright chrome-probe profile, not the user’s regular browser profile",
   "mode": "headed",
   "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
   "promptApi": true,
-  "availability": "downloadable"
+  "availability": "available"
 }
