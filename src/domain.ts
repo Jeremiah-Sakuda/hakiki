@@ -297,6 +297,13 @@ export const sampleProfile: Profile = {
   trustedNumber: "",
   sample: true,
   sampleCount: 18,
+  context: {
+    moneyRequests: "unknown",
+    usualPaymentMethods: ["bank_transfer"],
+    verificationAgreement: "speak_before_sending",
+    confirmedAt: "2026-11-15T12:00:00.000Z",
+    source: "user_confirmed",
+  },
   style:
     'Fictional example. Uses English, short friendly sentences and the greeting "hey cuz". Often says "no rush". Normally offers to talk by phone about money requests. No identity claim can be inferred from these habits.',
 };

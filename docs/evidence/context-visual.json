@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-16T23:18:28.064Z",
+  "target": "http://127.0.0.1:5173/",
+  "mode": "Synthetic manual contact and deterministic rules only. External HTTPS requests aborted. No inference results claimed.",
+  "desktop": {
+    "viewport": 1440,
+    "scrollWidth": 1440
+  },
+  "mobile": {
+    "viewport": 390,
+    "scrollWidth": 390
+  },
+  "ordering": {
+    "interpretation": 623.21875,
+    "arrangements": 1396.0625,
+    "skip": {
+      "top": "-100px",
+      "focus": "H1"
+    }
+  },
+  "observations": "Your saved arrangements with Amina · synthetic example\n\nConfirmed by you on 11/16/2026. Kept on this device.\n\nThese preliminary comparisons depend on the interpreted categories. A changed arrangement can be genuine.\n\nA change to check\n\nThis appears to ask for money. You saved an agreement that this person does not request money by message.\n\nCheck through your previously trusted route. Their circumstances may have changed.\n\nA change to check\n\nThis asks for bank transfer. You saved mobile money as your usual method.\n\nDiscuss the change directly. A genuine request can use a different method.\n\nA change to check\n\nThis request discourages a conversation, while your saved agreement is to speak before sending.\n\nPause and use your independently saved contact route.",
+  "cloudGenerationRequests": 0
+}

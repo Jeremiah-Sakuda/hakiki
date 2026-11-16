@@ -34,16 +34,16 @@ Excluded: Android, official notices, voice cloning detection, chat bots, transfe
 
 | State | Required behavior |
 | --- | --- |
-| Local model and sufficient history available | Compare locally; send only approved feature fields; combine evidence on device |
-| No history or sparse history | Say personal comparison is unavailable; permit a generic check |
+| Local model available | Interpret request locally; optional writing observations need history; compare confirmed arrangements on device |
+| No history or sparse history | Writing comparison unavailable; confirmed arrangements still usable; permit manual contact setup |
 | Local model unavailable | Keep raw text local; offer deterministic or user-selected feature categories, preview, and approved cloud check |
 | Sender number absent | Display unavailable; do not infer it from wording |
 | Offline with local model | Return a partial local card; identify missing cloud evidence |
-| Offline without local model | Give static independent-verification guidance; do not imply AI analysis occurred |
+| Offline without local model | Use editable rule categories and confirmed arrangements, with independent-verification guidance; do not imply AI analysis occurred |
 | Connection restored | Offer retry with fresh preview and consent; never automatically transmit a pending check |
 | Local failure, invalid model output, or cloud timeout | Preserve useful partial findings and label unavailable evidence; no silent raw-text fallback |
 | Witness disagreement | Show both observations and explain that identity remains unverified |
-| No relevant grounded source | Say no matching source found; do not treat this as clearance |
+| No grounded source returned | Say no search sources were returned; do not treat this as clearance or claim that no relevant source exists |
 | Unsupported language | Explain the limitation and permit manual verification; no untested language-quality claim |
 | Screenshot unreadable or unsupported | Ask for pasted text; never upload the image as fallback |
 
@@ -61,7 +61,7 @@ Avoid green safety badges, identity probabilities, and a global safe/unsafe scor
 | Missing-model flow, revises R9 | P0 | Preview and approval; no raw-text cloud fallback |
 | App Check, R10 | P0 | Enabled; debug tokens confined to local development configuration |
 | Anonymous Authentication, part of R10 | Conditional | Add only for a documented requirement; no named accounts or profile sync |
-| Remote Config, narrowed R11 | P0 | Versioned prompts/playbook IDs with bundled defaults; cannot change the outbound schema |
+| Remote Config, narrowed R11 | P0 | Namespaced version label with bundled default only; prompts and schema remain in the app build |
 | Synthetic examples, R12 | P0 | Clearly labeled; usable without private data |
 | Offline partial card, promoted/revised R14 | P0 | Both offline states work; no background queue transmission |
 | Chrome screenshot input, R3 | P1 | Local-only extraction verified; preview correction; unreadable-image fallback |

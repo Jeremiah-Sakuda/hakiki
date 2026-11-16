@@ -1,0 +1,92 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [
+        "The request discourages a call or conversation. Try a route you already trust."
+      ],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "ordinary_money",
+        "paymentChannel": "bank_transfer",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": true
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Can you send money by bank transfer?"
+        },
+        {
+          "field": "paymentChannel",
+          "quote": "Can you send money by bank transfer?"
+        },
+        {
+          "field": "verificationDiscouraged",
+          "quote": "Call me before paying."
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 21014
+    }
+  },
+  {
+    "text": "I am at the hospital. Can you visit?",
+    "status": "error",
+    "diagnostic": {
+      "id": 3,
+      "at": "2026-11-16T23:17:55.459Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60007,
+      "stageElapsedMs": 60007,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    }
+  },
+  {
+    "text": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+    "status": "error",
+    "diagnostic": {
+      "id": 4,
+      "at": "2026-11-16T23:18:55.495Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60011,
+      "stageElapsedMs": 60011,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    }
+  },
+  {
+    "text": "Could you cover the ticket? We can talk through your saved number before you decide.",
+    "status": "error",
+    "diagnostic": {
+      "id": 5,
+      "at": "2026-11-16T23:19:55.523Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60010,
+      "stageElapsedMs": 60010,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    }
+  }
+]

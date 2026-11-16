@@ -1,0 +1,45 @@
+import { chromium } from '@playwright/test';
+import { writeFileSync } from 'node:fs';
+const browser = await chromium.launch({channel:'chrome',headless:true});
+try {
+  const context = await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+  const page = await context.newPage();
+  const capture = async (path) => {
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    await page.screenshot({path,fullPage:true});
+  };
+  const generated=[];
+  page.on('request', request=> {if(request.url().includes('generateContent'))generated.push(request.url())});
+  await page.route('https://**',route=>route.abort());
+  await page.goto('http://127.0.0.1:5173');
+  await page.getByRole('button',{name:/Your people/}).click();
+  await page.getByLabel('Person’s name').fill('Amina · synthetic example');
+  await page.getByLabel('Independently saved number').fill('+1 202 555 0147');
+  await page.getByLabel('Money requests by message').selectOption('no_message_requests_confirmed');
+  await page.getByRole('checkbox',{name:'mobile money',exact:true}).check();
+  await page.getByLabel('Our verification agreement').selectOption('speak_before_sending');
+  await page.getByRole('checkbox',{name:/I reviewed these details/}).check();
+  await capture('docs/evidence/context-form-desktop.png');
+  await page.setViewportSize({width:390,height:844});
+  await capture('docs/evidence/context-form-mobile.png');
+  await page.getByRole('button',{name:'Save reviewed contact'}).click();
+  await page.getByLabel('Message to check',{exact:true}).fill('Please send money by bank transfer now. Do not call; keep this secret.');
+  await page.getByRole('button',{name:'Review this message'}).click();
+  await page.getByText('Text rules · no AI comparison',{exact:true}).waitFor();
+  await page.setViewportSize({width:1440,height:1000});
+  await capture('docs/evidence/context-desktop.png');
+  const desktop = await page.evaluate(()=>({viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+  await page.setViewportSize({width:390,height:844});
+  await capture('docs/evidence/context-mobile.png');
+  const mobile = await page.evaluate(()=>({viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+  const ordering=await page.evaluate(()=>({interpretation:document.querySelector('.interpretation-card').getBoundingClientRect().top,arrangements:document.querySelector('.context-findings').getBoundingClientRect().top,skip:{top:getComputedStyle(document.querySelector('.skip')).top,focus:document.activeElement?.tagName}}));
+  if(ordering.interpretation>=ordering.arrangements) throw new Error('Interpretation must precede arrangements');
+  if(await page.getByRole('combobox',{name:'Request',exact:true}).count()!==1)throw new Error('Duplicate request controls');
+  const observations=await page.locator('.context-findings').innerText();
+  const evidence={at:new Date().toISOString(),target:page.url(),mode:'Synthetic manual contact and deterministic rules only. External HTTPS requests aborted. No inference results claimed.',desktop,mobile,ordering,observations,cloudGenerationRequests:generated.length};
+  writeFileSync('docs/evidence/context-visual.json',JSON.stringify(evidence,null,2));
+  console.log(JSON.stringify(evidence));
+  if(generated.length)throw new Error('Unexpected generation request');
+  await context.close();
+} finally {await browser.close();}

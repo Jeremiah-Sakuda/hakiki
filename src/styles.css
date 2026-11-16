@@ -907,6 +907,19 @@ footer a {
 .interpretation-evidence p {
   overflow-wrap: anywhere;
 }
+.interpretation-card > p,
+.interpretation-card .feature-fields label,
+.interpretation-card .feature-fields select {
+  font-size: 13px;
+}
+.interpretation-card .feature-fields select {
+  max-width: 290px;
+}
+.agreement-description {
+  margin: 8px 0 18px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
 .contact-editor .text-button {
   margin-top: 14px;
 }

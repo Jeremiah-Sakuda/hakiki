@@ -153,7 +153,8 @@ describe("user-confirmed private arrangements", () => {
     verificationAgreement: "speak_before_sending" as const,
   };
   it("migrates old profiles and permits manual contacts without writing history", () => {
-    expect(profileSchema.parse(sampleProfile).context).toBeUndefined();
+    const { context: _newContext, ...legacyProfile } = sampleProfile;
+    expect(profileSchema.parse(legacyProfile).context).toBeUndefined();
     expect(
       profileSchema.parse({
         ...sampleProfile,

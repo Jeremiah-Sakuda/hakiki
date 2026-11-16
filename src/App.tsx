@@ -490,7 +490,7 @@ export default function App() {
       {features && profile && (
         <div className="personal context-findings">
           <h4>Your saved arrangements with {profile.name}</h4>
-          {profile.context?.confirmedAt && (
+          {profile.sample ? <p className="small">Fictional arrangements for this example. No person confirmed these.</p> : profile.context?.confirmedAt && (
             <p className="small">
               Confirmed by you on{" "}
               {new Date(profile.context.confirmedAt).toLocaleDateString()}. Kept
@@ -498,8 +498,8 @@ export default function App() {
             </p>
           )}
           <p className="small">
-            Check the interpretation below. A changed arrangement can be
-            genuine.
+            These preliminary comparisons depend on the interpreted categories.
+            A changed arrangement can be genuine.
           </p>
           {compareContext(features, profile.context).map((finding) => (
             <div key={finding.code} data-context-code={finding.code}>
@@ -855,7 +855,8 @@ export default function App() {
                       : "Now, reach out directly."}
                   </h1>
                   <p className="lead">
-                    These are observations, not proof of who sent the request.
+                    These are preliminary observations. Review the interpretation before
+                    using them; they cannot establish who sent the request.
                   </p>
                   <section className="finding message-summary">
                     <h3>The request you’re checking</h3>
@@ -866,6 +867,46 @@ export default function App() {
                       Identity remains unverified.
                     </p>
                   </section>
+                  {stage === "review" && features && (
+                    <section className="finding interpretation-card" aria-label="Review interpretation">
+                      <span className="eyebrow">REVIEW BEFORE USING THESE OBSERVATIONS</span>
+                      <h3>Check this interpretation</h3>
+                      <p>
+                        These suggested categories may be wrong. Correct them to
+                        update the preliminary observations below. These categories
+                        do not establish identity.
+                      </p>
+                      {!!local?.evidence?.length && (
+                        <details className="interpretation-evidence">
+                          <summary>
+                            Words used for this interpretation · stays local
+                          </summary>
+                          {local.evidence.map((item, i) => (
+                            <p key={i}>
+                              <strong>{featureLabel(item.field)}:</strong> “
+                              {item.quote}”
+                            </p>
+                          ))}
+                        </details>
+                      )}
+                      {!!local?.rejectedFields?.length && (
+                        <p className="small">
+                          Some suggestions had no usable supporting words and
+                          were changed to unknown. Review all categories.
+                        </p>
+                      )}
+                      <FeatureEditor
+                        features={features}
+                        setFeatures={(next) => {
+                          setFeatures(next);
+                          setLocal((old) =>
+                            old ? { ...old, signals: signalsFor(next) } : old,
+                          );
+                        }}
+                        disabled={busy}
+                      />
+                    </section>
+                  )}
                   {localCard}
                   {world && (
                     <section className="finding">
@@ -956,45 +997,10 @@ export default function App() {
                         <Icon name="cloud" size={24} />
                       </span>
                       <h2>Add a wider perspective</h2>
-                      <h3>Check this interpretation</h3>
-                      <p>
-                        These suggested categories may be wrong. Correct them to
-                        update your saved-arrangement comparison. Sending them
-                        is optional.
-                      </p>
-                      {!!local?.evidence?.length && (
-                        <details className="interpretation-evidence">
-                          <summary>
-                            Words used for this interpretation · stays local
-                          </summary>
-                          {local.evidence.map((item, i) => (
-                            <p key={i}>
-                              <strong>{featureLabel(item.field)}:</strong> “
-                              {item.quote}”
-                            </p>
-                          ))}
-                        </details>
-                      )}
-                      {!!local?.rejectedFields?.length && (
-                        <p className="small">
-                          Some suggestions had no usable supporting words and
-                          were changed to unknown. Review all categories.
-                        </p>
-                      )}
                       <p>
                         The cloud can look for known scam patterns. Only these
                         categories will be sent. Review or correct them first.
                       </p>
-                      <FeatureEditor
-                        features={features}
-                        setFeatures={(next) => {
-                          setFeatures(next);
-                          setLocal((old) =>
-                            old ? { ...old, signals: signalsFor(next) } : old,
-                          );
-                        }}
-                        disabled={busy}
-                      />
                       <p className="small">
                         No message text, names, numbers, or contact history.
                         Google also receives normal connection and App Check
@@ -1680,6 +1686,7 @@ function ContactEditor({
         <label htmlFor="money-agreement">Money requests by message</label>
         <select
           id="money-agreement"
+          aria-describedby="money-agreement-description"
           value={context.moneyRequests}
           onChange={(e) =>
             setContext({
@@ -1688,11 +1695,16 @@ function ContactEditor({
             })
           }
         >
-          <option value="unknown">Unknown / no confirmed agreement</option>
+          <option value="unknown">No confirmed agreement</option>
           <option value="no_message_requests_confirmed">
-            They told me they do not request money by message
+            No money requests by message
           </option>
         </select>
+        <p className="small agreement-description" id="money-agreement-description">
+          {context.moneyRequests === "no_message_requests_confirmed"
+            ? "They told me they do not request money by message."
+            : "Unknown: we have not confirmed an agreement about money requests by message."}
+        </p>
         <fieldset className="method-choices">
           <legend>Methods we normally use · optional</legend>
           <p className="small">
@@ -1722,6 +1734,7 @@ function ContactEditor({
         </label>
         <select
           id="verification-agreement"
+          aria-describedby="verification-agreement-description"
           value={context.verificationAgreement}
           onChange={(e) =>
             setContext({
@@ -1731,11 +1744,16 @@ function ContactEditor({
             })
           }
         >
-          <option value="unknown">Unknown / no confirmed agreement</option>
+          <option value="unknown">No confirmed agreement</option>
           <option value="speak_before_sending">
-            We agreed to speak through a trusted route before I send
+            Speak before sending
           </option>
         </select>
+        <p className="small agreement-description" id="verification-agreement-description">
+          {context.verificationAgreement === "speak_before_sending"
+            ? "We agreed to speak through a trusted route before I send money."
+            : "Unknown: we have not confirmed how to verify a request before sending money."}
+        </p>
         {!!existing?.style && (
           <>
             <label htmlFor="manual-writing-context">

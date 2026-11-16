@@ -1,0 +1,183 @@
+{
+  "diagnosticOnly": true,
+  "transport": "native-stream",
+  "at": "2026-11-16T23:20:15.361Z",
+  "cases": [
+    {
+      "input": "Can you send money by bank transfer? Call me before paying.",
+      "outcome": "completed",
+      "elapsedMs": 20530,
+      "chunks": 78,
+      "text": "{\"requestType\":\"ordinary_money\",\"requestTypeQuote\":\"Can you send money\",\"paymentChannel\":\"bank_transfer\",\"paymentChannelQuote\":\"by bank transfer\",\"urgency\":\"not_stated\",\"urgencyQuote\":\"\",\"secrecy\":\"unknown\",\"secrecyQuote\":\"\",\"contact\":\"unchanged\",\"contactQuote\":\"\",\"verification\":\"encouraged\",\"verificationQuote\":\"Call me before paying\"}",
+      "parsed": {
+        "requestType": "ordinary_money",
+        "requestTypeQuote": "Can you send money",
+        "paymentChannel": "bank_transfer",
+        "paymentChannelQuote": "by bank transfer",
+        "urgency": "not_stated",
+        "urgencyQuote": "",
+        "secrecy": "unknown",
+        "secrecyQuote": "",
+        "contact": "unchanged",
+        "contactQuote": "",
+        "verification": "encouraged",
+        "verificationQuote": "Call me before paying"
+      },
+      "events": [
+        {
+          "event": "create_start",
+          "atMs": 0
+        },
+        {
+          "event": "create_end",
+          "atMs": 13526
+        },
+        {
+          "event": "prompt_start",
+          "atMs": 13531
+        },
+        {
+          "event": "first_chunk",
+          "atMs": 17636
+        },
+        {
+          "event": "first_valid_json",
+          "atMs": 20529,
+          "characters": 337
+        }
+      ]
+    },
+    {
+      "input": "I am at the hospital. Can you visit?",
+      "outcome": "completed",
+      "elapsedMs": 3864,
+      "chunks": 76,
+      "text": "{\"requestType\": \"unknown\", \"requestTypeQuote\": \"\", \"paymentChannel\": \"unknown\", \"paymentChannelQuote\": \"\", \"urgency\": \"unknown\", \"urgencyQuote\": \"\", \"secrecy\": \"unknown\", \"secrecyQuote\": \"\", \"contact\": \"unknown\", \"contactQuote\": \"\", \"verification\": \"unknown\", \"verificationQuote\": \"\"}",
+      "parsed": {
+        "requestType": "unknown",
+        "requestTypeQuote": "",
+        "paymentChannel": "unknown",
+        "paymentChannelQuote": "",
+        "urgency": "unknown",
+        "urgencyQuote": "",
+        "secrecy": "unknown",
+        "secrecyQuote": "",
+        "contact": "unknown",
+        "contactQuote": "",
+        "verification": "unknown",
+        "verificationQuote": ""
+      },
+      "events": [
+        {
+          "event": "create_start",
+          "atMs": 0
+        },
+        {
+          "event": "create_end",
+          "atMs": 3
+        },
+        {
+          "event": "prompt_start",
+          "atMs": 3
+        },
+        {
+          "event": "first_chunk",
+          "atMs": 941
+        },
+        {
+          "event": "first_valid_json",
+          "atMs": 3864,
+          "characters": 284
+        }
+      ]
+    },
+    {
+      "input": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+      "outcome": "completed",
+      "elapsedMs": 4203,
+      "chunks": 90,
+      "text": "{\"requestType\":\"ordinary_money\",\"requestTypeQuote\":\"Please send your share by M-Pesa after we speak.\",\"paymentChannel\":\"mobile_money\",\"paymentChannelQuote\":\"M-Pesa\",\"urgency\":\"not_stated\",\"urgencyQuote\":\"After we speak\",\"secrecy\":\"unknown\",\"secrecyQuote\":\"\",\"contact\":\"unchanged\",\"contactQuote\":\"\",\"verification\":\"encouraged\",\"verificationQuote\":\"After we speak\"}",
+      "parsed": {
+        "requestType": "ordinary_money",
+        "requestTypeQuote": "Please send your share by M-Pesa after we speak.",
+        "paymentChannel": "mobile_money",
+        "paymentChannelQuote": "M-Pesa",
+        "urgency": "not_stated",
+        "urgencyQuote": "After we speak",
+        "secrecy": "unknown",
+        "secrecyQuote": "",
+        "contact": "unchanged",
+        "contactQuote": "",
+        "verification": "encouraged",
+        "verificationQuote": "After we speak"
+      },
+      "events": [
+        {
+          "event": "create_start",
+          "atMs": 0
+        },
+        {
+          "event": "create_end",
+          "atMs": 3
+        },
+        {
+          "event": "prompt_start",
+          "atMs": 3
+        },
+        {
+          "event": "first_chunk",
+          "atMs": 956
+        },
+        {
+          "event": "first_valid_json",
+          "atMs": 4203,
+          "characters": 363
+        }
+      ]
+    },
+    {
+      "input": "Could you cover the ticket? We can talk through your saved number before you decide.",
+      "outcome": "completed",
+      "elapsedMs": 3623,
+      "chunks": 67,
+      "text": "{\"requestType\":\"emergency_money\",\"requestTypeQuote\":\"Could you cover the ticket?\",\"paymentChannel\":\"unknown\",\"paymentChannelQuote\":\"\",\"urgency\":\"unknown\",\"urgencyQuote\":\"\",\"secrecy\":\"unknown\",\"secrecyQuote\":\"\",\"contact\":\"unknown\",\"contactQuote\":\"\",\"verification\":\"unknown\",\"verificationQuote\":\"\"}",
+      "parsed": {
+        "requestType": "emergency_money",
+        "requestTypeQuote": "Could you cover the ticket?",
+        "paymentChannel": "unknown",
+        "paymentChannelQuote": "",
+        "urgency": "unknown",
+        "urgencyQuote": "",
+        "secrecy": "unknown",
+        "secrecyQuote": "",
+        "contact": "unknown",
+        "contactQuote": "",
+        "verification": "unknown",
+        "verificationQuote": ""
+      },
+      "events": [
+        {
+          "event": "create_start",
+          "atMs": 0
+        },
+        {
+          "event": "create_end",
+          "atMs": 4
+        },
+        {
+          "event": "prompt_start",
+          "atMs": 4
+        },
+        {
+          "event": "first_chunk",
+          "atMs": 982
+        },
+        {
+          "event": "first_valid_json",
+          "atMs": 3623,
+          "characters": 296
+        }
+      ]
+    }
+  ]
+}
