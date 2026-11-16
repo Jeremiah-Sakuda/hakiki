@@ -67,12 +67,15 @@ export const CLOUD_INSTRUCTION =
 export function extractFeatures(text: string): Features {
   const t = text.normalize("NFKC").toLowerCase();
   const clauses = t.split(/[.!?;\n]+|\b(?:but|however)\b/);
+  const reported = (before: string) =>
+    /\b(?:warned|warning|example|quoted?|saying|said)\b/.test(before);
   // Editable cues, not semantic understanding. Reject directly negated cues.
   const positive = (pattern: RegExp) =>
     clauses.some((c) => {
       const m = pattern.exec(c);
       return (
         !!m &&
+        !reported(c.slice(0, m.index)) &&
         !/(?:don.?t|do not|never|not to|avoid)\s+(?:\w+\s+){0,4}$/.test(
           c.slice(0, m.index),
         )
@@ -117,11 +120,15 @@ export function extractFeatures(text: string): Features {
           : positive(/bank|wire|account transfer/)
             ? "bank_transfer"
             : "unknown",
-    urgency: clauses.some(
-      (c) =>
-        !/no rush|not urgent|whenever|when you can/.test(c) &&
-        /\bnow\b|immediately|urgent|right away|within.*minutes|asap/.test(c),
-    )
+    urgency: clauses.some((c) => {
+      const cue =
+        /\bnow\b|immediately|urgent|right away|within.*minutes|asap/.exec(c);
+      return (
+        !!cue &&
+        !reported(c.slice(0, cue.index)) &&
+        !/no rush|not urgent|whenever|when you can/.test(c)
+      );
+    })
       ? "immediate"
       : "not_stated",
     secrecyRequested: positive(
@@ -129,18 +136,16 @@ export function extractFeatures(text: string): Features {
     )
       ? true
       : null,
-    changedContactClaim:
-      /new number|lost my phone|changed my number|temporary number|phone broke/.test(
-        t,
-      )
-        ? true
-        : null,
-    verificationDiscouraged:
-      /don.?t call|do not call|can.?t (talk|call)|cannot (talk|call)|no calls/.test(
-        t,
-      )
-        ? true
-        : null,
+    changedContactClaim: positive(
+      /new number|lost my phone|changed my number|temporary number|phone broke/,
+    )
+      ? true
+      : null,
+    verificationDiscouraged: positive(
+      /don.?t call|do not call|can.?t (talk|call)|cannot (talk|call)|no calls/,
+    )
+      ? true
+      : null,
   });
 }
 export function signalsFor(f: Features): string[] {

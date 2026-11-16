@@ -94,6 +94,25 @@ describe("cautious text rules", () => {
   });
   it("handles directly negated payment and secrecy cues conservatively", () => {
     expect(
+      extractFeatures("I do not have a new number.").changedContactClaim,
+    ).toBeNull();
+    expect(
+      extractFeatures("They warned me about messages saying do not call.")
+        .verificationDiscouraged,
+    ).toBeNull();
+    expect(
+      extractFeatures('A warning described messages saying "send money now".')
+        .urgency,
+    ).toBe("not_stated");
+    expect(
+      extractFeatures("This is my new number. Do not call. Send money now.")
+        .changedContactClaim,
+    ).toBe(true);
+    expect(
+      extractFeatures("This is my new number. Do not call. Send money now.")
+        .verificationDiscouraged,
+    ).toBe(true);
+    expect(
       extractFeatures("Do not keep this secret. Call our family before paying.")
         .secrecyRequested,
     ).toBeNull();

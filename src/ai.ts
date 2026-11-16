@@ -139,10 +139,11 @@ export async function localAvailability(): Promise<Availability> {
 }
 let localReady = false;
 let setupController: AbortController | undefined;
-export const localPromptVersion = "2026-11-16.3";
+export const localPromptVersion = "2026-11-16.4";
 const profileConstraint = {
   type: "object",
-  properties: { style: { type: "string", minLength: 10, maxLength: 600 } },
+  // Length limits remain strict at validation; keep native decoding simple.
+  properties: { style: { type: "string" } },
   required: ["style"],
   additionalProperties: false,
 };

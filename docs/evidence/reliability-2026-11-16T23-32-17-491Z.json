@@ -1,0 +1,4549 @@
+{
+  "provenance": {
+    "at": "2026-11-16T23:32:17.594Z",
+    "command": "LIVE_LOCAL=1 LIVE_HYBRID=1 node scripts/check-reliability.mjs",
+    "target": "http://127.0.0.1:5173",
+    "sourceCommit": "58458a5a1d21da261b1e77b2dc7818669740806f",
+    "sourceDirty": false,
+    "gitMetadata": "available",
+    "node": "v26.13.1",
+    "platform": "win32",
+    "inputSha256": {
+      "src/ai.ts": "55227ddd2110890ff2e93d3c10d77fcdce00d64c29bae3524264daa8b9049696",
+      "src/interpretation.ts": "afc22477fd5e0fb57d138dd4a4efe4825493000a54da7639b0a06e0fddca16ba",
+      "src/context.ts": "416e354f36e49027181c3e718170afa2ef33157cee3702349c5d8119a0039a68",
+      "src/local-diagnostics.ts": "7f56ce226ec7c4796952f9ee2df2ecaa909082dcb8a04d0170a985f0c7bc4b0c",
+      "src/domain.ts": "987f70ca2a29252211a7615ca07be8cda329ad0d608eb8a5de6c6ab63bfdd292",
+      "src/App.tsx": "9b905eeb30048b9300cc9decdc0c2fa361075e6d99c83a9b0e2e17b63683d0d6",
+      "src/styles.css": "1a36d38bbecae78fca8b0b12a6c5f60804ece753bc48aa8d67d775de5c4eedd2",
+      "eval/cases.ts": "9e182222877556014ff6a56a71c779404f788b4e9bac988e3d1e6417ad3d9294",
+      "eval/pairs.ts": "9aac0b2ec8d32a796baeaed34018c7358dd4c2f66dcaea501f28edaf30fed355",
+      "eval/context-heldout-v1.json": "492da4a609595e24575108924814e17a57d4289e45c3203e8ebded7ad5b1c635",
+      "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6",
+      "scripts/evaluate.ts": "a10c4ebbfba01b2896664002b55ab42a2e2175d6ecf684f904f65cd43cb60b16",
+      "scripts/evaluate-live.mjs": "8b6c11fac47a860ba2e13b7a962665247ec554860f05ab951da8f163a0c79382",
+      "scripts/check-reliability.mjs": "71b13c7e8131712d5a0b9c20021b114ca829df30e2f6b386071e2434cc109618",
+      "scripts/evaluate-context.mjs": "bc083c5ad56cc81d7fcc94983ccf7ff6fdc87995a9f577fed279f3c4605897ce",
+      "scripts/summarize-live.mjs": "6c1a7bf31c1112ffb7a9ee8cea7d6ab9cb9ac5c13020cb5cb06d0bc758325843",
+      "scripts/probe-local.mjs": "7a64db6e92300f69017731c79425b99769ffbf347c323bf8e45051081aeeebe4",
+      "scripts/service-worker.mjs": "9a991fbd8330c2f79efbd30c05d0ac7d9a32687334e97d0218b02ba0ff01a938",
+      "scripts/verify-upgrade.mjs": "99b070cb428706964b32e2f787b7cb832014ca1a74502c4a199bf4225f8954fe",
+      "firebase.json": "1a32c4916046306e59aa8169cc692ac23e314a038ac4b9a9b9c788172aa0efd7",
+      "scripts/provenance.ts": "e67645f30e42b41f71c4facf54bebea8737d341dc6ee702747a07365afc0a265",
+      "vite.config.ts": "5bc7189934e38f920831aa0c54d3ccea3d692d3063e45b4e5ec3fcc6508ce161",
+      "tests/e2e/flow.spec.ts": "67dd2cba0730880ac4ebecba556cc317c7d030dbadf8ffd3d7d777dc8383de6a",
+      "tests/e2e/local.spec.ts": "9ca88ee170db32468e05244b564b4cff6c80dfd96a89562cc2c1402c19b6df0b",
+      "tests/e2e/deployed.ts": "7d65cbedf7ad05474aa3aee4a95799b42b5594bffa81901d727e4711a2ed6e8f"
+    }
+  },
+  "protocol": "3 fresh browser sessions x 8 comparisons, 1 profile per block, cancellation/recovery and offline; 2 approved cloud order checks; zero retries",
+  "attempts": [
+    {
+      "block": 0,
+      "operation": "setup",
+      "index": -1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 2950,
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 0,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 19202,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "No rush",
+            "Offers to talk by phone about money requests"
+          ]
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share by bank transfer"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Call me first"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 19201
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 2349,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "evidence": [],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 2348
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 2,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4152,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please cover the fare through M-Pesa immediately."
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "M-Pesa"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Do not call until after paying."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4152
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 3,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 2579,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Send the amount"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "after we speak"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 2579
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "profile",
+      "index": 4,
+      "offline": false,
+      "status": "error",
+      "elapsedMs": 60017,
+      "diagnostic": {
+        "id": 8,
+        "at": "2026-11-16T23:33:49.935Z",
+        "operation": "profile",
+        "stage": "generation",
+        "outcome": "failure",
+        "code": "timeout",
+        "elapsedMs": 60016,
+        "stageElapsedMs": 27,
+        "promptVersion": "2026-11-16.3",
+        "retryable": true
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 4,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 7039,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+          "The request discourages a call or conversation. Try a route you already trust.",
+          "The requested payment method can make recovery difficult. Independently verify the request first."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "gift_card",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "paymentChannel",
+            "quote": "buy gift cards now"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Ignore that message, I need nothing."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 7039
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 5,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4391,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Could you cover the ticket?"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "speak through your saved number before you decide"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4391
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 6,
+      "offline": true,
+      "status": "completed",
+      "elapsedMs": 4820,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "You are being asked to keep the request secret. Check independently before sending anything.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "not_stated",
+          "secrecyRequested": true,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Send the money"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "Send the money by mobile money"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Keep this between us and do not call"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4819
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:34:06.238Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4819,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "comparison",
+      "index": 7,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4683,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share by bank transfer after we talk."
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Please send your share by bank transfer after we talk."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4682
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:34:06.238Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4819,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:34:10.945Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4682,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "cancel",
+      "index": 0,
+      "offline": false,
+      "status": "error",
+      "elapsedMs": 108,
+      "diagnostic": {
+        "id": 13,
+        "at": "2026-11-16T23:34:11.057Z",
+        "operation": "comparison",
+        "stage": "generation",
+        "outcome": "cancelled",
+        "code": "cancelled",
+        "elapsedMs": 107,
+        "stageElapsedMs": 107,
+        "promptVersion": "2026-11-16.3",
+        "retryable": true
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:34:06.238Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4819,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:34:10.945Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4682,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 13,
+          "at": "2026-11-16T23:34:11.057Z",
+          "operation": "comparison",
+          "stage": "generation",
+          "outcome": "cancelled",
+          "code": "cancelled",
+          "elapsedMs": 107,
+          "stageElapsedMs": 107,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "recovery",
+      "index": 0,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 5778,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "short friendly sentences",
+            "offers to talk by phone about money requests"
+          ]
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "sending money"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Please call before sending money"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 5778
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:34:06.238Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4819,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:34:10.945Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4682,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 13,
+          "at": "2026-11-16T23:34:11.057Z",
+          "operation": "comparison",
+          "stage": "generation",
+          "outcome": "cancelled",
+          "code": "cancelled",
+          "elapsedMs": 107,
+          "stageElapsedMs": 107,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 14,
+          "at": "2026-11-16T23:34:16.842Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5778,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 0,
+      "operation": "cloud",
+      "index": 0,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 17469,
+      "value": {
+        "grounded": true,
+        "sourceCount": 3,
+        "receipts": [
+          {
+            "status": "attempting"
+          },
+          {
+            "status": "completed",
+            "elapsedMs": 17467
+          }
+        ]
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2943,
+          "stageElapsedMs": 2943,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:32:21.580Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2942,
+          "stageElapsedMs": 2942,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:32:21.604Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2949,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:32:40.814Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 19202,
+          "stageElapsedMs": 9,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:32:43.169Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2348,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:32:47.330Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4152,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:32:49.914Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2579,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:33:49.935Z",
+          "operation": "profile",
+          "stage": "generation",
+          "outcome": "failure",
+          "code": "timeout",
+          "elapsedMs": 60016,
+          "stageElapsedMs": 27,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:33:56.985Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 7039,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:34:01.388Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4391,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:34:06.238Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4819,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:34:10.945Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4682,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 13,
+          "at": "2026-11-16T23:34:11.057Z",
+          "operation": "comparison",
+          "stage": "generation",
+          "outcome": "cancelled",
+          "code": "cancelled",
+          "elapsedMs": 107,
+          "stageElapsedMs": 107,
+          "promptVersion": "2026-11-16.3",
+          "retryable": true
+        },
+        {
+          "id": 14,
+          "at": "2026-11-16T23:34:16.842Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5778,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "setup",
+      "index": -1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 3191,
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "cloud",
+      "index": -1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 16198,
+      "value": {
+        "grounded": true,
+        "sourceCount": 3,
+        "receipts": [
+          {
+            "status": "attempting"
+          },
+          {
+            "status": "completed",
+            "elapsedMs": 16194
+          }
+        ]
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 0,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 20328,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "No rush.",
+            "Offers to talk by phone about money requests."
+          ]
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share by bank transfer"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Call me first"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 20328
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 3057,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "evidence": [],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 3057
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 2,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4333,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "Short sentence",
+            "Direct request"
+          ]
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please cover the fare"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "through M-Pesa"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Do not call until after paying."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4333
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 3,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 3945,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Do not buy gift cards. Send the amount by bank transfer"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "Send the amount by bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "after we speak"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 3944
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "profile",
+      "index": 4,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4449,
+      "value": "Informal and courteous language prevails. Greetings like \"hello\" and expressions of well-wishing are common. The register is polite and indirect, utilizing phrases like \"please\" and \"thank you.\" Punctuation includes commas and periods. Writing habits convey a relaxed tone conducive to friendly communication.",
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:35:32.016Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4449,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 4,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 5459,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "Fictional example. Uses English, short friendly sentences and the greeting \"hey cuz\". Often says \"no rush\". Normally offers to talk by phone about money requests.",
+            "No identity claim can be inferred from these habits."
+          ]
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "evidence": [],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 5459
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:35:32.016Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4449,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:35:37.481Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5459,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 5,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 2930,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Could you cover the ticket?"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "speak through your saved number before you decide"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 2930
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:35:32.016Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4449,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:35:37.481Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5459,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:35:40.416Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2930,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 6,
+      "offline": true,
+      "status": "completed",
+      "elapsedMs": 4781,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "You are being asked to keep the request secret. Check independently before sending anything.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "not_stated",
+          "secrecyRequested": true,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Send the money"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "Send the money by mobile money"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Keep this between us and do not call."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4781
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:35:32.016Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4449,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:35:37.481Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5459,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:35:40.416Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2930,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:35:45.222Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4781,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "operation": "comparison",
+      "index": 7,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4247,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share by bank transfer"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4247
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3193,
+          "stageElapsedMs": 3193,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:34:39.642Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 3191,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:34:39.665Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3191,
+          "stageElapsedMs": 23,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:35:16.200Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 20328,
+          "stageElapsedMs": 6,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:35:19.266Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3057,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:35:23.605Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4333,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:35:27.555Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3944,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:35:32.016Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4449,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:35:37.481Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5459,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:35:40.416Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2930,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:35:45.222Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4781,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:35:49.486Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4247,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "setup",
+      "index": -1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 3168,
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 0,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 23223,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "No rush"
+          ]
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "by bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Call me first"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 23222
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 1,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 2722,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "unknown",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": null
+        },
+        "evidence": [],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 2722
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 2,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 5010,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": [
+            "short sentences",
+            "direct request"
+          ]
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please cover the fare"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "through M-Pesa immediately"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Do not call until after paying"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 5010
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 3,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4510,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Do not buy gift cards. Send the amount by bank transfer"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "after we speak"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4510
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "profile",
+      "index": 4,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4451,
+      "value": "Informal and polite language. Greetings and expressions of well-being are common. Uses phrases like 'please' and 'thank you'. Register is conversational. Punctuation includes commas and periods. Writing habits involve short, simple sentences, with a generally positive and appreciative tone.",
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:36:34.312Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4451,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 4,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 6564,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "The wording creates pressure to act quickly. Genuine emergencies can do this too.",
+          "The requested payment method can make recovery difficult. Independently verify the request first."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "gift_card",
+          "urgency": "immediate",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "someone sent me 'buy gift cards now'."
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "buy gift cards now"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Ignore that message, I need nothing."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 6564
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:36:34.312Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4451,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:36:40.882Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6564,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 5,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 4013,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "unknown",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Could you cover the ticket?"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "speak through your saved number before you decide"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 4013
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:36:34.312Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4451,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:36:40.882Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6564,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:36:44.901Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4013,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 6,
+      "offline": true,
+      "status": "completed",
+      "elapsedMs": 6636,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [
+          "You are being asked to keep the request secret. Check independently before sending anything.",
+          "The request discourages a call or conversation. Try a route you already trust."
+        ],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "mobile_money",
+          "urgency": "not_stated",
+          "secrecyRequested": true,
+          "changedContactClaim": null,
+          "verificationDiscouraged": true
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Send the money"
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "Send the money by mobile money."
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "Keep this between us and do not call."
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 6636
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:36:34.312Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4451,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:36:40.882Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6564,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:36:44.901Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4013,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:36:51.564Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6636,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "operation": "comparison",
+      "index": 7,
+      "offline": false,
+      "status": "completed",
+      "elapsedMs": 6381,
+      "value": {
+        "kind": "model",
+        "personal": {
+          "languageMatch": "unknown",
+          "toneMatch": "unknown",
+          "observations": []
+        },
+        "signals": [],
+        "suggestedFeatures": {
+          "schemaVersion": 1,
+          "requestType": "ordinary_money",
+          "paymentChannel": "bank_transfer",
+          "urgency": "not_stated",
+          "secrecyRequested": null,
+          "changedContactClaim": null,
+          "verificationDiscouraged": false
+        },
+        "evidence": [
+          {
+            "field": "requestType",
+            "quote": "Please send your share by bank transfer after we talk."
+          },
+          {
+            "field": "paymentChannel",
+            "quote": "bank transfer"
+          },
+          {
+            "field": "verificationDiscouraged",
+            "quote": "talk"
+          }
+        ],
+        "rejectedFields": [],
+        "number": "unknown",
+        "note": "Personal observations were generated on this device. They do not establish identity.",
+        "elapsedMs": 6381
+      },
+      "diagnostics": [
+        {
+          "id": 1,
+          "at": "2026-11-16T23:35:54.337Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3161,
+          "stageElapsedMs": 3161,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 2,
+          "at": "2026-11-16T23:35:54.338Z",
+          "operation": "availability",
+          "stage": "availability",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3159,
+          "stageElapsedMs": 3159,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 3,
+          "at": "2026-11-16T23:35:54.363Z",
+          "operation": "setup",
+          "stage": "initialization",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 3168,
+          "stageElapsedMs": 25,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 4,
+          "at": "2026-11-16T23:36:17.591Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 23223,
+          "stageElapsedMs": 11,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 5,
+          "at": "2026-11-16T23:36:20.321Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 2722,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 6,
+          "at": "2026-11-16T23:36:25.336Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 5010,
+          "stageElapsedMs": 1,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 7,
+          "at": "2026-11-16T23:36:29.853Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4510,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 8,
+          "at": "2026-11-16T23:36:34.312Z",
+          "operation": "profile",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4451,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 9,
+          "at": "2026-11-16T23:36:40.882Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6564,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 10,
+          "at": "2026-11-16T23:36:44.901Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 4013,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 11,
+          "at": "2026-11-16T23:36:51.564Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6636,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        },
+        {
+          "id": 12,
+          "at": "2026-11-16T23:36:57.969Z",
+          "operation": "comparison",
+          "stage": "validation",
+          "outcome": "success",
+          "code": "ok",
+          "elapsedMs": 6381,
+          "stageElapsedMs": 0,
+          "promptVersion": "2026-11-16.3",
+          "retryable": false
+        }
+      ]
+    }
+  ],
+  "privacy": {
+    "generationRequests": 2,
+    "canaryExcluded": true
+  },
+  "complete": true,
+  "summary": {
+    "completed": 25,
+    "attempted": 25,
+    "failures": [],
+    "medianMs": 4683,
+    "p95Ms": 20328
+  }
+}

@@ -67,6 +67,9 @@ test("deleting profiles invalidates pending local profile writes", async ({
     page.getByRole("button", { name: "Building profile on your device" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Delete all saved profiles" }).click();
+  await page
+    .getByRole("button", { name: "Delete saved contacts", exact: true })
+    .click();
   await page.evaluate(() => {
     (
       window as unknown as { completeMockProfile: () => void }
@@ -215,6 +218,79 @@ test("manual arrangements work without AI, can be corrected, edited and deleted"
   await expect(
     page.getByRole("heading", { name: "A little context goes a long way." }),
   ).toBeVisible();
+});
+
+test("importing writing context clears a stale manual edit and deleting its target clears selection", async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "hakiki.contacts.v1",
+      JSON.stringify([
+        {
+          id: "old",
+          name: "Old contact",
+          style: "Old synthetic writing style.",
+          trustedNumber: "",
+          sample: false,
+          sampleCount: 5,
+        },
+      ]),
+    ),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Device setup" }).click();
+  await page.getByRole("button", { name: "Enable on-device AI" }).click();
+  await expect(
+    page.getByRole("button", { name: "Local model ready" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Close dialog" }).click();
+  await page.getByRole("button", { name: /Your people/ }).click();
+  await page.getByRole("button", { name: "Edit Old contact" }).click();
+  await page.getByLabel("Writing context belongs to").selectOption("old");
+  await page
+    .getByLabel("Choose a WhatsApp text export")
+    .setInputFiles({
+      name: "synthetic.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from(
+        Array.from(
+          { length: 5 },
+          (_, i) => `11/12/2026, 10:20 AM - Old contact: synthetic line ${i}`,
+        ).join("\n"),
+      ),
+    });
+  await page.getByRole("checkbox", { name: /I have permission/ }).check();
+  await page.getByRole("button", { name: "Create local profile" }).click();
+  await page.evaluate(() =>
+    (
+      window as unknown as { completeMockProfile: () => void }
+    ).completeMockProfile(),
+  );
+  await page
+    .getByLabel("Writing profile for Old contact")
+    .fill("New reviewed writing context.");
+  await page.getByRole("button", { name: "Save reviewed profile" }).click();
+  await page.getByRole("button", { name: /Your people/ }).click();
+  await expect(
+    page.getByRole("button", { name: "Save reviewed changes" }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "Edit Old contact" }).click();
+  await page
+    .getByRole("checkbox", { name: /I reviewed these details/ })
+    .check();
+  await page.getByRole("button", { name: "Save reviewed changes" }).click();
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem("hakiki.contacts.v1")!)[0].style,
+    ),
+  ).toBe("New reviewed writing context.");
+  await page.getByRole("button", { name: /Your people/ }).click();
+  await page.getByLabel("Writing context belongs to").selectOption("old");
+  await page
+    .getByRole("button", { name: "Delete Old contact", exact: true })
+    .click();
+  await expect(page.getByLabel("Writing context belongs to")).toHaveValue("");
 });
 
 test("cancelled setup cannot become ready after a late completion", async ({

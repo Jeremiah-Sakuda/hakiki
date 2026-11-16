@@ -13,3 +13,9 @@ The earlier hosted fallback had no detailed diagnostics, so its exact cause cann
 The investigation therefore separates output-format complexity, native completion/cancellation, and application behavior. Neither a retry nor a changed timeout is evidence that extraction quality or reliability improved. A final prospective consecutive-run protocol is defined in CONTEXT_EVALUATION.md, separately from these exploratory diagnostics.
 
 References: [Chrome Prompt API cancellation](https://developer.chrome.com/docs/ai/prompt-api#stop_prompting), [Firebase constrained on-device output](https://firebase.google.com/docs/ai-logic/hybrid/web/generate-structured-output). Direct native probes are diagnostics only; production inference remains through Firebase AI Logic.
+
+## Prospective candidate and independent review
+
+Flat streamed output completed four development SDK checks but exposed fabricated secrecy assertions. Version 2026-11-16.3 narrowed the model to financial request, payment method and verification; existing text rules supply the other cues. Its four separate development checks completed with the expected categories. The first frozen consecutive run (`reliability-2026-11-16T23-32-17-491Z.json`) completed 25/25 comparisons/recovery, 3/3 setup operations, 2/3 profile generations and 2/2 cloud operations; deliberate cancellation returned the expected cancelled diagnostic. Comparison median was 4,683ms and p95 20,328ms. The profile timeout remains in the report.
+
+Version 2026-11-16.4 removes native string-length constraints from profile generation, retaining the strict 10–600 character runtime validator and bounded streaming. Independent review also found and fixed a stale manual editor that could overwrite newly saved writing context. The next complete run must establish the amended candidate's actual counts; the earlier failure is not erased.

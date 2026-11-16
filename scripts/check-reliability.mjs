@@ -65,6 +65,12 @@ try {
       window.__testAI = await import("/src/ai.ts");
       window.__testDomain = await import("/src/domain.ts");
     });
+    report.environment = await page.evaluate(() => ({
+      browser: navigator.userAgent,
+      promptVersion: window.__testAI.localPromptVersion,
+      profile:
+        "same persistent test profile; fresh browser launch, not fresh install",
+    }));
     const perform = async (operation, text, index, offline = false) => {
       await page.bringToFront();
       const result = await page.evaluate(
@@ -176,6 +182,8 @@ try {
     .map((x) => x.elapsedMs)
     .sort((a, b) => a - b);
   report.summary = {
+    scope:
+      "Comparison and cancellation-recovery counts; all other operations are broken out separately below.",
     completed: comparisons.filter((x) => x.status === "completed").length,
     attempted: comparisons.length,
     failures: comparisons
@@ -191,6 +199,32 @@ try {
         Math.min(latencies.length - 1, Math.ceil(latencies.length * 0.95) - 1)
       ] ?? null,
   };
+  report.operations = Object.fromEntries(
+    [...new Set(report.attempts.map((x) => x.operation))].map((operation) => {
+      const rows = report.attempts.filter((x) => x.operation === operation);
+      return [
+        operation,
+        {
+          attempted: rows.length,
+          completed: rows.filter((x) => x.status === "completed").length,
+          cancelled: rows.filter((x) => x.diagnostic?.code === "cancelled")
+            .length,
+          failed: rows.filter(
+            (x) =>
+              x.status !== "completed" && x.diagnostic?.code !== "cancelled",
+          ).length,
+          failures: rows
+            .filter((x) => x.status !== "completed")
+            .map((x) => ({
+              block: x.block,
+              index: x.index,
+              code: x.diagnostic?.code,
+              stage: x.diagnostic?.stage,
+            })),
+        },
+      ];
+    }),
+  );
   save();
   console.log(path, report.summary);
 }

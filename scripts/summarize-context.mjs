@@ -475,6 +475,20 @@ for (const fixture of fixtures) {
       reviewId: id,
       request: fixture.text,
       confirmedContext: context || null,
+      genericWarnings:
+        variant === "rules_context"
+          ? row.rules.genericSignals
+          : row.local?.result?.signals || [],
+      writingObservations:
+        variant === "rules_context"
+          ? []
+          : row.local?.result?.personal?.observations || [],
+      interpretationEvidence:
+        variant === "rules_context" ? [] : row.local?.result?.evidence || [],
+      rejectedFields:
+        variant === "rules_context"
+          ? []
+          : row.local?.result?.rejectedFields || [],
       observations: observations.map(({ kind, text, action }) => ({
         kind,
         text,

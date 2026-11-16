@@ -307,7 +307,7 @@ describe("local reliability diagnostics (mocked native lifecycle)", () => {
     });
     expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({
       code: "ok",
-      promptVersion: "2026-11-16.3",
+      promptVersion: ai.localPromptVersion,
     });
   });
 

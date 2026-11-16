@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-16T23:18:28.064Z",
+  "at": "2026-11-16T23:43:38.984Z",
   "target": "http://127.0.0.1:5173/",
   "mode": "Synthetic manual contact and deterministic rules only. External HTTPS requests aborted. No inference results claimed.",
   "desktop": {
@@ -11,8 +11,8 @@
     "scrollWidth": 390
   },
   "ordering": {
-    "interpretation": 623.21875,
-    "arrangements": 1396.0625,
+    "interpretation": 756,
+    "arrangements": 1528.84375,
     "skip": {
       "top": "-100px",
       "focus": "H1"

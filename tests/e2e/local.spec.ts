@@ -282,6 +282,9 @@ test("real on-device comparison and profile import keep raw content local", asyn
     await page
       .getByRole("button", { name: "Delete all saved profiles" })
       .click();
+    await page
+      .getByRole("button", { name: "Delete saved contacts", exact: true })
+      .click();
   } finally {
     await context.close();
   }

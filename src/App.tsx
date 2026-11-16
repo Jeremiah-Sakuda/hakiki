@@ -183,6 +183,7 @@ function localErrorCode(error: unknown): string {
       "cancelled",
       "unsupported",
       "input_limit",
+      "output_limit",
       "invalid_state",
       "native_error",
       "wrong_execution_source",
@@ -196,7 +197,7 @@ function localErrorCode(error: unknown): string {
 export default function App() {
   const [tab, setTab] = useState("check");
   const [modal, setModal] = useState<
-    "privacy" | "how" | "receipt" | "setup" | null
+    "privacy" | "how" | "receipt" | "setup" | "delete_profiles" | null
   >(null);
   const [message, setMessage] = useState("");
   const [selected, setSelected] = useState("");
@@ -430,6 +431,7 @@ export default function App() {
       const next = profiles.filter((p) => p.id !== id);
       saveProfiles(next);
       setProfiles(next);
+      if (importTarget === id) setImportTarget("");
       if (editingContact?.id === id) setEditingContact(null);
       if (profileDraft?.id === id) {
         setProfileDraft(null);
@@ -699,6 +701,11 @@ export default function App() {
                       <span>{message.length.toLocaleString()} / 4,000</span>
                     </div>
                     <div className="form-bottom">
+                      <p className="small muted">
+                        English text only. For other languages, use your
+                        previously saved contact route; interpretation quality
+                        has not been tested.
+                      </p>
                       <label htmlFor="contact">
                         Who does it claim to be from?{" "}
                         <span className="muted">Optional</span>
@@ -785,8 +792,9 @@ export default function App() {
                       Your peace of mind.
                     </h2>
                     <p>
-                      Hakiki looks for pressure in a request and, when
-                      available, changes from a person’s usual writing.
+                      Compare a request with arrangements you confirmed with
+                      someone you know. Your private context stays on this
+                      device.
                     </p>
                     <div className="aside-rule" />
                     <div className="aside-note">
@@ -866,6 +874,26 @@ export default function App() {
                     interpretation before using them; they cannot establish who
                     sent the request.
                   </p>
+                  <div className="notice trusted-first">
+                    <Icon name="phone" />
+                    <div>
+                      <strong>
+                        Before sending money, speak through a route you already
+                        trust.
+                      </strong>
+                      <p>
+                        {profile?.trustedNumber ? (
+                          <>
+                            Your saved number:{" "}
+                            <strong>{profile.trustedNumber}</strong>. Saved by
+                            you; not authenticated by Hakiki.
+                          </>
+                        ) : (
+                          "Use your existing address book, not contact details from this request or a search result."
+                        )}
+                      </p>
+                    </div>
+                  </div>
                   <section className="finding message-summary">
                     <h3>The request you’re checking</h3>
                     <blockquote>{message}</blockquote>
@@ -1163,19 +1191,7 @@ export default function App() {
                 {profiles.length > 0 && (
                   <button
                     className="text-button danger"
-                    onClick={() => {
-                      try {
-                        deleteProfiles();
-                        setProfiles([]);
-                        setEditingContact(null);
-                        setImportTarget("");
-                        reset();
-                      } catch {
-                        setError(
-                          "Browser storage could not be updated. Try clearing this site’s stored data.",
-                        );
-                      }
-                    }}
+                    onClick={() => setModal("delete_profiles")}
                   >
                     Delete all saved profiles
                   </button>
@@ -1244,6 +1260,7 @@ export default function App() {
                             ];
                             saveProfiles(next);
                             setProfiles(next);
+                            setEditingContact(null);
                             setPermission(false);
                             setImportTarget("");
                             reset();
@@ -1419,6 +1436,40 @@ export default function App() {
           </div>
         </footer>
       </main>
+      {modal === "delete_profiles" && (
+        <Modal
+          title="Delete all saved contacts?"
+          onClose={() => setModal(null)}
+        >
+          <p>
+            This removes every saved arrangement and writing profile from this
+            browser. It cannot be undone.
+          </p>
+          <button
+            className="primary"
+            onClick={() => {
+              try {
+                deleteProfiles();
+                setProfiles([]);
+                setEditingContact(null);
+                setImportTarget("");
+                reset();
+                setModal(null);
+              } catch {
+                setError(
+                  "Browser storage could not be updated. Try clearing this site’s stored data.",
+                );
+                setModal(null);
+              }
+            }}
+          >
+            Delete saved contacts
+          </button>
+          <button className="secondary" onClick={() => setModal(null)}>
+            Keep contacts
+          </button>
+        </Modal>
+      )}
       {modal === "privacy" && (
         <Modal title="Your words stay close" onClose={() => setModal(null)}>
           <p>
@@ -1522,7 +1573,9 @@ export default function App() {
               </strong>
               <p>
                 {local?.kind === "model"
-                  ? "Personal comparison ran on device."
+                  ? profile?.style.trim()
+                    ? "Request interpretation and optional writing observations ran on device."
+                    : "Request interpretation ran on device. No writing profile was compared."
                   : local
                     ? "Local text rules ran. No on-device model result."
                     : "No analysis has run yet."}
@@ -1593,12 +1646,21 @@ export default function App() {
             </code>
             , restart Chrome, then return here. Preparing the model may require
             a one-time model download; your messages are not part of that
+            download. Supported hardware needs either more than 4 GB of graphics
+            memory, or at least 16 GB RAM and four processor cores, plus 22 GB
+            of free storage and an unmetered connection for the initial
+            download. Contact arrangements and text rules work without this
             download.
           </p>
           <button
             className="primary"
             onClick={enableLocal}
-            disabled={progress !== null || localReady}
+            disabled={
+              progress !== null ||
+              localReady ||
+              availability === "unavailable" ||
+              availability === "checking"
+            }
           >
             {progress !== null
               ? `Preparing local model… ${progress}%`
@@ -1618,6 +1680,17 @@ export default function App() {
           >
             Download redacted local diagnostics
           </Download>
+          {availability === "unavailable" && (
+            <button
+              className="secondary"
+              onClick={async () => {
+                setAvailability("checking");
+                setAvailability(await localAvailability());
+              }}
+            >
+              Recheck this browser
+            </button>
+          )}
           <p className="small">
             The diagnostics export contains only fixed codes, timing, and
             execution metadata, never messages, contact details, or model
