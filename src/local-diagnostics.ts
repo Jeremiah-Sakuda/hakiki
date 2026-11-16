@@ -15,6 +15,7 @@ export type LocalFailureCode =
   | "cancelled"
   | "unsupported"
   | "input_limit"
+  | "output_limit"
   | "invalid_state"
   | "native_error"
   | "wrong_execution_source"
@@ -47,6 +48,8 @@ const messages: Record<LocalFailureCode, string> = {
     "This device does not support the requested on-device operation.",
   input_limit:
     "This input exceeds the on-device model's capacity. Try a shorter input.",
+  output_limit:
+    "The on-device response exceeded the output limit. Personal comparison is unavailable.",
   invalid_state:
     "The on-device model is not ready for this request. Check device setup and try again.",
   native_error:

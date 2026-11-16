@@ -490,12 +490,19 @@ export default function App() {
       {features && profile && (
         <div className="personal context-findings">
           <h4>Your saved arrangements with {profile.name}</h4>
-          {profile.sample ? <p className="small">Fictional arrangements for this example. No person confirmed these.</p> : profile.context?.confirmedAt && (
+          {profile.sample ? (
             <p className="small">
-              Confirmed by you on{" "}
-              {new Date(profile.context.confirmedAt).toLocaleDateString()}. Kept
-              on this device.
+              Fictional arrangements for this example. No person confirmed
+              these.
             </p>
+          ) : (
+            profile.context?.confirmedAt && (
+              <p className="small">
+                Confirmed by you on{" "}
+                {new Date(profile.context.confirmedAt).toLocaleDateString()}.
+                Kept on this device.
+              </p>
+            )
           )}
           <p className="small">
             These preliminary comparisons depend on the interpreted categories.
@@ -855,8 +862,9 @@ export default function App() {
                       : "Now, reach out directly."}
                   </h1>
                   <p className="lead">
-                    These are preliminary observations. Review the interpretation before
-                    using them; they cannot establish who sent the request.
+                    These are preliminary observations. Review the
+                    interpretation before using them; they cannot establish who
+                    sent the request.
                   </p>
                   <section className="finding message-summary">
                     <h3>The request you’re checking</h3>
@@ -868,14 +876,26 @@ export default function App() {
                     </p>
                   </section>
                   {stage === "review" && features && (
-                    <section className="finding interpretation-card" aria-label="Review interpretation">
-                      <span className="eyebrow">REVIEW BEFORE USING THESE OBSERVATIONS</span>
+                    <section
+                      className="finding interpretation-card"
+                      aria-label="Review interpretation"
+                    >
+                      <span className="eyebrow">
+                        REVIEW BEFORE USING THESE OBSERVATIONS
+                      </span>
                       <h3>Check this interpretation</h3>
                       <p>
                         These suggested categories may be wrong. Correct them to
-                        update the preliminary observations below. These categories
-                        do not establish identity.
+                        update the preliminary observations below. These
+                        categories do not establish identity.
                       </p>
+                      {local?.kind === "model" && (
+                        <p className="small muted">
+                          AI suggests the request, payment method and
+                          verification category. Text rules supply urgency,
+                          secrecy and changed-number cues.
+                        </p>
+                      )}
                       {!!local?.evidence?.length && (
                         <details className="interpretation-evidence">
                           <summary>
@@ -1700,7 +1720,10 @@ function ContactEditor({
             No money requests by message
           </option>
         </select>
-        <p className="small agreement-description" id="money-agreement-description">
+        <p
+          className="small agreement-description"
+          id="money-agreement-description"
+        >
           {context.moneyRequests === "no_message_requests_confirmed"
             ? "They told me they do not request money by message."
             : "Unknown: we have not confirmed an agreement about money requests by message."}
@@ -1745,11 +1768,12 @@ function ContactEditor({
           }
         >
           <option value="unknown">No confirmed agreement</option>
-          <option value="speak_before_sending">
-            Speak before sending
-          </option>
+          <option value="speak_before_sending">Speak before sending</option>
         </select>
-        <p className="small agreement-description" id="verification-agreement-description">
+        <p
+          className="small agreement-description"
+          id="verification-agreement-description"
+        >
           {context.verificationAgreement === "speak_before_sending"
             ? "We agreed to speak through a trusted route before I send money."
             : "Unknown: we have not confirmed how to verify a request before sending money."}

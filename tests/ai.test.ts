@@ -1,6 +1,7 @@
 import { beforeEach, describe, it, expect, vi } from "vitest";
 const fake = vi.hoisted(() => ({
   generateContent: vi.fn(),
+  generateContentStream: vi.fn(),
   initializeDeviceModel: vi.fn(),
   getGenerativeModel: vi.fn(),
   initializeAppCheck: vi.fn(),
@@ -39,18 +40,20 @@ vi.mock("firebase/remote-config", () => ({
 }));
 import { extractFeatures, sampleProfile } from "../src/domain";
 const interpretation = (personal: Record<string, unknown> = {}) => ({
-  languageMatch: "unknown",
-  toneMatch: "unknown",
-  observations: [],
-  ...personal,
-  facts: {
-    requestType: { value: "unknown", quote: "" },
-    paymentChannel: { value: "unknown", quote: "" },
-    urgency: { value: "unknown", quote: "" },
-    secrecyRequested: { value: null, quote: "" },
-    changedContactClaim: { value: null, quote: "" },
-    verificationDiscouraged: { value: null, quote: "" },
-  },
+  requestType: "unknown",
+  requestTypeQuote: "",
+  paymentChannel: "unknown",
+  paymentChannelQuote: "",
+  verification: "unknown",
+  verificationQuote: "",
+  ...(Object.keys(personal).length
+    ? {
+        languageMatch: "unknown",
+        toneMatch: "unknown",
+        observations: [],
+        ...personal,
+      }
+    : {}),
 });
 describe("local reliability diagnostics (mocked native lifecycle)", () => {
   it("bounds availability without starting SDK generation or leaking native errors", async () => {
@@ -283,18 +286,18 @@ describe("local reliability diagnostics (mocked native lifecycle)", () => {
       toneMatch: "different",
       observations: ["An unsupported personal observation"],
     });
-    output.facts.requestType = {
-      value: "ordinary_money",
-      quote: "Please send money",
-    };
-    output.facts.paymentChannel = {
-      value: "gift_card",
-      quote: "not in the message",
-    };
+    output.requestType = "money_request";
+    output.requestTypeQuote = "Please send money";
+    output.paymentChannel = "gift_card";
+    output.paymentChannelQuote = "not in the message";
     fake.generateContent.mockResolvedValue(localResponse(output));
     const result = await ai.analyzeLocal("Please send money", undefined, "");
     expect(result).toMatchObject({
-      personal: { languageMatch: "unknown", toneMatch: "unknown", observations: [] },
+      personal: {
+        languageMatch: "unknown",
+        toneMatch: "unknown",
+        observations: [],
+      },
       suggestedFeatures: {
         requestType: "ordinary_money",
         paymentChannel: "unknown",
@@ -304,7 +307,7 @@ describe("local reliability diagnostics (mocked native lifecycle)", () => {
     });
     expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({
       code: "ok",
-      promptVersion: "2026-11-16.1",
+      promptVersion: "2026-11-16.3",
     });
   });
 
@@ -355,16 +358,180 @@ beforeEach(() => {
   ])
     vi.stubEnv(key, "test-only");
   fake.getGenerativeModel.mockReturnValue(fake);
+  fake.generateContentStream.mockImplementation(async (...args) => {
+    const result = await fake.generateContent(...args);
+    return {
+      stream: (async function* () {
+        yield result.response;
+      })(),
+      response: Promise.resolve(result.response),
+    };
+  });
   fake.initializeDeviceModel.mockResolvedValue(undefined);
   vi.stubGlobal("LanguageModel", { availability: async () => "available" });
 });
 describe("SDK privacy routing (mocked transport)", () => {
+  it("stops a never-ending stream at validated JSON and handles the aggregate abort", async () => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    const encoded = JSON.stringify(interpretation());
+    const closed = vi.fn();
+    const afterValid = vi.fn();
+    let aggregateRejected = false;
+    fake.generateContentStream.mockImplementation(async () => {
+      const signal =
+        fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams
+          .promptOptions.signal;
+      const response = new Promise((_, reject) =>
+        signal.addEventListener(
+          "abort",
+          () => {
+            aggregateRejected = true;
+            reject(new DOMException("aborted", "AbortError"));
+          },
+          { once: true },
+        ),
+      );
+      return {
+        response,
+        stream: (async function* () {
+          try {
+            yield {
+              inferenceSource: "on_device",
+              text: () => encoded.slice(0, 30),
+            };
+            yield {
+              inferenceSource: "on_device",
+              text: () => encoded.slice(30),
+            };
+            afterValid();
+            await new Promise(() => {});
+          } finally {
+            closed();
+          }
+        })(),
+      };
+    });
+    await expect(
+      ai.analyzeLocal("Synthetic", undefined, ""),
+    ).resolves.toMatchObject({ kind: "model" });
+    await Promise.resolve();
+    expect(afterValid).not.toHaveBeenCalled();
+    expect(closed).toHaveBeenCalledOnce();
+    expect(aggregateRejected).toBe(true);
+    expect(fake.generateContentStream).toHaveBeenCalledOnce();
+    expect(fake.generateContent).not.toHaveBeenCalled();
+  });
+  it.each([
+    ["truncated", '{"requestType":', "invalid_json", "parse"],
+    ["malformed", "not JSON", "invalid_json", "parse"],
+    [
+      "schema-invalid",
+      '{"requestType":"unknown"}',
+      "invalid_schema",
+      "validation",
+    ],
+    ["oversized", " ".repeat(12001), "output_limit", "parse"],
+  ])("rejects %s streamed output", async (_name, text, code, stage) => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    fake.generateContentStream.mockResolvedValue({
+      response: Promise.resolve({}),
+      stream: (async function* () {
+        yield { inferenceSource: "on_device", text: () => text };
+      })(),
+    });
+    await expect(
+      ai.analyzeLocal("Synthetic", undefined, ""),
+    ).rejects.toMatchObject({ diagnostic: { code, stage } });
+    expect(fake.generateContentStream).toHaveBeenCalledOnce();
+  });
+  it("verifies execution source on every streamed chunk", async () => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    const text = JSON.stringify(interpretation());
+    fake.generateContentStream.mockResolvedValue({
+      response: Promise.resolve({}),
+      stream: (async function* () {
+        yield { inferenceSource: "on_device", text: () => text.slice(0, 20) };
+        yield { inferenceSource: "in_cloud", text: () => text.slice(20) };
+      })(),
+    });
+    await expect(
+      ai.analyzeLocal("Synthetic", undefined, ""),
+    ).rejects.toMatchObject({
+      diagnostic: { code: "wrong_execution_source", stage: "execution_source" },
+    });
+  });
+  it("bounds a stream that stalls after an incomplete prefix", async () => {
+    vi.useFakeTimers();
+    try {
+      const ai = await import("../src/ai");
+      await ai.prepareLocal(() => {});
+      fake.generateContentStream.mockResolvedValue({
+        response: new Promise(() => {}),
+        stream: (async function* () {
+          yield { inferenceSource: "on_device", text: () => '{"requestType":' };
+          await new Promise(() => {});
+        })(),
+      });
+      const pending = ai.analyzeLocal("Synthetic", undefined, "");
+      const checked = expect(pending).rejects.toMatchObject({
+        diagnostic: { code: "timeout", stage: "generation" },
+      });
+      await vi.advanceTimersByTimeAsync(60000);
+      await checked;
+      const options =
+        fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams;
+      expect(options.promptOptions.signal.aborted).toBe(true);
+      expect(options.createOptions.signal).toBe(options.promptOptions.signal);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+  it("adds writing comparison fields only when a writing profile is supplied", async () => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    fake.generateContent.mockResolvedValue(localResponse());
+    await ai.analyzeLocal("Synthetic", undefined, "");
+    expect(
+      fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams
+        .promptOptions.responseConstraint.properties,
+    ).not.toHaveProperty("languageMatch");
+    fake.generateContent.mockResolvedValue(
+      localResponse(
+        interpretation({
+          languageMatch: "consistent",
+          toneMatch: "different",
+          observations: ["Different greeting."],
+        }),
+      ),
+    );
+    const result = await ai.analyzeLocal("Synthetic", sampleProfile, "");
+    expect(result.personal).toMatchObject({
+      languageMatch: "consistent",
+      toneMatch: "different",
+    });
+    expect(
+      fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams
+        .promptOptions.responseConstraint.properties,
+    ).toHaveProperty("languageMatch");
+  });
   it.each(["local-first", "cloud-first"])(
     "attests the cloud service before its cached creation: %s",
     async (order) => {
       const ai = await import("../src/ai");
       fake.getGenerativeModel.mockImplementation((service, options) => ({
         initializeDeviceModel: fake.initializeDeviceModel,
+        async generateContentStream() {
+          const result = await this.generateContent();
+          return {
+            stream: (async function* () {
+              yield result.response;
+            })(),
+            response: Promise.resolve(result.response),
+          };
+        },
         generateContent: async () => {
           if (options.mode === "only_in_cloud" && !service.attested)
             throw new Error("Unauthenticated cached AI service");

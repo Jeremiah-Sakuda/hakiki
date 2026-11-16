@@ -1,0 +1,19 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "writing": false,
+    "status": "error",
+    "diagnostic": {
+      "id": 4,
+      "at": "2026-11-16T23:24:40.855Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "not_ready",
+      "elapsedMs": 0,
+      "stageElapsedMs": 0,
+      "promptVersion": "2026-11-16.2",
+      "retryable": false
+    }
+  }
+]

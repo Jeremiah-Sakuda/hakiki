@@ -1,0 +1,154 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "ordinary_money",
+        "paymentChannel": "bank_transfer",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": false
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Can you send money by bank transfer?"
+        },
+        {
+          "field": "paymentChannel",
+          "quote": "bank transfer"
+        },
+        {
+          "field": "verificationDiscouraged",
+          "quote": "Call me before paying"
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 19309
+    }
+  },
+  {
+    "text": "I am at the hospital. Can you visit?",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "unknown",
+        "paymentChannel": "unknown",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 2567
+    }
+  },
+  {
+    "text": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+    "writing": true,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": [
+          "No identity claim can be inferred from these habits.",
+          "Normally offers to talk by phone about money requests.",
+          "Often says \"no rush\".",
+          "Uses English, short friendly sentences"
+        ]
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "ordinary_money",
+        "paymentChannel": "mobile_money",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": false
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Please send your share by M-Pesa"
+        },
+        {
+          "field": "paymentChannel",
+          "quote": "M-Pesa"
+        },
+        {
+          "field": "verificationDiscouraged",
+          "quote": "after we speak"
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 6784
+    }
+  },
+  {
+    "text": "Could you cover the ticket? We can talk through your saved number before you decide.",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "ordinary_money",
+        "paymentChannel": "unknown",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": false
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Could you cover the ticket?"
+        },
+        {
+          "field": "verificationDiscouraged",
+          "quote": "Could you cover the ticket? We can talk through your saved number before you decide."
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 3259
+    }
+  }
+]

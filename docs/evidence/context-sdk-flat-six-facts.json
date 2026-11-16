@@ -1,0 +1,166 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [
+        "You are being asked to keep the request secret. Check independently before sending anything."
+      ],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "unknown",
+        "paymentChannel": "bank_transfer",
+        "urgency": "unknown",
+        "secrecyRequested": true,
+        "changedContactClaim": null,
+        "verificationDiscouraged": false
+      },
+      "evidence": [
+        {
+          "field": "paymentChannel",
+          "quote": "Can you send money by bank transfer?"
+        },
+        {
+          "field": "secrecyRequested",
+          "quote": "Call me before paying."
+        },
+        {
+          "field": "verificationDiscouraged",
+          "quote": "Call me before paying."
+        }
+      ],
+      "rejectedFields": [
+        "requestType",
+        "changedContactClaim"
+      ],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 18961
+    }
+  },
+  {
+    "text": "I am at the hospital. Can you visit?",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "unknown",
+        "paymentChannel": "unknown",
+        "urgency": "unknown",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 5566
+    }
+  },
+  {
+    "text": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+    "writing": true,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": [
+          "",
+          ""
+        ]
+      },
+      "signals": [
+        "You are being asked to keep the request secret. Check independently before sending anything."
+      ],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "emergency_money",
+        "paymentChannel": "mobile_money",
+        "urgency": "not_stated",
+        "secrecyRequested": true,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Please send your share by M-Pesa"
+        },
+        {
+          "field": "paymentChannel",
+          "quote": "M-Pesa"
+        },
+        {
+          "field": "secrecyRequested",
+          "quote": "Please send your share"
+        }
+      ],
+      "rejectedFields": [
+        "changedContactClaim",
+        "verificationDiscouraged"
+      ],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 6720
+    }
+  },
+  {
+    "text": "Could you cover the ticket? We can talk through your saved number before you decide.",
+    "writing": false,
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": []
+      },
+      "signals": [
+        "You are being asked to keep the request secret. Check independently before sending anything."
+      ],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "emergency_money",
+        "paymentChannel": "unknown",
+        "urgency": "unknown",
+        "secrecyRequested": true,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Could you cover the ticket?"
+        },
+        {
+          "field": "secrecyRequested",
+          "quote": "talk through your saved number"
+        }
+      ],
+      "rejectedFields": [
+        "changedContactClaim"
+      ],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 4000
+    }
+  }
+]

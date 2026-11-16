@@ -173,9 +173,15 @@ test("real on-device comparison and profile import keep raw content local", asyn
     if (process.env.LIVE_HYBRID === "1") {
       await page.getByRole("button", { name: /Your people/ }).click();
       await page.getByRole("button", { name: "Edit Synthetic cousin" }).click();
-      await page.getByRole("checkbox", { name: "mobile money", exact: true }).check();
-      await page.getByLabel("Our verification agreement").selectOption("speak_before_sending");
-      await page.getByRole("checkbox", { name: /I reviewed these details/ }).check();
+      await page
+        .getByRole("checkbox", { name: "mobile money", exact: true })
+        .check();
+      await page
+        .getByLabel("Our verification agreement")
+        .selectOption("speak_before_sending");
+      await page
+        .getByRole("checkbox", { name: /I reviewed these details/ })
+        .check();
       await page.getByRole("button", { name: "Save reviewed changes" }).click();
       await page
         .getByLabel("Message to check", { exact: true })
@@ -186,8 +192,12 @@ test("real on-device comparison and profile import keep raw content local", asyn
       await expect(
         page.getByText("On-device AI + text rules", { exact: true }),
       ).toBeVisible({ timeout: 75000 });
-      await expect(page.locator('[data-context-code="different_payment_method"]')).toBeVisible();
-      await expect(page.locator('[data-context-code="verification_discouraged"]')).toBeVisible();
+      await expect(
+        page.locator('[data-context-code="different_payment_method"]'),
+      ).toBeVisible();
+      await expect(
+        page.locator('[data-context-code="verification_discouraged"]'),
+      ).toBeVisible();
       await page
         .getByRole("button", { name: "Approve & check patterns" })
         .click();
