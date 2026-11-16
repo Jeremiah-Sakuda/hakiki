@@ -38,6 +38,301 @@ vi.mock("firebase/remote-config", () => ({
   getString: () => "",
 }));
 import { extractFeatures, sampleProfile } from "../src/domain";
+const interpretation = (personal: Record<string, unknown> = {}) => ({
+  languageMatch: "unknown",
+  toneMatch: "unknown",
+  observations: [],
+  ...personal,
+  facts: {
+    requestType: { value: "unknown", quote: "" },
+    paymentChannel: { value: "unknown", quote: "" },
+    urgency: { value: "unknown", quote: "" },
+    secrecyRequested: { value: null, quote: "" },
+    changedContactClaim: { value: null, quote: "" },
+    verificationDiscouraged: { value: null, quote: "" },
+  },
+});
+describe("local reliability diagnostics (mocked native lifecycle)", () => {
+  it("bounds availability without starting SDK generation or leaking native errors", async () => {
+    vi.useFakeTimers();
+    try {
+      const ai = await import("../src/ai");
+      vi.stubGlobal("LanguageModel", {
+        availability: () => new Promise(() => {}),
+      });
+      const pending = ai.localAvailability();
+      await vi.advanceTimersByTimeAsync(5000);
+      await expect(pending).resolves.toBe("unavailable");
+      expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({
+        operation: "availability",
+        stage: "availability",
+        code: "timeout",
+      });
+      vi.stubGlobal("LanguageModel", {
+        availability: async () => {
+          throw new Error("PRIVATE_CANARY");
+        },
+      });
+      await expect(ai.localAvailability()).resolves.toBe("unavailable");
+      expect(ai.getLocalDiagnostics().at(-1)?.code).toBe("native_error");
+      expect(JSON.stringify(ai.getLocalDiagnostics())).not.toContain(
+        "PRIVATE_CANARY",
+      );
+      expect(fake.getGenerativeModel).not.toHaveBeenCalled();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("times out setup, ignores late readiness, and permits a fresh successful setup", async () => {
+    vi.useFakeTimers();
+    try {
+      const ai = await import("../src/ai");
+      let finish!: () => void;
+      fake.initializeDeviceModel.mockReturnValue(
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+      );
+      const pending = ai.prepareLocal(() => {});
+      const rejected = expect(pending).rejects.toMatchObject({
+        diagnostic: {
+          operation: "setup",
+          stage: "initialization",
+          code: "timeout",
+        },
+      });
+      await vi.advanceTimersByTimeAsync(600000);
+      await rejected;
+      const failedSignal =
+        fake.getGenerativeModel.mock.calls[0][1].onDeviceParams.createOptions
+          .signal;
+      expect(failedSignal.aborted).toBe(true);
+      finish();
+      await Promise.resolve();
+      await expect(
+        ai.analyzeLocal("message", undefined, ""),
+      ).rejects.toMatchObject({ diagnostic: { code: "not_ready" } });
+      fake.initializeDeviceModel.mockResolvedValue(undefined);
+      await ai.prepareLocal(() => {});
+      fake.generateContent.mockResolvedValue(localResponse());
+      await expect(
+        ai.analyzeLocal("message", undefined, ""),
+      ).resolves.toMatchObject({ kind: "model" });
+      expect(
+        ai
+          .getLocalDiagnostics()
+          .filter((entry) => entry.operation === "setup")
+          .map((entry) => entry.code),
+      ).toEqual(["timeout", "ok"]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("cancels setup and suppresses progress and readiness from its late completion", async () => {
+    const ai = await import("../src/ai");
+    const controller = new AbortController();
+    let finish!: () => void;
+    let report!: (value: number) => void;
+    let began!: () => void;
+    const started = new Promise<void>((resolve) => {
+      began = resolve;
+    });
+    fake.initializeDeviceModel.mockImplementation((callback) => {
+      report = callback;
+      began();
+      return new Promise<void>((resolve) => {
+        finish = resolve;
+      });
+    });
+    const progress = vi.fn();
+    const pending = ai.prepareLocal(progress, controller.signal);
+    const rejected = expect(pending).rejects.toMatchObject({
+      diagnostic: { code: "cancelled", outcome: "cancelled" },
+    });
+    await started;
+    controller.abort();
+    await rejected;
+    report(1);
+    finish();
+    await Promise.resolve();
+    expect(progress).not.toHaveBeenCalled();
+    await expect(
+      ai.analyzeLocal("message", undefined, ""),
+    ).rejects.toMatchObject({ diagnostic: { code: "not_ready" } });
+  });
+
+  it.each(["comparison", "profile"])(
+    "cancels %s, ignores late output, then recovers with a fresh request",
+    async (operation) => {
+      const ai = await import("../src/ai");
+      await ai.prepareLocal(() => {});
+      const controller = new AbortController();
+      let finish!: (value: unknown) => void;
+      let began!: () => void;
+      const started = new Promise<void>((resolve) => {
+        began = resolve;
+      });
+      fake.generateContent.mockImplementation(() => {
+        began();
+        return new Promise((resolve) => {
+          finish = resolve;
+        });
+      });
+      const invoke = (signal?: AbortSignal) =>
+        operation === "comparison"
+          ? ai.analyzeLocal("PRIVATE_CANARY", undefined, "", signal)
+          : ai.summarizeProfile(["a", "b", "c", "d", "e"], signal);
+      const pending = invoke(controller.signal);
+      const rejected = expect(pending).rejects.toMatchObject({
+        diagnostic: { operation, stage: "generation", code: "cancelled" },
+      });
+      await started;
+      const failedSignal =
+        fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams
+          .createOptions.signal;
+      controller.abort();
+      await rejected;
+      expect(failedSignal.aborted).toBe(true);
+      const response = localResponse(
+        operation === "comparison"
+          ? interpretation()
+          : { style: "Short casual English greetings." },
+      );
+      finish(response);
+      await Promise.resolve();
+      expect(
+        ai
+          .getLocalDiagnostics()
+          .filter((entry) => entry.operation === operation),
+      ).toHaveLength(1);
+      fake.generateContent.mockResolvedValue(response);
+      await invoke();
+      const nextSignal =
+        fake.getGenerativeModel.mock.calls.at(-1)?.[1].onDeviceParams
+          .createOptions.signal;
+      expect(nextSignal).not.toBe(failedSignal);
+      expect(nextSignal.aborted).toBe(true);
+      expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({
+        operation,
+        code: "ok",
+        outcome: "success",
+      });
+      expect(fake.generateContent).toHaveBeenCalledTimes(2);
+      expect(JSON.stringify(ai.getLocalDiagnostics())).not.toContain(
+        "PRIVATE_CANARY",
+      );
+    },
+  );
+
+  it("does not start a generation for an already cancelled request", async () => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    const controller = new AbortController();
+    controller.abort();
+    await expect(
+      ai.analyzeLocal("message", undefined, "", controller.signal),
+    ).rejects.toMatchObject({ diagnostic: { code: "cancelled" } });
+    expect(fake.generateContent).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ["generation", "native_error"],
+    ["execution_source", "wrong_execution_source"],
+    ["parse", "invalid_json"],
+    ["validation", "invalid_schema"],
+  ])(
+    "distinguishes %s failures and retains only redacted diagnostics",
+    async (stage, code) => {
+      const ai = await import("../src/ai");
+      await ai.prepareLocal(() => {});
+      if (stage === "generation")
+        fake.generateContent.mockRejectedValue(new Error("PRIVATE_CANARY"));
+      else
+        fake.generateContent.mockResolvedValue({
+          response: {
+            inferenceSource:
+              stage === "execution_source" ? "in_cloud" : "on_device",
+            text: () =>
+              stage === "parse"
+                ? "PRIVATE_CANARY invalid JSON"
+                : JSON.stringify({
+                    ...interpretation(),
+                    toneMatch: "PRIVATE_CANARY",
+                  }),
+          },
+        });
+      const error = await ai
+        .analyzeLocal("PRIVATE_CANARY", undefined, "")
+        .catch((failure: unknown) => failure);
+      expect(error).toBeInstanceOf(ai.LocalInferenceError);
+      expect(error).toMatchObject({ diagnostic: { stage, code } });
+      expect(JSON.stringify(error)).not.toContain("PRIVATE_CANARY");
+      expect(String(error)).not.toContain("PRIVATE_CANARY");
+      expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({ stage, code });
+      expect(fake.generateContent).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it("uses supported fact evidence and forces unknown style matches without history", async () => {
+    const ai = await import("../src/ai");
+    await ai.prepareLocal(() => {});
+    const output = interpretation({
+      languageMatch: "consistent",
+      toneMatch: "different",
+      observations: ["An unsupported personal observation"],
+    });
+    output.facts.requestType = {
+      value: "ordinary_money",
+      quote: "Please send money",
+    };
+    output.facts.paymentChannel = {
+      value: "gift_card",
+      quote: "not in the message",
+    };
+    fake.generateContent.mockResolvedValue(localResponse(output));
+    const result = await ai.analyzeLocal("Please send money", undefined, "");
+    expect(result).toMatchObject({
+      personal: { languageMatch: "unknown", toneMatch: "unknown", observations: [] },
+      suggestedFeatures: {
+        requestType: "ordinary_money",
+        paymentChannel: "unknown",
+      },
+      evidence: [{ field: "requestType", quote: "Please send money" }],
+      rejectedFields: ["paymentChannel"],
+    });
+    expect(ai.getLocalDiagnostics().at(-1)).toMatchObject({
+      code: "ok",
+      promptVersion: "2026-11-16.1",
+    });
+  });
+
+  it.each([
+    { style: "x".repeat(601) },
+    { style: "Valid length writing summary.", privateExtra: "PRIVATE_CANARY" },
+    { style: "   " },
+  ])(
+    "rejects invalid or oversized generated profiles before retention",
+    async (value) => {
+      const ai = await import("../src/ai");
+      await ai.prepareLocal(() => {});
+      fake.generateContent.mockResolvedValue(localResponse(value));
+      await expect(
+        ai.summarizeProfile(["a", "b", "c", "d", "e"]),
+      ).rejects.toMatchObject({
+        diagnostic: {
+          operation: "profile",
+          stage: "validation",
+          code: "invalid_schema",
+        },
+      });
+    },
+  );
+});
+const localResponse = (value: unknown = interpretation()) => ({
+  response: { inferenceSource: "on_device", text: () => JSON.stringify(value) },
+});
 beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
@@ -80,11 +375,7 @@ describe("SDK privacy routing (mocked transport)", () => {
               text: () =>
                 options.mode === "only_in_cloud"
                   ? "Verify independently."
-                  : JSON.stringify({
-                      languageMatch: "unknown",
-                      toneMatch: "unknown",
-                      observations: [],
-                    }),
+                  : JSON.stringify(interpretation()),
               candidates: [{ finishReason: "STOP" }],
             },
           };
@@ -129,11 +420,7 @@ describe("SDK privacy routing (mocked transport)", () => {
               text: () =>
                 outcome === "invalid"
                   ? "invalid JSON"
-                  : JSON.stringify({
-                      languageMatch: "unknown",
-                      toneMatch: "unknown",
-                      observations: [],
-                    }),
+                  : JSON.stringify(interpretation()),
             },
           });
         const pending = ai.analyzeLocal("synthetic", undefined, "");

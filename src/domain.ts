@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { contextSchema } from "./context";
 
 export const featureSchema = z.strictObject({
   schemaVersion: z.literal(1),
@@ -19,7 +20,8 @@ export type Features = z.infer<typeof featureSchema>;
 export const profileSchema = z.strictObject({
   id: z.string().max(80),
   name: z.string().min(1).max(60),
-  style: z.string().min(10).max(1800),
+  style: z.string().max(1800),
+  context: contextSchema.optional(),
   trustedNumber: z.string().max(30),
   sample: z.boolean(),
   sampleCount: z.number().int().min(0).max(5000),
@@ -34,6 +36,9 @@ export type Personal = z.infer<typeof personalSchema>;
 export type LocalResult = {
   kind: "model" | "rules";
   signals: string[];
+  suggestedFeatures?: Features;
+  evidence?: { field: keyof Omit<Features, "schemaVersion">; quote: string }[];
+  rejectedFields?: string[];
   personal?: Personal;
   number: "matches" | "differs" | "unknown";
   note: string;
@@ -73,14 +78,36 @@ export function extractFeatures(text: string): Features {
         )
       );
     });
+  const moneyRequest = clauses.some((clause) => {
+    const match =
+      /\b(?:send|transfer|pay|lend|borrow|loan|cover|buy)\b[^.!?;\n]{0,55}\b(?:money|funds|cash|rent|fare|invoice|bill|gift|cards?|codes?|share|ticket|m[ -]?pesa|bank|bitcoin|crypto|usdt)\b|\b(?:need|want)\s+(?:some\s+)?(?:money|cash|funds)\b/.exec(
+        clause,
+      );
+    if (!match) return false;
+    const before = clause.slice(0, match.index);
+    if (/(?:don.?t|do not|never|not to|avoid)\s+(?:\w+\s+){0,4}$/.test(before))
+      return false;
+    // Use only direct request forms. Narrative offers ("I will send money")
+    // and quoted warnings are unknown, not requests to the recipient.
+    if (/\b(?:scam|example|warning|said|says|quote)\b/.test(before))
+      return false;
+    if (/^(?:need|want)\b/.test(match[0])) return /^\s*(?:i\s+)?$/.test(before);
+    return (
+      /^\s*$/.test(before) ||
+      /(?:^|[,;:])\s*(?:please\s+)?$/.test(before) ||
+      /\b(?:can|could|would|will)\s+you\s+(?:please\s+)?$/.test(before) ||
+      /\b(?:please|kindly|need you to|want you to|you need to|you have to)\s+$/.test(
+        before,
+      )
+    );
+  });
   return featureSchema.parse({
     schemaVersion: 1,
-    requestType:
-      /hospital|accident|emergency|stranded|arrest|hurt|injured/.test(t)
+    requestType: moneyRequest
+      ? /hospital|accident|emergency|stranded|arrest|hurt|injured/.test(t)
         ? "emergency_money"
-        : /send|transfer|money|pay|loan|rent|lend|borrow/.test(t)
-          ? "ordinary_money"
-          : "unknown",
+        : "ordinary_money"
+      : "unknown",
     paymentChannel: positive(/gift\s*card|voucher/)
       ? "gift_card"
       : positive(/bitcoin|crypto|usdt/)
