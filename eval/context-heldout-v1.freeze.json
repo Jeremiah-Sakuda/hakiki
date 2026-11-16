@@ -1,6 +1,6 @@
 {
-  "recordedAt": "2026-11-16T23:31:25.573Z",
-  "author": "Independent competition-review AI agent",
+  "recordedAt": "2026-11-16T23:45:33.557Z",
+  "author": "Independent competition-review AI agent; restamp after static review and separate reliability probes",
   "heldoutModelOutcomesInspected": false,
   "originalSourceFreeze": "0331bb02f989ba7bc39b7c5b72f4bedf43ebb294",
   "originalSourceSha256": {
@@ -9,20 +9,26 @@
     "src/domain.ts": "b75a98d93c879bda4cdbfbdef0080742bf2145e7cc1c87dd1faf923cf66702de",
     "src/ai.ts": "026ca4387046c5c54c8aac967b809126fffb06dcfa892f2acccc3a5323c1066a"
   },
-  "amendedSourceCommit": "0fcfeb86778696b850386820b400b92f3c813f3a",
-  "amendedSourceWorkingTreeDirty": true,
-  "amendmentStatus": "final pre-run hashes; no held-out outcomes inspected",
+  "amendedSourceCommit": "22fce17a3364df642f96190c8e83e5d9dc26bbfb",
+  "amendedSourceWorkingTreeDirty": false,
+  "amendmentStatus": "Final pre-first-run candidate; clean source verified before documentation-only stamp edits; no held-out outcomes inspected",
   "amendedSourceSha256": {
     "src/context.ts": "416e354f36e49027181c3e718170afa2ef33157cee3702349c5d8119a0039a68",
     "src/interpretation.ts": "afc22477fd5e0fb57d138dd4a4efe4825493000a54da7639b0a06e0fddca16ba",
-    "src/domain.ts": "987f70ca2a29252211a7615ca07be8cda329ad0d608eb8a5de6c6ab63bfdd292",
-    "src/ai.ts": "55227ddd2110890ff2e93d3c10d77fcdce00d64c29bae3524264daa8b9049696"
+    "src/domain.ts": "a47f21c253bd1a2b44b3fd680212ad8ccb3dd91a59ce098654a7ba5ce71f934c",
+    "src/ai.ts": "d078696f1d261d7039180783de010ab655eea0371123fdd3edf6ed3182054dcc",
+    "src/App.tsx": "90c59b85bf71d7e12a2fcb0107b0a1fe187643f0c69138fc2fc06d930112e3fe",
+    "src/local-diagnostics.ts": "7f56ce226ec7c4796952f9ee2df2ecaa909082dcb8a04d0170a985f0c7bc4b0c",
+    "src/styles.css": "1a36d38bbecae78fca8b0b12a6c5f60804ece753bc48aa8d67d775de5c4eedd2",
+    "package-lock.json": "42edce1747349c29cc29a8e443ed99099c9a47a5b246d79af33c7b52817cc1e6"
   },
   "evaluationSha256": {
     "scripts/evaluate-context.mjs": "bc083c5ad56cc81d7fcc94983ccf7ff6fdc87995a9f577fed279f3c4605897ce",
-    "scripts/summarize-context.mjs": "19a7095a39018497cceab2fd1974272ba12adff318106917ba3994ad96946d63",
-    "docs/CONTEXT_EVALUATION.md": "7a6be89beb689236dd97da7b6eb8a637abe9966be2e7e821aaad98c7bdd83be4",
-    "docs/CONTEXT_HELDOUT_FREEZE.md": "24c4026152e959709acf9fa54fc8f7489f762bc93a775c04eb96a4ec7e43d419"
+    "scripts/summarize-context.mjs": "c666025b932fbc9da9c6a6bfced4f01e4c2fa52b1344dde6430ec8972f27572f",
+    "scripts/check-reliability.mjs": "fa239f8d24f44b72c5ef65e1181553cec17cb7128b9e45fd1c942765eb38ed3e",
+    "scripts/provenance.ts": "e67645f30e42b41f71c4facf54bebea8737d341dc6ee702747a07365afc0a265",
+    "docs/CONTEXT_EVALUATION.md": "da1bcc638f91c4c430813b42070d6c6c53ce2a2e5a89eeeef9fb489bc51ccf41",
+    "docs/CONTEXT_HELDOUT_FREEZE.md": "6b516f677463236a57e2b07a0d3156be88b426ecefff14f51988fe0dc808ab93"
   },
   "fixtureFile": "eval/context-heldout-v1.json",
   "fixtureFileSha256": "492da4a609595e24575108924814e17a57d4289e45c3203e8ebded7ad5b1c635",
@@ -43,6 +49,56 @@
     "unspecified": 7
   },
   "identityInferableCount": 0,
-  "firstRun": "Not performed or inspected by author at this stamp",
-  "amendmentReason": "Prospective pre-first-run amendments based only on separate development inputs: schema metadata, flat raw enums/quotes, validated JSON streaming/cancellation, prompt clarifications, and three model-derived context facts plus three existing-rule facts with rule-gated emergency classification. Fixture contents withheld; gold and thresholds unchanged."
+  "firstRun": "Not performed or inspected by restamping agent at this stamp; implementation owner reports all 48 cases untouched",
+  "amendmentReason": "Prospective pre-first-run amendments based only on separate development inputs: schema metadata, flat raw enums/quotes, validated JSON streaming/cancellation, prompt clarifications, and three model-derived context facts plus three existing-rule facts with rule-gated emergency classification. Fixture contents withheld; gold and thresholds unchanged. Additional prospective pre-first-run amendments: remove native profile length constraints while keeping strict runtime 10–600-character limits after a separate preserved reliability run; static-review negation/reported-speech rules and UI stale-edit/confirmation/trusted-action/English/setup fixes; broaden blinded packet to generic warnings, writing observations, evidence and rejected fields. No fixture content or held-out result informed these amendments.",
+  "freezeHistory": [
+    {
+      "recordedAt": "2026-11-16T23:31:25.573Z",
+      "author": "Independent competition-review AI agent",
+      "heldoutModelOutcomesInspected": false,
+      "originalSourceFreeze": "0331bb02f989ba7bc39b7c5b72f4bedf43ebb294",
+      "originalSourceSha256": {
+        "src/context.ts": "416e354f36e49027181c3e718170afa2ef33157cee3702349c5d8119a0039a68",
+        "src/interpretation.ts": "35bd0b534196c11a2219daf450dc41cbf6bb661617a71dd9406fb241310a9f65",
+        "src/domain.ts": "b75a98d93c879bda4cdbfbdef0080742bf2145e7cc1c87dd1faf923cf66702de",
+        "src/ai.ts": "026ca4387046c5c54c8aac967b809126fffb06dcfa892f2acccc3a5323c1066a"
+      },
+      "amendedSourceCommit": "0fcfeb86778696b850386820b400b92f3c813f3a",
+      "amendedSourceWorkingTreeDirty": true,
+      "amendmentStatus": "final pre-run hashes; no held-out outcomes inspected",
+      "amendedSourceSha256": {
+        "src/context.ts": "416e354f36e49027181c3e718170afa2ef33157cee3702349c5d8119a0039a68",
+        "src/interpretation.ts": "afc22477fd5e0fb57d138dd4a4efe4825493000a54da7639b0a06e0fddca16ba",
+        "src/domain.ts": "987f70ca2a29252211a7615ca07be8cda329ad0d608eb8a5de6c6ab63bfdd292",
+        "src/ai.ts": "55227ddd2110890ff2e93d3c10d77fcdce00d64c29bae3524264daa8b9049696"
+      },
+      "evaluationSha256": {
+        "scripts/evaluate-context.mjs": "bc083c5ad56cc81d7fcc94983ccf7ff6fdc87995a9f577fed279f3c4605897ce",
+        "scripts/summarize-context.mjs": "19a7095a39018497cceab2fd1974272ba12adff318106917ba3994ad96946d63",
+        "docs/CONTEXT_EVALUATION.md": "7a6be89beb689236dd97da7b6eb8a637abe9966be2e7e821aaad98c7bdd83be4",
+        "docs/CONTEXT_HELDOUT_FREEZE.md": "24c4026152e959709acf9fa54fc8f7489f762bc93a775c04eb96a4ec7e43d419"
+      },
+      "fixtureFile": "eval/context-heldout-v1.json",
+      "fixtureFileSha256": "492da4a609595e24575108924814e17a57d4289e45c3203e8ebded7ad5b1c635",
+      "fixtureNormalizedSha256": "79bc7ac450eea7d30823d3e717a37e8943e492968edc9859d7979c9e0c6bcb1e",
+      "cases": 48,
+      "families": 24,
+      "strata": {
+        "clear_departures": 8,
+        "consistent_requests": 8,
+        "genuine_exceptions": 8,
+        "copied_style_imposters": 8,
+        "missing_ambiguous_context": 8,
+        "adversarial_conflicting": 8
+      },
+      "identityCounts": {
+        "imposter": 18,
+        "genuine": 23,
+        "unspecified": 7
+      },
+      "identityInferableCount": 0,
+      "firstRun": "Not performed or inspected by author at this stamp",
+      "amendmentReason": "Prospective pre-first-run amendments based only on separate development inputs: schema metadata, flat raw enums/quotes, validated JSON streaming/cancellation, prompt clarifications, and three model-derived context facts plus three existing-rule facts with rule-gated emergency classification. Fixture contents withheld; gold and thresholds unchanged."
+    }
+  ]
 }
