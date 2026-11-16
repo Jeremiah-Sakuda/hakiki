@@ -433,6 +433,9 @@ describe("SDK privacy routing (mocked transport)", () => {
         const options = fake.getGenerativeModel.mock.calls.at(-1)?.[1];
         expect(options.mode).toBe("only_on_device");
         expect(options.onDeviceParams.createOptions.signal.aborted).toBe(true);
+        expect(options.onDeviceParams.promptOptions.signal).toBe(
+          options.onDeviceParams.createOptions.signal,
+        );
       } finally {
         vi.useRealTimers();
       }

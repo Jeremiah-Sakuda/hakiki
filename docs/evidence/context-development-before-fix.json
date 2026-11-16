@@ -1,0 +1,119 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": [
+          "Asking to call before paying."
+        ]
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "ordinary_money",
+        "paymentChannel": "bank_transfer",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "Can you send money by bank transfer?"
+        },
+        {
+          "field": "paymentChannel",
+          "quote": "bank transfer"
+        },
+        {
+          "field": "urgency",
+          "quote": "Call me before paying."
+        },
+        {
+          "field": "secrecyRequested",
+          "quote": "Call me before paying."
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 19191
+    }
+  },
+  {
+    "text": "I am at the hospital. Can you visit?",
+    "status": "completed",
+    "result": {
+      "kind": "model",
+      "personal": {
+        "languageMatch": "unknown",
+        "toneMatch": "unknown",
+        "observations": [
+          "User is at the hospital.",
+          "User asks if someone can visit."
+        ]
+      },
+      "signals": [],
+      "suggestedFeatures": {
+        "schemaVersion": 1,
+        "requestType": "unknown",
+        "paymentChannel": "unknown",
+        "urgency": "not_stated",
+        "secrecyRequested": null,
+        "changedContactClaim": null,
+        "verificationDiscouraged": null
+      },
+      "evidence": [
+        {
+          "field": "requestType",
+          "quote": "I am at the hospital. Can you visit?"
+        },
+        {
+          "field": "urgency",
+          "quote": "I am at the hospital. Can you visit?"
+        }
+      ],
+      "rejectedFields": [],
+      "number": "unknown",
+      "note": "Personal observations were generated on this device. They do not establish identity.",
+      "elapsedMs": 10713
+    }
+  },
+  {
+    "text": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+    "status": "error",
+    "diagnostic": {
+      "id": 6,
+      "at": "2026-11-16T22:57:32.443Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60007,
+      "stageElapsedMs": 60007,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    }
+  },
+  {
+    "text": "Could you cover the ticket? We can talk through your saved number before you decide.",
+    "status": "error",
+    "diagnostic": {
+      "id": 7,
+      "at": "2026-11-16T22:58:32.452Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60006,
+      "stageElapsedMs": 60006,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    }
+  }
+]

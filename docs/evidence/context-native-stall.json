@@ -1,0 +1,756 @@
+[
+  {
+    "text": "Can you send money by bank transfer? Call me before paying.",
+    "status": "error",
+    "diagnostic": {
+      "id": 4,
+      "at": "2026-11-16T23:01:58.505Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60006,
+      "stageElapsedMs": 60006,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    },
+    "trace": [
+      {
+        "atMs": 1,
+        "event": "visibility",
+        "state": "visible"
+      },
+      {
+        "atMs": 1,
+        "event": "installed",
+        "createDescriptor": {
+          "own": true,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 560,
+        "event": "availability_start",
+        "id": 1
+      },
+      {
+        "atMs": 562,
+        "event": "availability_start",
+        "id": 2
+      },
+      {
+        "atMs": 583,
+        "event": "availability_start",
+        "id": 3
+      },
+      {
+        "atMs": 2805,
+        "event": "availability_end",
+        "id": 1,
+        "outcome": "completed",
+        "durationMs": 2245
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 2,
+        "outcome": "completed",
+        "durationMs": 2244
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 3,
+        "outcome": "completed",
+        "durationMs": 2224
+      },
+      {
+        "atMs": 2809,
+        "event": "availability_start",
+        "id": 4
+      },
+      {
+        "atMs": 2826,
+        "event": "availability_end",
+        "id": 4,
+        "outcome": "completed",
+        "durationMs": 17
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_start",
+        "id": 5
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_end",
+        "id": 5,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 2830,
+        "event": "create_signal",
+        "id": 6,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 2830,
+        "event": "create_start",
+        "id": 6
+      },
+      {
+        "atMs": 13661,
+        "event": "create_end",
+        "id": 6,
+        "outcome": "completed",
+        "durationMs": 10831
+      },
+      {
+        "atMs": 13661,
+        "event": "session_wrapped",
+        "id": 6,
+        "promptDescriptor": {
+          "own": false,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 13661,
+        "event": "prompt_start",
+        "id": 6
+      },
+      {
+        "atMs": 62835,
+        "event": "signal_aborted",
+        "id": 6
+      }
+    ]
+  },
+  {
+    "text": "I am at the hospital. Can you visit?",
+    "status": "error",
+    "diagnostic": {
+      "id": 5,
+      "at": "2026-11-16T23:02:58.516Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60001,
+      "stageElapsedMs": 60001,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    },
+    "trace": [
+      {
+        "atMs": 1,
+        "event": "visibility",
+        "state": "visible"
+      },
+      {
+        "atMs": 1,
+        "event": "installed",
+        "createDescriptor": {
+          "own": true,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 560,
+        "event": "availability_start",
+        "id": 1
+      },
+      {
+        "atMs": 562,
+        "event": "availability_start",
+        "id": 2
+      },
+      {
+        "atMs": 583,
+        "event": "availability_start",
+        "id": 3
+      },
+      {
+        "atMs": 2805,
+        "event": "availability_end",
+        "id": 1,
+        "outcome": "completed",
+        "durationMs": 2245
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 2,
+        "outcome": "completed",
+        "durationMs": 2244
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 3,
+        "outcome": "completed",
+        "durationMs": 2224
+      },
+      {
+        "atMs": 2809,
+        "event": "availability_start",
+        "id": 4
+      },
+      {
+        "atMs": 2826,
+        "event": "availability_end",
+        "id": 4,
+        "outcome": "completed",
+        "durationMs": 17
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_start",
+        "id": 5
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_end",
+        "id": 5,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 2830,
+        "event": "create_signal",
+        "id": 6,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 2830,
+        "event": "create_start",
+        "id": 6
+      },
+      {
+        "atMs": 13661,
+        "event": "create_end",
+        "id": 6,
+        "outcome": "completed",
+        "durationMs": 10831
+      },
+      {
+        "atMs": 13661,
+        "event": "session_wrapped",
+        "id": 6,
+        "promptDescriptor": {
+          "own": false,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 13661,
+        "event": "prompt_start",
+        "id": 6
+      },
+      {
+        "atMs": 62835,
+        "event": "signal_aborted",
+        "id": 6
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_start",
+        "id": 7
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_end",
+        "id": 7,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 62847,
+        "event": "create_signal",
+        "id": 8,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 62847,
+        "event": "create_start",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "signal_aborted",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "create_end",
+        "id": 8,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60001
+      }
+    ]
+  },
+  {
+    "text": "Do not buy gift cards. Please send your share by M-Pesa after we speak.",
+    "status": "error",
+    "diagnostic": {
+      "id": 6,
+      "at": "2026-11-16T23:03:58.536Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60012,
+      "stageElapsedMs": 60012,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    },
+    "trace": [
+      {
+        "atMs": 1,
+        "event": "visibility",
+        "state": "visible"
+      },
+      {
+        "atMs": 1,
+        "event": "installed",
+        "createDescriptor": {
+          "own": true,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 560,
+        "event": "availability_start",
+        "id": 1
+      },
+      {
+        "atMs": 562,
+        "event": "availability_start",
+        "id": 2
+      },
+      {
+        "atMs": 583,
+        "event": "availability_start",
+        "id": 3
+      },
+      {
+        "atMs": 2805,
+        "event": "availability_end",
+        "id": 1,
+        "outcome": "completed",
+        "durationMs": 2245
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 2,
+        "outcome": "completed",
+        "durationMs": 2244
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 3,
+        "outcome": "completed",
+        "durationMs": 2224
+      },
+      {
+        "atMs": 2809,
+        "event": "availability_start",
+        "id": 4
+      },
+      {
+        "atMs": 2826,
+        "event": "availability_end",
+        "id": 4,
+        "outcome": "completed",
+        "durationMs": 17
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_start",
+        "id": 5
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_end",
+        "id": 5,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 2830,
+        "event": "create_signal",
+        "id": 6,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 2830,
+        "event": "create_start",
+        "id": 6
+      },
+      {
+        "atMs": 13661,
+        "event": "create_end",
+        "id": 6,
+        "outcome": "completed",
+        "durationMs": 10831
+      },
+      {
+        "atMs": 13661,
+        "event": "session_wrapped",
+        "id": 6,
+        "promptDescriptor": {
+          "own": false,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 13661,
+        "event": "prompt_start",
+        "id": 6
+      },
+      {
+        "atMs": 62835,
+        "event": "signal_aborted",
+        "id": 6
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_start",
+        "id": 7
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_end",
+        "id": 7,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 62847,
+        "event": "create_signal",
+        "id": 8,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 62847,
+        "event": "create_start",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "signal_aborted",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "create_end",
+        "id": 8,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60001
+      },
+      {
+        "atMs": 122854,
+        "event": "availability_start",
+        "id": 9
+      },
+      {
+        "atMs": 122855,
+        "event": "availability_end",
+        "id": 9,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 122855,
+        "event": "create_signal",
+        "id": 10,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 122855,
+        "event": "create_start",
+        "id": 10
+      },
+      {
+        "atMs": 182866,
+        "event": "signal_aborted",
+        "id": 10
+      },
+      {
+        "atMs": 182866,
+        "event": "create_end",
+        "id": 10,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60012
+      }
+    ]
+  },
+  {
+    "text": "Could you cover the ticket? We can talk through your saved number before you decide.",
+    "status": "error",
+    "diagnostic": {
+      "id": 7,
+      "at": "2026-11-16T23:04:58.551Z",
+      "operation": "comparison",
+      "stage": "generation",
+      "outcome": "failure",
+      "code": "timeout",
+      "elapsedMs": 60002,
+      "stageElapsedMs": 60002,
+      "promptVersion": "2026-11-16.1",
+      "retryable": true
+    },
+    "trace": [
+      {
+        "atMs": 1,
+        "event": "visibility",
+        "state": "visible"
+      },
+      {
+        "atMs": 1,
+        "event": "installed",
+        "createDescriptor": {
+          "own": true,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 560,
+        "event": "availability_start",
+        "id": 1
+      },
+      {
+        "atMs": 562,
+        "event": "availability_start",
+        "id": 2
+      },
+      {
+        "atMs": 583,
+        "event": "availability_start",
+        "id": 3
+      },
+      {
+        "atMs": 2805,
+        "event": "availability_end",
+        "id": 1,
+        "outcome": "completed",
+        "durationMs": 2245
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 2,
+        "outcome": "completed",
+        "durationMs": 2244
+      },
+      {
+        "atMs": 2806,
+        "event": "availability_end",
+        "id": 3,
+        "outcome": "completed",
+        "durationMs": 2224
+      },
+      {
+        "atMs": 2809,
+        "event": "availability_start",
+        "id": 4
+      },
+      {
+        "atMs": 2826,
+        "event": "availability_end",
+        "id": 4,
+        "outcome": "completed",
+        "durationMs": 17
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_start",
+        "id": 5
+      },
+      {
+        "atMs": 2830,
+        "event": "availability_end",
+        "id": 5,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 2830,
+        "event": "create_signal",
+        "id": 6,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 2830,
+        "event": "create_start",
+        "id": 6
+      },
+      {
+        "atMs": 13661,
+        "event": "create_end",
+        "id": 6,
+        "outcome": "completed",
+        "durationMs": 10831
+      },
+      {
+        "atMs": 13661,
+        "event": "session_wrapped",
+        "id": 6,
+        "promptDescriptor": {
+          "own": false,
+          "configurable": true,
+          "writable": true,
+          "getter": false
+        }
+      },
+      {
+        "atMs": 13661,
+        "event": "prompt_start",
+        "id": 6
+      },
+      {
+        "atMs": 62835,
+        "event": "signal_aborted",
+        "id": 6
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_start",
+        "id": 7
+      },
+      {
+        "atMs": 62846,
+        "event": "availability_end",
+        "id": 7,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 62847,
+        "event": "create_signal",
+        "id": 8,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 62847,
+        "event": "create_start",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "signal_aborted",
+        "id": 8
+      },
+      {
+        "atMs": 122847,
+        "event": "create_end",
+        "id": 8,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60001
+      },
+      {
+        "atMs": 122854,
+        "event": "availability_start",
+        "id": 9
+      },
+      {
+        "atMs": 122855,
+        "event": "availability_end",
+        "id": 9,
+        "outcome": "completed",
+        "durationMs": 0
+      },
+      {
+        "atMs": 122855,
+        "event": "create_signal",
+        "id": 10,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 122855,
+        "event": "create_start",
+        "id": 10
+      },
+      {
+        "atMs": 182866,
+        "event": "signal_aborted",
+        "id": 10
+      },
+      {
+        "atMs": 182866,
+        "event": "create_end",
+        "id": 10,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60012
+      },
+      {
+        "atMs": 182880,
+        "event": "availability_start",
+        "id": 11
+      },
+      {
+        "atMs": 182881,
+        "event": "availability_end",
+        "id": 11,
+        "outcome": "completed",
+        "durationMs": 1
+      },
+      {
+        "atMs": 182881,
+        "event": "create_signal",
+        "id": 12,
+        "present": true,
+        "aborted": false
+      },
+      {
+        "atMs": 182881,
+        "event": "create_start",
+        "id": 12
+      },
+      {
+        "atMs": 242882,
+        "event": "signal_aborted",
+        "id": 12
+      },
+      {
+        "atMs": 242882,
+        "event": "create_end",
+        "id": 12,
+        "outcome": "error",
+        "errorName": "AbortError",
+        "durationMs": 60001
+      }
+    ]
+  }
+]

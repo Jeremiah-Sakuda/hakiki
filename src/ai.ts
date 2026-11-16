@@ -6,6 +6,7 @@ import {
   AgentPlatformBackend,
   InferenceMode,
   InferenceSource,
+  type LanguageModelPromptOptions,
 } from "firebase/ai";
 import { diagnoseLocal, LocalFailure } from "./local-diagnostics";
 import {
@@ -245,11 +246,17 @@ async function generateLocal(
 ) {
   return boundedLocal(
     async (requestSignal) => {
+      // Chrome documents cancellation on prompt() separately from create().
+      // Firebase 13.3 forwards this object unchanged but omits signal in its type.
+      const promptOptions: LanguageModelPromptOptions & { signal: AbortSignal } = {
+        responseConstraint,
+        signal: requestSignal,
+      };
       const model = getGenerativeModel(ai(), {
         mode: InferenceMode.ONLY_ON_DEVICE,
         onDeviceParams: {
           createOptions: { ...localOptions, signal: requestSignal },
-          promptOptions: { responseConstraint },
+          promptOptions,
         },
       });
       return model.generateContent(prompt);

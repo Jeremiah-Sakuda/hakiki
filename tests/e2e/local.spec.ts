@@ -93,7 +93,8 @@ test("real on-device comparison and profile import keep raw content local", asyn
     expect(outgoing.filter((x) => x.includes("generateContent"))).toHaveLength(
       0,
     );
-    const observations = await page.locator(".personal").innerText();
+    await page.locator("details.personal summary").click();
+    const observations = await page.locator("details.personal").innerText();
     await page.screenshot({
       path: "docs/evidence/local-result.png",
       fullPage: true,
@@ -136,7 +137,7 @@ test("real on-device comparison and profile import keep raw content local", asyn
           .join("\n"),
       ),
     });
-    await page.getByRole("checkbox").check();
+    await page.getByRole("checkbox", { name: /I have permission/ }).check();
     await page.getByRole("button", { name: "Create local profile" }).click();
     const draft = page.getByLabel("Writing profile for Synthetic cousin");
     await expect(draft).toBeVisible({ timeout: 75000 });
