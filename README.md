@@ -1,12 +1,12 @@
 # Hakiki
 
-A private second opinion on family money requests. Pause, inspect the request, and contact the person through a route you already trust. Hakiki does not authenticate a sender or certify a request as safe.
+A private second opinion on family money requests. Check a request against arrangements you confirmed with someone you know, then contact them through a route you already trust. Hakiki does not authenticate a sender or certify a request as safe.
 
 **Working hybrid implementation candidate.** Real on-device comparison and profile generation pass through Firebase AI Logic, and cloud inference succeeds through its Agent Platform (formerly Vertex AI) backend on Soma's approved existing billing. The hosted app displays complete cloud output and search sources. Tested raw-message canaries remain excluded from outbound requests. Model usefulness, human outcomes, and exact Nano 4 competition eligibility are separate evidence gates; see [release status](docs/STATUS.md).
 
 [Try the hosted candidate](https://hakiki-hybrid-2026.web.app).
 
-The three-reviewer AI panel stabilized at **3.42/5 after five rounds**, not an official judging score. Local inference has an unexplained intermittent failure; the app labels the text-rule fallback and keeps raw content local. See [review history](docs/REVIEWS.md) and [remaining gates](docs/STATUS.md).
+The previous three-reviewer AI panel stabilized at **3.42/5 after five rounds**, not an official judging score. A November 16 revision adds confirmed arrangements, evidence-backed editable local interpretation, cancellable operations and redacted failure diagnostics. Its new reliability and independent evaluation are tracked separately in [the context protocol](docs/CONTEXT_EVALUATION.md). Earlier intermittent failures and the negative style pilot remain part of the evidence. See [review history](docs/REVIEWS.md) and [remaining gates](docs/STATUS.md).
 
 ![Hakiki desktop interface](docs/evidence/desktop.png)
 

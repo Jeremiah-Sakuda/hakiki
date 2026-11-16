@@ -868,6 +868,48 @@ footer a {
 .people-grid .finding {
   margin-top: 25px;
 }
+.contact-editor > fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.contact-editor .method-choices {
+  border: 1px solid var(--line);
+  padding: 12px;
+  margin: 18px 0;
+  border-radius: 8px;
+}
+.method-choices legend {
+  font-size: 13px;
+}
+.contact-editor > p,
+.contact-editor label {
+  font-size: 13px;
+}
+.contact-editor textarea,
+#profile-draft {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px;
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  resize: vertical;
+}
+.context-findings > div {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+.context-findings strong {
+  font-size: 13px;
+}
+.interpretation-evidence p {
+  overflow-wrap: anywhere;
+}
+.contact-editor .text-button {
+  margin-top: 14px;
+}
 .empty {
   text-align: center;
   padding: 40px 25px;

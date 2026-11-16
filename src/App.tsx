@@ -15,7 +15,15 @@ import {
   prepareLocal,
   refreshPlaybook,
   summarizeProfile,
+  getLocalDiagnostics,
 } from "./ai";
+import {
+  compareContext,
+  emptyContext,
+  paymentLabels,
+  paymentMethods,
+  type ContactContext,
+} from "./context";
 import {
   deleteProfiles,
   examples,
@@ -164,6 +172,27 @@ function Download({
   );
 }
 
+function localErrorCode(error: unknown): string {
+  const code = (error as { diagnostic?: { code?: unknown } })?.diagnostic?.code;
+  return typeof code === "string" &&
+    [
+      "unavailable",
+      "not_ready",
+      "insufficient_history",
+      "timeout",
+      "cancelled",
+      "unsupported",
+      "input_limit",
+      "invalid_state",
+      "native_error",
+      "wrong_execution_source",
+      "invalid_json",
+      "invalid_schema",
+    ].includes(code)
+    ? code
+    : "native_error";
+}
+
 export default function App() {
   const [tab, setTab] = useState("check");
   const [modal, setModal] = useState<
@@ -193,6 +222,13 @@ export default function App() {
   const [trusted, setTrusted] = useState("");
   const [permission, setPermission] = useState(false);
   const [profileDraft, setProfileDraft] = useState<Profile | null>(null);
+  const [editingContact, setEditingContact] = useState<Profile | null>(null);
+  const [importTarget, setImportTarget] = useState("");
+  const [localIssue, setLocalIssue] = useState("");
+  const [localOperation, setLocalOperation] = useState(false);
+  const operation = useRef<AbortController | null>(null);
+  const setupOperation = useRef<AbortController | null>(null);
+  const setupEpoch = useRef(0);
   const resultHeading = useRef<HTMLHeadingElement>(null);
   const epoch = useRef(0);
   const profile = [...profiles, sampleProfile].find((p) => p.id === selected);
@@ -202,6 +238,8 @@ export default function App() {
     window.addEventListener("online", update);
     window.addEventListener("offline", update);
     return () => {
+      operation.current?.abort();
+      setupOperation.current?.abort();
       window.removeEventListener("online", update);
       window.removeEventListener("offline", update);
     };
@@ -211,6 +249,9 @@ export default function App() {
   }, [stage]);
   function reset() {
     epoch.current++;
+    operation.current?.abort();
+    setLocalOperation(false);
+    setLocalIssue("");
     setProfileDraft(null);
     setBusy(false);
     setMessage("");
@@ -226,36 +267,73 @@ export default function App() {
   async function enableLocal() {
     setError("");
     setProgress(0);
+    setupOperation.current?.abort();
+    const controller = new AbortController();
+    setupOperation.current = controller;
+    const current = ++setupEpoch.current;
     try {
-      await prepareLocal((v) => setProgress(Math.round(v * 100)));
+      await prepareLocal((v) => {
+        if (current === setupEpoch.current) setProgress(Math.round(v * 100));
+      }, controller.signal);
+      if (current !== setupEpoch.current) return;
       setLocalReady(true);
       setAvailability("available");
     } catch (e) {
-      setError((e as Error).message);
+      if (current === setupEpoch.current)
+        setError(
+          `On-device setup could not finish. Code: ${localErrorCode(e)}. You can retry or continue with local rules.`,
+        );
     } finally {
-      setProgress(null);
+      if (current === setupEpoch.current) setProgress(null);
     }
   }
-  async function inspect(e: FormEvent) {
-    e.preventDefault();
+  function cancelSetup() {
+    setupEpoch.current++;
+    setupOperation.current?.abort();
+    setProgress(null);
+    setError("On-device setup cancelled. You can retry when ready.");
+  }
+  function cancelLocal() {
+    epoch.current++;
+    operation.current?.abort();
+    setLocalOperation(false);
+    setBusy(false);
+    setError("Local operation cancelled. Nothing was sent to cloud AI.");
+  }
+  async function inspect(e?: FormEvent) {
+    e?.preventDefault();
     if (!message.trim() || busy) return;
     setBusy(true);
     setError("");
+    setLocalIssue("");
+    setWorld(null);
     const current = ++epoch.current;
+    operation.current?.abort();
+    const controller = new AbortController();
+    operation.current = controller;
+    setLocalOperation(true);
     let result = rulesResult(message, profile, number);
     if (localReady) {
       try {
-        result = await analyzeLocal(message, profile, number);
-      } catch {
+        result = await analyzeLocal(
+          message,
+          profile,
+          number,
+          controller.signal,
+        );
+      } catch (e) {
+        if (epoch.current !== current) return;
+        setLocalIssue(localErrorCode(e));
         result.note =
           "On-device AI could not finish. These observations use text rules only; writing-style comparison is unavailable.";
       }
     }
     if (epoch.current !== current) return;
     setLocal(result);
-    setFeatures(extractFeatures(message));
+    setFeatures(result.suggestedFeatures ?? extractFeatures(message));
     setStage("review");
     setBusy(false);
+    setLocalOperation(false);
   }
   async function send() {
     if (!features || busy || !online) return;
@@ -308,16 +386,25 @@ export default function App() {
     setBusy(true);
     setError("");
     const current = ++epoch.current;
+    operation.current?.abort();
+    const controller = new AbortController();
+    operation.current = controller;
+    setLocalOperation(true);
     try {
       const messages = chat.messages
         .filter((m) => m.speaker === speaker)
         .map((m) => m.text);
-      const style = await summarizeProfile(messages);
+      const style = await summarizeProfile(messages, controller.signal);
       if (current !== epoch.current) return;
       const entry: Profile = {
-        id: crypto.randomUUID(),
-        name: contactName.trim(),
-        trustedNumber: trusted.trim(),
+        id: importTarget || crypto.randomUUID(),
+        name:
+          profiles.find((p) => p.id === importTarget)?.name ||
+          contactName.trim(),
+        trustedNumber:
+          profiles.find((p) => p.id === importTarget)?.trustedNumber ||
+          trusted.trim(),
+        context: profiles.find((p) => p.id === importTarget)?.context,
         style,
         sample: false,
         sampleCount: profileInput(messages).length,
@@ -327,9 +414,15 @@ export default function App() {
       setTrusted("");
       setContactName("");
     } catch (e) {
-      if (current === epoch.current) setError((e as Error).message);
+      if (current === epoch.current)
+        setError(
+          `Writing context could not be prepared. Code: ${localErrorCode(e)}. Your export stays local; retry or discard it.`,
+        );
     } finally {
-      if (current === epoch.current) setBusy(false);
+      if (current === epoch.current) {
+        setBusy(false);
+        setLocalOperation(false);
+      }
     }
   }
   function removeContact(id: string) {
@@ -337,10 +430,33 @@ export default function App() {
       const next = profiles.filter((p) => p.id !== id);
       saveProfiles(next);
       setProfiles(next);
+      if (editingContact?.id === id) setEditingContact(null);
+      if (profileDraft?.id === id) {
+        setProfileDraft(null);
+        epoch.current++;
+        operation.current?.abort();
+        setBusy(false);
+        setLocalOperation(false);
+      }
       if (selected === id) reset();
     } catch {
       setError(
         "Browser storage could not be updated. Try again or clear this site’s stored data.",
+      );
+    }
+  }
+  function saveContact(entry: Profile) {
+    try {
+      const next = [...profiles.filter((p) => p.id !== entry.id), entry];
+      saveProfiles(next);
+      setProfiles(next);
+      setEditingContact(null);
+      reset();
+      setSelected(entry.id);
+      setTab("check");
+    } catch {
+      setError(
+        "Browser storage could not be updated. Your contact was not saved.",
       );
     }
   }
@@ -371,9 +487,38 @@ export default function App() {
           does not establish who sent the message.
         </p>
       )}
-      {local.personal && profile && (
-        <div className="personal">
-          <h4>Compared with {profile.name}</h4>
+      {features && profile && (
+        <div className="personal context-findings">
+          <h4>Your saved arrangements with {profile.name}</h4>
+          {profile.context?.confirmedAt && (
+            <p className="small">
+              Confirmed by you on{" "}
+              {new Date(profile.context.confirmedAt).toLocaleDateString()}. Kept
+              on this device.
+            </p>
+          )}
+          <p className="small">
+            Check the interpretation below. A changed arrangement can be
+            genuine.
+          </p>
+          {compareContext(features, profile.context).map((finding) => (
+            <div key={finding.code} data-context-code={finding.code}>
+              <strong>
+                {finding.kind === "departure"
+                  ? "A change to check"
+                  : finding.kind === "reminder"
+                    ? "Your next step"
+                    : "Not enough context"}
+              </strong>
+              <p>{finding.text}</p>
+              <p>{finding.action}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {local.personal && profile?.style && (
+        <details className="personal">
+          <summary>Optional writing observations for {profile.name}</summary>
           <p>
             Language: {local.personal.languageMatch}. Tone:{" "}
             {local.personal.toneMatch}.
@@ -385,6 +530,23 @@ export default function App() {
             Writing context is experimental. It may miss changes or flag normal
             ones, and cannot confirm who sent a message.
           </small>
+        </details>
+      )}
+      {localIssue && (
+        <div className="notice">
+          <div>
+            <p>
+              Local AI was unavailable for this check. Code: {localIssue}. Your
+              saved arrangements still use the editable categories.
+            </p>
+            <button
+              className="text-button"
+              disabled={busy}
+              onClick={() => inspect()}
+            >
+              Retry local interpretation
+            </button>
+          </div>
         </div>
       )}
       <p className="small muted">{local.note}</p>
@@ -467,6 +629,19 @@ export default function App() {
             >
               <Icon name="close" size={16} />
             </button>
+          </div>
+        )}
+        {localOperation && (
+          <div className="notice" role="status">
+            <div>
+              <p>
+                Working only on this device. You can cancel and keep using the
+                message check.
+              </p>
+              <button className="secondary" onClick={cancelLocal}>
+                Cancel local operation
+              </button>
+            </div>
           </div>
         )}
         {tab === "check" && (
@@ -781,6 +956,31 @@ export default function App() {
                         <Icon name="cloud" size={24} />
                       </span>
                       <h2>Add a wider perspective</h2>
+                      <h3>Check this interpretation</h3>
+                      <p>
+                        These suggested categories may be wrong. Correct them to
+                        update your saved-arrangement comparison. Sending them
+                        is optional.
+                      </p>
+                      {!!local?.evidence?.length && (
+                        <details className="interpretation-evidence">
+                          <summary>
+                            Words used for this interpretation · stays local
+                          </summary>
+                          {local.evidence.map((item, i) => (
+                            <p key={i}>
+                              <strong>{featureLabel(item.field)}:</strong> “
+                              {item.quote}”
+                            </p>
+                          ))}
+                        </details>
+                      )}
+                      {!!local?.rejectedFields?.length && (
+                        <p className="small">
+                          Some suggestions had no usable supporting words and
+                          were changed to unknown. Review all categories.
+                        </p>
+                      )}
                       <p>
                         The cloud can look for known scam patterns. Only these
                         categories will be sent. Review or correct them first.
@@ -878,10 +1078,17 @@ export default function App() {
               <em>on your device.</em>
             </h1>
             <p className="lead">
-              Add writing context when you’re ready. You can always check a
-              message without it.
+              Save arrangements you confirmed outside this request. You can
+              always check a message without a contact or local AI.
             </p>
             <div className="people-grid">
+              <ContactEditor
+                key={`${editingContact?.id || "new-contact"}:${profiles.length}`}
+                existing={editingContact}
+                disabled={busy || (profiles.length >= 30 && !editingContact)}
+                onSave={saveContact}
+                onCancel={() => setEditingContact(null)}
+              />
               <section className="finding">
                 <h2>Saved contacts</h2>
                 {profiles.length === 0 ? (
@@ -889,8 +1096,9 @@ export default function App() {
                     <Icon name="people" size={36} />
                     <h3>A little context goes a long way.</h3>
                     <p>
-                      No contacts saved yet. Save optional writing context for
-                      an experimental comparison on this device.
+                      No contacts saved yet. Add confirmed arrangements without
+                      importing a chat. Optional writing context can follow
+                      later.
                     </p>
                   </div>
                 ) : (
@@ -902,9 +1110,20 @@ export default function App() {
                       <div>
                         <h3>{p.name}</h3>
                         <p>
-                          {p.sampleCount} messages used · stored on this browser
+                          {p.context?.confirmedAt
+                            ? `Arrangements confirmed ${new Date(p.context.confirmedAt).toLocaleDateString()}`
+                            : "No arrangements confirmed"}{" "}
+                          · {p.sampleCount} writing samples · stored in this
+                          browser
                         </p>
                       </div>
+                      <button
+                        className="text-button"
+                        disabled={busy}
+                        onClick={() => setEditingContact(p)}
+                      >
+                        Edit<span className="sr-only"> {p.name}</span>
+                      </button>
                       <button
                         className="text-button"
                         onClick={() => removeContact(p.id)}
@@ -922,6 +1141,8 @@ export default function App() {
                       try {
                         deleteProfiles();
                         setProfiles([]);
+                        setEditingContact(null);
+                        setImportTarget("");
                         reset();
                       } catch {
                         setError(
@@ -940,7 +1161,23 @@ export default function App() {
                 </p>
               </section>
               <form className="finding import-form" onSubmit={addContact}>
-                <h2>Add a contact</h2>
+                <h2>Add optional writing context</h2>
+                <label htmlFor="import-target">
+                  Writing context belongs to
+                </label>
+                <select
+                  id="import-target"
+                  disabled={busy || !!profileDraft}
+                  value={importTarget}
+                  onChange={(e) => setImportTarget(e.target.value)}
+                >
+                  <option value="">A new contact from this export</option>
+                  {profiles.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
                 {profileDraft && (
                   <div className="notice">
                     <div>
@@ -975,10 +1212,14 @@ export default function App() {
                               ...profileDraft,
                               style: profileDraft.style.trim(),
                             };
-                            const next = [...profiles, entry];
+                            const next = [
+                              ...profiles.filter((p) => p.id !== entry.id),
+                              entry,
+                            ];
                             saveProfiles(next);
                             setProfiles(next);
                             setPermission(false);
+                            setImportTarget("");
                             reset();
                             setSelected(entry.id);
                             setTab("check");
@@ -1106,7 +1347,7 @@ export default function App() {
                         busy ||
                         !localReady ||
                         !permission ||
-                        profiles.length >= 30
+                        (profiles.length >= 30 && !importTarget)
                       }
                     >
                       {busy
@@ -1208,8 +1449,9 @@ export default function App() {
             <li>
               <h3>Start with the message</h3>
               <p>
-                Text rules notice pressure. With a supported local model and a
-                saved profile, AI can also compare writing on your device.
+                Review what the message asks against arrangements you confirmed
+                outside it. Local AI can suggest an interpretation; rules and
+                your corrections work without it.
               </p>
             </li>
             <li>
@@ -1294,7 +1536,10 @@ export default function App() {
       {modal === "setup" && (
         <Modal
           title="Make room for a local perspective"
-          onClose={() => setModal(null)}
+          onClose={() => {
+            if (progress !== null) cancelSetup();
+            setModal(null);
+          }}
         >
           <div className="receipt-status">
             <Icon name="device" size={28} />
@@ -1320,7 +1565,8 @@ export default function App() {
             <code>
               chrome://flags/#prompt-api-for-gemini-nano-multimodal-input
             </code>
-            , restart Chrome, then return here. The model may need a one-time
+            , restart Chrome, then return here. Preparing the model may require
+            a one-time model download; your messages are not part of that
             download.
           </p>
           <button
@@ -1335,10 +1581,22 @@ export default function App() {
                 : "Enable on-device AI"}
             <Icon name="device" />
           </button>
+          {progress !== null && (
+            <button className="secondary" onClick={cancelSetup}>
+              Cancel model setup
+            </button>
+          )}
+          <Download
+            value={getLocalDiagnostics()}
+            name="hakiki-local-diagnostics.json"
+          >
+            Download redacted local diagnostics
+          </Download>
           <p className="small">
-            The download contains the model, not your messages. Unsupported
-            browsers can still use text rules and approved cloud categories.
-            Cloud model: {cloudModel}.
+            The diagnostics export contains only fixed codes, timing, and
+            execution metadata, never messages, contact details, or model
+            outputs. Unsupported browsers can still use text rules and approved
+            cloud categories. Cloud model: {cloudModel}.
           </p>
           {error && (
             <p role="alert" className="dialog-error">
@@ -1348,6 +1606,202 @@ export default function App() {
         </Modal>
       )}
     </>
+  );
+}
+
+function ContactEditor({
+  existing,
+  disabled,
+  onSave,
+  onCancel,
+}: {
+  existing: Profile | null;
+  disabled: boolean;
+  onSave: (profile: Profile) => void;
+  onCancel: () => void;
+}) {
+  const [name, setName] = useState(existing?.name || "");
+  const [trustedNumber, setTrustedNumber] = useState(
+    existing?.trustedNumber || "",
+  );
+  const [context, setContext] = useState<ContactContext>(
+    existing?.context || emptyContext(),
+  );
+  const [style, setStyle] = useState(existing?.style || "");
+  const [confirmed, setConfirmed] = useState(false);
+  function submit(e: FormEvent) {
+    e.preventDefault();
+    if (!confirmed || !name.trim() || disabled) return;
+    const hasContext =
+      context.moneyRequests !== "unknown" ||
+      context.usualPaymentMethods.length > 0 ||
+      context.verificationAgreement !== "unknown";
+    onSave({
+      id: existing?.id || crypto.randomUUID(),
+      name: name.trim(),
+      trustedNumber: trustedNumber.trim(),
+      style: style.trim(),
+      sample: false,
+      sampleCount: style.trim() ? existing?.sampleCount || 0 : 0,
+      context: {
+        ...context,
+        source: "user_confirmed",
+        confirmedAt: hasContext ? new Date().toISOString() : null,
+      },
+    });
+  }
+  return (
+    <form className="finding contact-editor" onSubmit={submit}>
+      <h2>{existing ? `Edit ${existing.name}` : "Add someone you know"}</h2>
+      <p>
+        No chat export or AI is needed. Add only arrangements you confirmed
+        outside this request. Leave uncertain answers unknown.
+      </p>
+      <fieldset disabled={disabled}>
+        <label htmlFor="manual-contact-name">Person’s name</label>
+        <input
+          id="manual-contact-name"
+          required
+          maxLength={60}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label htmlFor="manual-trusted-number">
+          Independently saved number · optional
+        </label>
+        <input
+          id="manual-trusted-number"
+          type="tel"
+          maxLength={30}
+          value={trustedNumber}
+          onChange={(e) => setTrustedNumber(e.target.value)}
+          placeholder="From your existing address book"
+        />
+        <label htmlFor="money-agreement">Money requests by message</label>
+        <select
+          id="money-agreement"
+          value={context.moneyRequests}
+          onChange={(e) =>
+            setContext({
+              ...context,
+              moneyRequests: e.target.value as ContactContext["moneyRequests"],
+            })
+          }
+        >
+          <option value="unknown">Unknown / no confirmed agreement</option>
+          <option value="no_message_requests_confirmed">
+            They told me they do not request money by message
+          </option>
+        </select>
+        <fieldset className="method-choices">
+          <legend>Methods we normally use · optional</legend>
+          <p className="small">
+            Leave blank if unknown. These are usual methods, not a list of
+            allowed payments.
+          </p>
+          {paymentMethods.map((method) => (
+            <label className="checkbox" key={method}>
+              <input
+                type="checkbox"
+                checked={context.usualPaymentMethods.includes(method)}
+                onChange={(e) =>
+                  setContext({
+                    ...context,
+                    usualPaymentMethods: e.target.checked
+                      ? [...context.usualPaymentMethods, method]
+                      : context.usualPaymentMethods.filter((m) => m !== method),
+                  })
+                }
+              />
+              {paymentLabels[method]}
+            </label>
+          ))}
+        </fieldset>
+        <label htmlFor="verification-agreement">
+          Our verification agreement
+        </label>
+        <select
+          id="verification-agreement"
+          value={context.verificationAgreement}
+          onChange={(e) =>
+            setContext({
+              ...context,
+              verificationAgreement: e.target
+                .value as ContactContext["verificationAgreement"],
+            })
+          }
+        >
+          <option value="unknown">Unknown / no confirmed agreement</option>
+          <option value="speak_before_sending">
+            We agreed to speak through a trusted route before I send
+          </option>
+        </select>
+        {!!existing?.style && (
+          <>
+            <label htmlFor="manual-writing-context">
+              Optional writing context · review or clear
+            </label>
+            <textarea
+              id="manual-writing-context"
+              maxLength={1800}
+              value={style}
+              onChange={(e) => setStyle(e.target.value)}
+            />
+            <p className="small">
+              Experimental writing observations cannot confirm identity. Remove
+              private details you do not want stored.
+            </p>
+          </>
+        )}
+        {existing?.context?.confirmedAt && (
+          <p className="small">
+            Last confirmed by you:{" "}
+            {new Date(existing.context.confirmedAt).toLocaleDateString()}.
+            Saving reconfirms your current selections.
+          </p>
+        )}
+        <label className="checkbox">
+          <input
+            type="checkbox"
+            checked={confirmed}
+            onChange={(e) => setConfirmed(e.target.checked)}
+          />
+          I reviewed these details, confirmed any selected arrangements outside
+          this request, and want to save them in this browser.
+        </label>
+        <p className="small">
+          Stored on this device without application-level encryption. You can
+          edit or delete this contact.
+        </p>
+        <button
+          className="primary"
+          disabled={!confirmed || !name.trim()}
+          type="submit"
+        >
+          {existing ? "Save reviewed changes" : "Save reviewed contact"}
+        </button>
+        {existing && (
+          <button className="text-button" type="button" onClick={onCancel}>
+            Cancel contact edit
+          </button>
+        )}
+      </fieldset>
+    </form>
+  );
+}
+
+function featureLabel(field: string) {
+  return (
+    (
+      {
+        requestType: "Request",
+        paymentChannel: "Payment",
+        urgency: "Urgency",
+        secrecyRequested: "Secrecy requested",
+        changedContactClaim: "Claims a new number",
+        verificationDiscouraged: "Discourages verification",
+      } as Record<string, string>
+    )[field] || "Interpretation"
   );
 }
 
@@ -1373,7 +1827,9 @@ function FeatureEditor({
   };
   return (
     <fieldset disabled={disabled} className="feature-fields">
-      <legend className="sr-only">Categories sent to the cloud</legend>
+      <legend className="sr-only">
+        Review categories used for local comparison and optional cloud check
+      </legend>
       {(
         [
           [

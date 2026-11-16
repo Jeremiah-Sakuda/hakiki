@@ -5,7 +5,7 @@ This is the implementation contract. See STATUS.md and the recorded evidence for
 ## Data flow
 
 1. Raw request, optional screenshot, and imported conversation enter local processing only.
-2. A strictly on-device model compares the request with a compact local profile. Missing capability is an explicit failure state, not permission to use cloud inference.
+2. A strictly on-device model suggests request categories with local source excerpts and optional writing observations. User-confirmed contact arrangements are compared deterministically on the device. Missing capability is an explicit failure state, not permission to use cloud inference.
 3. A deterministic validator converts local extraction or user selections into a closed set of cloud feature fields. No model-generated free text crosses this boundary.
 4. The user sees those fields and approves a cloud request through Firebase AI Logic. Fixed system prompts contain no user text.
 5. The cloud returns generic scam-pattern evidence. The browser validates it and combines it with personal findings locally. Static localized templates render the card; the baseline has no cloud card-writer step.
@@ -29,7 +29,9 @@ The implemented strict schema is defined in `src/domain.ts`. This is an allowed 
 
 All categorical fields must include `unknown` where applicable; unknown boolean facts use `null`. Allowed values are constants in application code. Reject additional keys, nested arbitrary data, invalid enum strings, and oversized input. Never include names, phone numbers, account identifiers, amounts, codes, exact dates, URLs, narrative summaries, contact IDs, personal comparison findings, or request text. These categories still reveal limited facts about a request; describe them accurately rather than claiming anonymization or zero disclosure.
 
-The no-local-model flow uses simple deterministic rules and user-selected categories. It cannot produce a personal comparison or import a model-built profile. Inability to extract useful categories leads to manual verification guidance, not relaxed validation.
+The no-local-model flow uses simple deterministic rules and user-selected categories. It can compare confirmed arrangements but cannot generate writing observations or import a model-built writing profile. Inability to extract useful categories leads to manual verification guidance, not relaxed validation.
+
+Confirmed arrangements, their date, and local source excerpts are never included in cloud generation. Contact settings default to unknown and require explicit review before saving. Redacted local diagnostics retain at most 200 in-memory operation records with fixed failure categories, stages and timings; no raw input/output, exception text, stack traces or credentials. A user may explicitly download these records; they are not uploaded or saved automatically.
 
 ## Storage and network boundaries
 
